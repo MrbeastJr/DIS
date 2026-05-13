@@ -63,7 +63,7 @@ export default function FinalCTASection() {
               className="mt-16 pt-8 border-t border-white/10"
             >
               <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 px-2">
-                {["Beauty & Cosmetics", "Django Ready", "Global Logistics", "RC: 1492798"].map((item, i) => (
+                {["Beauty & Cosmetics", "Strategic Advisory", "Global Logistics", "RC: 1492798"].map((item, i) => (
                   <div key={i} className="flex items-center gap-2">
                     <div className="w-1.5 h-1.5 rounded-full bg-crimson flex-shrink-0" />
                     <span className="text-[10px] md:text-[11px] uppercase tracking-[0.15em] text-white/60 font-bold">{item}</span>

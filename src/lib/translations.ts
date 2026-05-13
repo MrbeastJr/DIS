@@ -76,6 +76,36 @@ export interface Translations {
     tagline: string;
     copyright: string;
   };
+  pieChart: {
+    sectionLabel: string;
+    sectionTitle: string;
+    scrollProgress: string;
+    segments: { label: string }[];
+  };
+  tradingStore: {
+    badge: string;
+    heroTitle: string;
+    heroSub: string;
+    productsCount: string;
+    freeDelivery: string;
+    searchPlaceholder: string;
+    showing: string;
+    products: string;
+    noResults: string;
+    noResultsSub: string;
+    categories: string[];
+    trustBadges: { title: string; sub: string }[];
+    bulkTitle: string;
+    bulkSub: string;
+    bulkCta: string;
+    orderVia: string;
+    reviews: string;
+    deliveryBadge: string;
+    authenticBadge: string;
+    packagingBadge: string;
+    productNames: string[];
+    productDescs: string[];
+  };
 }
 
 const translations: Record<Locale, Translations> = {
@@ -164,7 +194,7 @@ const translations: Record<Locale, Translations> = {
           "Market Feasibility Audits & Expansion Playbooks",
           "Intermediary Alignment for Global Buyers & Sellers",
           "Licensing, Incorporation Support & RC Entity Alignment",
-          "Django-Ready Enterprise Infrastructure Scoping",
+          "Scalable Enterprise Platform & Digital Infrastructure",
         ],
       },
       procurement: {
@@ -196,7 +226,7 @@ const translations: Record<Locale, Translations> = {
         },
         {
           q: "What digital and backend infrastructure do you support?",
-          a: "We deploy enterprise architectures optimized for scaling businesses, incorporating high-performance Django-ready backend environments for custom client management, ledgers, and seamless messaging integrations.",
+          a: "We deploy enterprise architectures optimized for scaling businesses, incorporating high-performance backend environments for custom client management, ledgers, and seamless messaging integrations.",
         },
         {
           q: "Are your regional entities fully verified and licensed?",
@@ -247,6 +277,64 @@ const translations: Record<Locale, Translations> = {
     footer: {
       tagline: "Precision. Integrity. Global Perspective.",
       copyright: `© ${new Date().getFullYear()} DIS Group. All rights reserved.`,
+    },
+    pieChart: {
+      sectionLabel: "Revenue Distribution",
+      sectionTitle: "Business Segments",
+      scrollProgress: "Scroll Progress",
+      segments: [
+        { label: "Logistics" },
+        { label: "Consulting" },
+        { label: "Procurement" },
+        { label: "Trading" },
+      ],
+    },
+    tradingStore: {
+      badge: "DIS Beauty & Cosmetics",
+      heroTitle: "Premium Beauty\nCollection",
+      heroSub: "Curated skincare, body care, and fragrance imports. Direct from trusted global suppliers to your doorstep.",
+      productsCount: "Products",
+      freeDelivery: "Free Local Delivery",
+      searchPlaceholder: "Search products...",
+      showing: "Showing",
+      products: "products",
+      noResults: "No products found",
+      noResultsSub: "Try adjusting your search or filter",
+      categories: ["All", "Skincare", "Body Care", "Hair Care", "Fragrance"],
+      trustBadges: [
+        { title: "Free Local Delivery", sub: "Lubumbashi & Lagos" },
+        { title: "Authentic Products", sub: "100% genuine imports" },
+        { title: "WhatsApp Ordering", sub: "Chat to buy instantly" },
+        { title: "Secure Packaging", sub: "Safe & discreet delivery" },
+      ],
+      bulkTitle: "Want to order in bulk?",
+      bulkSub: "Wholesale pricing available for retailers, salons, and distributors. Contact CEO Okey Francis CHIBUEZE directly.",
+      bulkCta: "Chat for Wholesale Pricing",
+      orderVia: "Order via WhatsApp",
+      reviews: "reviews",
+      deliveryBadge: "Free delivery in Lubumbashi & Lagos",
+      authenticBadge: "Authentic product guarantee",
+      packagingBadge: "Secure packaging & handling",
+      productNames: [
+        "Exfoliating Radiance Body Scrub",
+        "Premium Glow Serum & Essence",
+        "Pure Herbal Beauty X7 Lotion",
+        "Natural Organic Shea Butter Blend",
+        "Coconut & Argan Hair Treatment Oil",
+        "Rose Petal Hydrating Face Mist",
+        "Luxury Oud & Vanilla Perfume Oil",
+        "Brightening Vitamin C Body Cream",
+      ],
+      productDescs: [
+        "Deep skin renewal scrub targeting dead cells and restoring smooth natural brilliance. Enriched with natural exfoliants.",
+        "Highly concentrated daily glow serum enriched with advanced botanical extracts for radiant luminous skin.",
+        "Rich nourishing body lotion for full-day moisture locking and even toning. Lightweight, non-greasy formula.",
+        "100% pure imported body butter formulated for flawless deep layer skin conditioning and protection.",
+        "Intensive hair repair oil combining coconut and argan to restore shine, reduce breakage, and deeply nourish.",
+        "Refreshing rose-infused facial mist for instant hydration boost. Perfect for on-the-go skin revival.",
+        "Long-lasting Arabian-inspired perfume oil with rich oud, warm vanilla, and subtle musk notes.",
+        "Vitamin C enriched body cream for brightening, evening skin tone, and providing all-day antioxidant protection.",
+      ],
     },
   },
   fr: {
@@ -334,7 +422,7 @@ const translations: Record<Locale, Translations> = {
           "Audits de Faisabilité de Marché & Plans d'Expansion",
           "Alignement d'Intermédiaires pour Acheteurs & Vendeurs Mondiaux",
           "Support de Licence, Incorporation & Alignement d'Entité RC",
-          "Cadrage d'Infrastructure Django Prête pour l'Entreprise",
+          "Plateforme Entreprise Évolutive & Infrastructure Numérique",
         ],
       },
       procurement: {
@@ -366,7 +454,7 @@ const translations: Record<Locale, Translations> = {
         },
         {
           q: "Quelle infrastructure numérique et backend supportez-vous ?",
-          a: "Nous déployons des architectures d'entreprise optimisées pour la mise à l'échelle, intégrant des environnements backend Django haute performance pour la gestion des clients et les intégrations de messagerie.",
+          a: "Nous déployons des architectures d'entreprise optimisées pour la mise à l'échelle, intégrant des environnements backend haute performance pour la gestion des clients et les intégrations de messagerie.",
         },
         {
           q: "Vos entités régionales sont-elles entièrement vérifiées ?",
@@ -417,6 +505,64 @@ const translations: Record<Locale, Translations> = {
     footer: {
       tagline: "Précision. Intégrité. Perspective Mondiale.",
       copyright: `© ${new Date().getFullYear()} DIS Group. Tous droits réservés.`,
+    },
+    pieChart: {
+      sectionLabel: "Répartition des Revenus",
+      sectionTitle: "Segments d'Activité",
+      scrollProgress: "Progression du Défilement",
+      segments: [
+        { label: "Logistique" },
+        { label: "Conseil" },
+        { label: "Approvisionnement" },
+        { label: "Commerce" },
+      ],
+    },
+    tradingStore: {
+      badge: "DIS Beauté & Cosmétiques",
+      heroTitle: "Collection Beauté\nPremium",
+      heroSub: "Importations sélectionnées de soins de la peau, soins corporels et parfums. Directement de fournisseurs mondiaux de confiance.",
+      productsCount: "Produits",
+      freeDelivery: "Livraison Locale Gratuite",
+      searchPlaceholder: "Rechercher des produits...",
+      showing: "Affichage de",
+      products: "produits",
+      noResults: "Aucun produit trouvé",
+      noResultsSub: "Essayez d'ajuster votre recherche ou filtre",
+      categories: ["Tous", "Soins Peau", "Soins Corps", "Soins Cheveux", "Parfum"],
+      trustBadges: [
+        { title: "Livraison Locale Gratuite", sub: "Lubumbashi & Lagos" },
+        { title: "Produits Authentiques", sub: "100% importations authentiques" },
+        { title: "Commande WhatsApp", sub: "Discutez pour acheter" },
+        { title: "Emballage Sécurisé", sub: "Livraison sûre & discrète" },
+      ],
+      bulkTitle: "Vous souhaitez commander en gros ?",
+      bulkSub: "Prix de gros disponibles pour les détaillants, salons et distributeurs. Contactez directement le PDG Okey Francis CHIBUEZE.",
+      bulkCta: "Discuter pour les Prix de Gros",
+      orderVia: "Commander via WhatsApp",
+      reviews: "avis",
+      deliveryBadge: "Livraison gratuite à Lubumbashi & Lagos",
+      authenticBadge: "Garantie de produit authentique",
+      packagingBadge: "Emballage sécurisé & soigné",
+      productNames: [
+        "Gommage Corporel Éclat Exfoliant",
+        "Sérum & Essence Éclat Premium",
+        "Lotion Beauté Herbale Pure X7",
+        "Mélange Beurre de Karité Bio Naturel",
+        "Huile Capillaire Coco & Argan",
+        "Brume Hydratante aux Pétales de Rose",
+        "Huile Parfumée Luxe Oud & Vanille",
+        "Crème Corporelle Éclaircissante Vitamine C",
+      ],
+      productDescs: [
+        "Gommage de renouvellement cutané ciblant les cellules mortes et restaurant un éclat naturel lisse. Enrichi en exfoliants naturels.",
+        "Sérum éclat quotidien hautement concentré enrichi en extraits botaniques avancés pour une peau radieuse et lumineuse.",
+        "Lotion corporelle riche et nourrissante pour une hydratation longue durée et un teint uniforme. Formule légère et non grasse.",
+        "Beurre corporel 100% pur importé formulé pour un conditionnement et une protection en profondeur de la peau.",
+        "Huile capillaire réparatrice intensive combinant noix de coco et argan pour restaurer la brillance et réduire la casse.",
+        "Brume faciale rafraîchissante infusée à la rose pour un boost d'hydratation instantané. Parfaite pour la revitalisation en déplacement.",
+        "Huile parfumée d'inspiration arabe longue durée avec oud riche, vanille chaude et notes de musc subtiles.",
+        "Crème corporelle enrichie en Vitamine C pour éclaircir, unifier le teint et offrir une protection antioxydante toute la journée.",
+      ],
     },
   },
   es: {
@@ -504,7 +650,7 @@ const translations: Record<Locale, Translations> = {
           "Auditorías de Factibilidad de Mercado y Planes de Expansión",
           "Alineación de Intermediarios para Compradores y Vendedores Globales",
           "Soporte de Licencias, Incorporación y Alineación de Entidad RC",
-          "Alcance de Infraestructura Django Lista para Empresas",
+          "Plataforma Empresarial Escalable & Infraestructura Digital",
         ],
       },
       procurement: {
@@ -536,7 +682,7 @@ const translations: Record<Locale, Translations> = {
         },
         {
           q: "¿Qué infraestructura digital y backend soportan?",
-          a: "Desplegamos arquitecturas empresariales optimizadas para escalabilidad, incorporando entornos backend Django de alto rendimiento para gestión de clientes e integraciones de mensajería.",
+          a: "Desplegamos arquitecturas empresariales optimizadas para escalabilidad, incorporando entornos backend de alto rendimiento para gestión de clientes e integraciones de mensajería.",
         },
         {
           q: "¿Sus entidades regionales están completamente verificadas?",
@@ -587,6 +733,64 @@ const translations: Record<Locale, Translations> = {
     footer: {
       tagline: "Precisión. Integridad. Perspectiva Global.",
       copyright: `© ${new Date().getFullYear()} DIS Group. Todos los derechos reservados.`,
+    },
+    pieChart: {
+      sectionLabel: "Distribución de Ingresos",
+      sectionTitle: "Segmentos de Negocio",
+      scrollProgress: "Progreso de Desplazamiento",
+      segments: [
+        { label: "Logística" },
+        { label: "Consultoría" },
+        { label: "Adquisiciones" },
+        { label: "Comercio" },
+      ],
+    },
+    tradingStore: {
+      badge: "DIS Belleza & Cosméticos",
+      heroTitle: "Colección Belleza\nPremium",
+      heroSub: "Importaciones seleccionadas de cuidado de piel, cuidado corporal y fragancias. Directo de proveedores globales de confianza.",
+      productsCount: "Productos",
+      freeDelivery: "Entrega Local Gratuita",
+      searchPlaceholder: "Buscar productos...",
+      showing: "Mostrando",
+      products: "productos",
+      noResults: "No se encontraron productos",
+      noResultsSub: "Intente ajustar su búsqueda o filtro",
+      categories: ["Todos", "Cuidado Piel", "Cuidado Corporal", "Cuidado Capilar", "Fragancia"],
+      trustBadges: [
+        { title: "Entrega Local Gratuita", sub: "Lubumbashi & Lagos" },
+        { title: "Productos Auténticos", sub: "100% importaciones genuinas" },
+        { title: "Pedido por WhatsApp", sub: "Chatee para comprar" },
+        { title: "Empaque Seguro", sub: "Entrega segura & discreta" },
+      ],
+      bulkTitle: "¿Quiere pedir al por mayor?",
+      bulkSub: "Precios mayoristas disponibles para minoristas, salones y distribuidores. Contacte directamente al CEO Okey Francis CHIBUEZE.",
+      bulkCta: "Chatear por Precios Mayoristas",
+      orderVia: "Pedir por WhatsApp",
+      reviews: "reseñas",
+      deliveryBadge: "Entrega gratuita en Lubumbashi & Lagos",
+      authenticBadge: "Garantía de producto auténtico",
+      packagingBadge: "Empaque seguro & cuidadoso",
+      productNames: [
+        "Exfoliante Corporal de Brillo Radiante",
+        "Sérum & Esencia de Brillo Premium",
+        "Loción de Belleza Herbal Pura X7",
+        "Mezcla de Manteca de Karité Orgánica Natural",
+        "Aceite Capilar de Coco & Argán",
+        "Bruma Hidratante de Pétalos de Rosa",
+        "Aceite Perfumado de Lujo Oud & Vainilla",
+        "Crema Corporal Iluminadora de Vitamina C",
+      ],
+      productDescs: [
+        "Exfoliante de renovación cutánea que elimina células muertas y restaura un brillo natural suave. Enriquecido con exfoliantes naturales.",
+        "Sérum de brillo diario altamente concentrado enriquecido con extractos botánicos avanzados para una piel radiante y luminosa.",
+        "Loción corporal rica y nutritiva para hidratación duradera y tonificación uniforme. Fórmula ligera y no grasa.",
+        "Manteca corporal 100% pura importada formulada para acondicionamiento profundo y protección de la piel.",
+        "Aceite capilar reparador intensivo que combina coco y argán para restaurar el brillo y reducir la rotura.",
+        "Bruma facial refrescante infusionada con rosa para un impulso instantáneo de hidratación. Perfecta para revitalización en movimiento.",
+        "Aceite perfumado de inspiración árabe de larga duración con oud rico, vainilla cálida y notas sutiles de almizcle.",
+        "Crema corporal enriquecida con Vitamina C para iluminar, unificar el tono de piel y brindar protección antioxidante todo el día.",
+      ],
     },
   },
 };

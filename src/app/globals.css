@@ -267,6 +267,15 @@
       padding-right: 8rem;
     }
   }
+
+  /* Hide scrollbar for horizontal carousels */
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 /* ── LOADER ── */

@@ -6,31 +6,44 @@ import { Package, Lightbulb, ShoppingCart, TrendUp } from "@phosphor-icons/react
 import { useLanguage } from "@/context/LanguageContext";
 
 const segments = [
-  { label: "Logistics", pct: 45, color: "#8B2020", icon: Package },
-  { label: "Consulting", pct: 30, color: "#2A1F14", icon: Lightbulb },
-  { label: "Procurement", pct: 15, color: "#A33030", icon: ShoppingCart },
-  { label: "Trading", pct: 10, color: "#5C4A38", icon: TrendUp },
+  { pct: 45, color: "#8B2020", icon: Package },
+  { pct: 30, color: "#2A1F14", icon: Lightbulb },
+  { pct: 15, color: "#A33030", icon: ShoppingCart },
+  { pct: 10, color: "#5C4A38", icon: TrendUp },
 ];
 
 export default function InteractivePieChart() {
   const { t } = useLanguage();
   const sectionRef = useRef<HTMLDivElement>(null);
+  const [hasAnimated, setHasAnimated] = useState(false);
   const [progress, setProgress] = useState(0);
 
+  // Animate to 100% when section comes into view
   useEffect(() => {
-    const handleScroll = () => {
-      if (!sectionRef.current) return;
-      const rect = sectionRef.current.getBoundingClientRect();
-      const vh = window.innerHeight;
-      const start = vh * 0.7;
-      const end = -rect.height * 0.4;
-      const raw = (start - rect.top) / (start - end);
-      setProgress(Math.max(0, Math.min(1, raw)));
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasAnimated) {
+          setHasAnimated(true);
+          // Smooth count-up animation
+          const duration = 1800;
+          const start = performance.now();
+          const animate = (now: number) => {
+            const elapsed = now - start;
+            const t = Math.min(elapsed / duration, 1);
+            // Ease out cubic
+            const eased = 1 - Math.pow(1 - t, 3);
+            setProgress(eased);
+            if (t < 1) requestAnimationFrame(animate);
+          };
+          requestAnimationFrame(animate);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, [hasAnimated]);
 
   const size = 300;
   const strokeWidth = 40;
@@ -42,8 +55,8 @@ export default function InteractivePieChart() {
       <div className="max-w-7xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }} transition={{ duration: 0.8 }}>
-          <span className="text-caption uppercase tracking-[0.2em] text-crimson/50 mb-4 block">Revenue Distribution</span>
-          <h2 className="text-display-lg font-bold text-espresso mb-16">Business Segments</h2>
+          <span className="text-caption uppercase tracking-[0.2em] text-crimson/50 mb-4 block">{t.pieChart.sectionLabel}</span>
+          <h2 className="text-display-lg font-bold text-espresso mb-16">{t.pieChart.sectionTitle}</h2>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
@@ -78,7 +91,7 @@ export default function InteractivePieChart() {
               <span className="text-[42px] font-bold text-espresso tracking-tight leading-none">
                 {Math.round(progress * 100)}<span className="text-[22px] text-crimson/50">%</span>
               </span>
-              <span className="text-[9px] uppercase tracking-[0.25em] text-walnut/30 mt-2 font-medium">Scroll Progress</span>
+              <span className="text-[9px] uppercase tracking-[0.25em] text-walnut/30 mt-2 font-medium">{t.pieChart.scrollProgress}</span>
             </div>
           </motion.div>
 
@@ -98,7 +111,7 @@ export default function InteractivePieChart() {
                     <Icon size={20} weight="light" className="text-walnut/50" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h4 className="text-body-md font-semibold text-espresso">{seg.label}</h4>
+                    <h4 className="text-body-md font-semibold text-espresso">{t.pieChart.segments[i]?.label || ""}</h4>
                     <div className="w-full h-1 bg-espresso/[0.04] rounded-full mt-2 overflow-hidden">
                       <div className="h-full rounded-full transition-all duration-500"
                         style={{ width: `${myProgress * 100}%`, backgroundColor: seg.color }} />

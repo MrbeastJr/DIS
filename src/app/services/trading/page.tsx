@@ -7,18 +7,28 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   MagnifyingGlass, Funnel, ShoppingBag, Star, WhatsappLogo,
   ArrowLeft, X, Heart, Eye, Tag, Package, Truck, ShieldCheck,
+  ShoppingCart, Plus, Minus, Trash,
 } from "@phosphor-icons/react";
 import Navbar from "@/components/Navbar";
-import WhatsAppButton from "@/components/WhatsAppButton";
 import { useLanguage } from "@/context/LanguageContext";
 
-/* ── Product Catalog (hardcoded now, Django API later) ── */
-const categories = ["All", "Skincare", "Body Care", "Hair Care", "Fragrance"] as const;
+/* ── Cart Item Type ── */
+interface CartItem {
+  id: number;
+  name: string;
+  price: number;
+  priceFc: string;
+  image: string;
+  qty: number;
+}
 
-const products = [
+/* ── Product Catalog ── */
+const categoryKeys = ["All", "Skincare", "Body Care", "Hair Care", "Fragrance"] as const;
+
+const productsData = [
   {
     id: 1,
-    name: "Exfoliating Radiance Body Scrub",
+    nameIndex: 0,
     price: 25,
     priceFc: "50,000 FC",
     category: "Skincare",
@@ -26,11 +36,10 @@ const products = [
     rating: 4.8,
     reviews: 124,
     image: "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=600&h=600&fit=crop",
-    desc: "Deep skin renewal scrub targeting dead cells and restoring smooth natural brilliance. Enriched with natural exfoliants.",
   },
   {
     id: 2,
-    name: "Premium Glow Serum & Essence",
+    nameIndex: 1,
     price: 40,
     priceFc: "80,000 FC",
     category: "Skincare",
@@ -38,11 +47,10 @@ const products = [
     rating: 4.9,
     reviews: 89,
     image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600&h=600&fit=crop",
-    desc: "Highly concentrated daily glow serum enriched with advanced botanical extracts for radiant luminous skin.",
   },
   {
     id: 3,
-    name: "Pure Herbal Beauty X7 Lotion",
+    nameIndex: 2,
     price: 30,
     priceFc: "60,000 FC",
     category: "Body Care",
@@ -50,11 +58,10 @@ const products = [
     rating: 4.7,
     reviews: 203,
     image: "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?w=600&h=600&fit=crop",
-    desc: "Rich nourishing body lotion for full-day moisture locking and even toning. Lightweight, non-greasy formula.",
   },
   {
     id: 4,
-    name: "Natural Organic Shea Butter Blend",
+    nameIndex: 3,
     price: 20,
     priceFc: "40,000 FC",
     category: "Body Care",
@@ -62,11 +69,10 @@ const products = [
     rating: 4.6,
     reviews: 156,
     image: "https://images.unsplash.com/photo-1643185450492-6ba77dea4e17?w=600&h=600&fit=crop",
-    desc: "100% pure imported body butter formulated for flawless deep layer skin conditioning and protection.",
   },
   {
     id: 5,
-    name: "Coconut & Argan Hair Treatment Oil",
+    nameIndex: 4,
     price: 35,
     priceFc: "70,000 FC",
     category: "Hair Care",
@@ -74,11 +80,10 @@ const products = [
     rating: 4.8,
     reviews: 67,
     image: "https://images.unsplash.com/photo-1535585209827-a15fcdbc4c2d?w=600&h=600&fit=crop",
-    desc: "Intensive hair repair oil combining coconut and argan to restore shine, reduce breakage, and deeply nourish.",
   },
   {
     id: 6,
-    name: "Rose Petal Hydrating Face Mist",
+    nameIndex: 5,
     price: 18,
     priceFc: "36,000 FC",
     category: "Skincare",
@@ -86,11 +91,10 @@ const products = [
     rating: 4.5,
     reviews: 98,
     image: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&h=600&fit=crop",
-    desc: "Refreshing rose-infused facial mist for instant hydration boost. Perfect for on-the-go skin revival.",
   },
   {
     id: 7,
-    name: "Luxury Oud & Vanilla Perfume Oil",
+    nameIndex: 6,
     price: 55,
     priceFc: "110,000 FC",
     category: "Fragrance",
@@ -98,11 +102,10 @@ const products = [
     rating: 4.9,
     reviews: 42,
     image: "https://images.unsplash.com/photo-1594035910387-fea081e84dfb?w=600&h=600&fit=crop",
-    desc: "Long-lasting Arabian-inspired perfume oil with rich oud, warm vanilla, and subtle musk notes.",
   },
   {
     id: 8,
-    name: "Brightening Vitamin C Body Cream",
+    nameIndex: 7,
     price: 28,
     priceFc: "56,000 FC",
     category: "Body Care",
@@ -110,12 +113,15 @@ const products = [
     rating: 4.7,
     reviews: 181,
     image: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=600&h=600&fit=crop",
-    desc: "Vitamin C enriched body cream for brightening, evening skin tone, and providing all-day antioxidant protection.",
   },
 ];
 
 /* ── Quick View Modal ── */
-function ProductModal({ product, onClose }: { product: typeof products[0]; onClose: () => void }) {
+function ProductModal({ product, onClose, ts }: {
+  product: { name: string; desc: string; price: number; priceFc: string; category: string; tag: string; rating: number; reviews: number; image: string };
+  onClose: () => void;
+  ts: any;
+}) {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -158,7 +164,7 @@ function ProductModal({ product, onClose }: { product: typeof products[0]; onClo
                     <Star key={i} size={14} weight="fill" className={i < Math.floor(product.rating) ? "text-amber-400" : "text-pearl"} />
                   ))}
                 </div>
-                <span className="text-xs text-walnut/50 font-medium">{product.rating} ({product.reviews} reviews)</span>
+                <span className="text-xs text-walnut/50 font-medium">{product.rating} ({product.reviews} {ts.reviews})</span>
               </div>
 
               <p className="text-body-sm text-walnut/70 leading-relaxed mb-6">{product.desc}</p>
@@ -171,9 +177,9 @@ function ProductModal({ product, onClose }: { product: typeof products[0]; onClo
               {/* Trust badges */}
               <div className="space-y-2 mb-6">
                 {[
-                  { icon: Truck, text: "Free delivery in Lubumbashi & Lagos" },
-                  { icon: ShieldCheck, text: "Authentic product guarantee" },
-                  { icon: Package, text: "Secure packaging & handling" },
+                  { icon: Truck, text: ts.deliveryBadge },
+                  { icon: ShieldCheck, text: ts.authenticBadge },
+                  { icon: Package, text: ts.packagingBadge },
                 ].map((badge, i) => (
                   <div key={i} className="flex items-center gap-2 text-xs text-walnut/50 font-medium">
                     <badge.icon size={14} className="text-crimson/60 flex-shrink-0" />
@@ -191,7 +197,7 @@ function ProductModal({ product, onClose }: { product: typeof products[0]; onClo
               style={{ textDecoration: "none" }}
             >
               <WhatsappLogo size={22} weight="fill" />
-              <span>Order via WhatsApp</span>
+              <span>{ts.orderVia}</span>
             </a>
           </div>
         </div>
@@ -203,10 +209,13 @@ function ProductModal({ product, onClose }: { product: typeof products[0]; onClo
 /* ── Main Store Page ── */
 export default function TradingStorePage() {
   const { t } = useLanguage();
+  const ts = t.tradingStore;
   const [search, setSearch] = useState("");
-  const [activeCategory, setActiveCategory] = useState<string>("All");
-  const [quickView, setQuickView] = useState<typeof products[0] | null>(null);
+  const [activeCategoryIndex, setActiveCategoryIndex] = useState(0);
+  const [quickView, setQuickView] = useState<{ name: string; desc: string; price: number; priceFc: string; category: string; tag: string; rating: number; reviews: number; image: string } | null>(null);
   const [favorites, setFavorites] = useState<Set<number>>(new Set());
+  const [cart, setCart] = useState<CartItem[]>([]);
+  const [cartOpen, setCartOpen] = useState(false);
 
   const toggleFav = (id: number) => {
     setFavorites((prev) => {
@@ -216,14 +225,47 @@ export default function TradingStorePage() {
     });
   };
 
+  const addToCart = (product: { id: number; name: string; price: number; priceFc: string; image: string }) => {
+    setCart((prev) => {
+      const existing = prev.find((c) => c.id === product.id);
+      if (existing) return prev.map((c) => c.id === product.id ? { ...c, qty: c.qty + 1 } : c);
+      return [...prev, { ...product, qty: 1 }];
+    });
+  };
+
+  const updateQty = (id: number, delta: number) => {
+    setCart((prev) => prev.map((c) => c.id === id ? { ...c, qty: Math.max(1, c.qty + delta) } : c));
+  };
+
+  const removeFromCart = (id: number) => {
+    setCart((prev) => prev.filter((c) => c.id !== id));
+  };
+
+  const cartTotal = cart.reduce((sum, c) => sum + c.price * c.qty, 0);
+  const cartCount = cart.reduce((sum, c) => sum + c.qty, 0);
+
+  const buildWhatsAppMessage = () => {
+    const lines = cart.map((c) => `\u2022 ${c.name} x${c.qty} — $${c.price * c.qty}`);
+    return encodeURIComponent(
+      `Hi Okey,\n\nI'd like to place an order from DIS Beauty & Cosmetics:\n\n${lines.join("\n")}\n\n💰 Total: $${cartTotal}\n\nPlease confirm availability, delivery options, and payment details. Thank you!`
+    );
+  };
+
+  // Build localized products
+  const products = useMemo(() => productsData.map((p) => ({
+    ...p,
+    name: ts.productNames[p.nameIndex] || "",
+    desc: ts.productDescs[p.nameIndex] || "",
+  })), [ts]);
+
   const filtered = useMemo(() => {
     return products.filter((p) => {
-      const matchCategory = activeCategory === "All" || p.category === activeCategory;
+      const matchCategory = activeCategoryIndex === 0 || p.category === categoryKeys[activeCategoryIndex];
       const matchSearch = p.name.toLowerCase().includes(search.toLowerCase()) ||
         p.desc.toLowerCase().includes(search.toLowerCase());
       return matchCategory && matchSearch;
     });
-  }, [activeCategory, search]);
+  }, [activeCategoryIndex, search, products]);
 
   return (
     <main className="bg-white min-h-screen text-espresso w-full max-w-full overflow-hidden">
@@ -259,20 +301,20 @@ export default function TradingStorePage() {
             <div>
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-crimson/20 text-crimson-light text-[10px] font-bold uppercase tracking-wider mb-4">
                 <ShoppingBag size={12} weight="fill" />
-                DIS Beauty & Cosmetics
+                {ts.badge}
               </div>
-              <h1 className="text-display-lg md:text-display-xl font-bold text-white mb-3 leading-[1.06]">
-                Premium Beauty<br />Collection<span className="text-crimson">.</span>
+              <h1 className="text-display-lg md:text-display-xl font-bold text-white mb-3 leading-[1.06]" style={{ whiteSpace: "pre-line" }}>
+                {ts.heroTitle}<span className="text-crimson">.</span>
               </h1>
               <p className="text-body-md text-white/60 max-w-md leading-relaxed">
-                Curated skincare, body care, and fragrance imports. Direct from trusted global suppliers to your doorstep.
+                {ts.heroSub}
               </p>
             </div>
 
             <div className="flex items-center gap-3 text-white/40 text-xs font-medium">
-              <span className="flex items-center gap-1.5"><Package size={14} /> {products.length} Products</span>
+              <span className="flex items-center gap-1.5"><Package size={14} /> {productsData.length} {ts.productsCount}</span>
               <span className="w-1 h-1 rounded-full bg-white/20" />
-              <span className="flex items-center gap-1.5"><Truck size={14} /> Free Local Delivery</span>
+              <span className="flex items-center gap-1.5"><Truck size={14} /> {ts.freeDelivery}</span>
             </div>
           </div>
         </div>
@@ -286,7 +328,7 @@ export default function TradingStorePage() {
             <MagnifyingGlass size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-walnut/30" />
             <input
               type="text"
-              placeholder="Search products..."
+              placeholder={ts.searchPlaceholder}
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="w-full pl-11 pr-4 py-3 rounded-xl bg-cream/60 border border-espresso/5 text-body-sm text-espresso placeholder:text-walnut/30 focus:outline-none focus:border-crimson/30 focus:bg-white transition-all"
@@ -296,12 +338,12 @@ export default function TradingStorePage() {
           {/* Categories */}
           <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 scrollbar-hide">
             <Funnel size={16} className="text-walnut/30 flex-shrink-0 mr-1 hidden sm:block" />
-            {categories.map((cat) => (
+            {ts.categories.map((cat: string, idx: number) => (
               <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
+                key={idx}
+                onClick={() => setActiveCategoryIndex(idx)}
                 className={`px-4 py-2 rounded-lg text-xs font-bold whitespace-nowrap transition-all duration-200 cursor-pointer ${
-                  activeCategory === cat
+                  activeCategoryIndex === idx
                     ? "bg-espresso text-white shadow-sm"
                     : "bg-cream/50 text-walnut/60 hover:bg-cream hover:text-espresso"
                 }`}
@@ -317,15 +359,15 @@ export default function TradingStorePage() {
       <section className="section-padding max-w-6xl mx-auto px-4">
         <div className="flex items-center justify-between mb-8">
           <p className="text-body-sm text-walnut/50 font-medium">
-            Showing <span className="text-espresso font-bold">{filtered.length}</span> product{filtered.length !== 1 ? "s" : ""}
+            {ts.showing} <span className="text-espresso font-bold">{filtered.length}</span> {ts.products}
           </p>
         </div>
 
         {filtered.length === 0 ? (
           <div className="text-center py-24">
             <MagnifyingGlass size={48} className="text-walnut/10 mx-auto mb-4" />
-            <p className="text-body-lg text-walnut/40 font-medium">No products found</p>
-            <p className="text-body-sm text-walnut/25 mt-1">Try adjusting your search or filter</p>
+            <p className="text-body-lg text-walnut/40 font-medium">{ts.noResults}</p>
+            <p className="text-body-sm text-walnut/25 mt-1">{ts.noResultsSub}</p>
           </div>
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
@@ -335,7 +377,8 @@ export default function TradingStorePage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4 }}
-                className="group rounded-2xl md:rounded-3xl border border-espresso/[0.06] bg-white hover:border-crimson/20 hover:shadow-xl hover:shadow-espresso/[0.04] transition-all duration-500 overflow-hidden"
+                onClick={() => setQuickView(product)}
+                className="group rounded-2xl md:rounded-3xl border border-espresso/[0.06] bg-white hover:border-crimson/20 hover:shadow-xl hover:shadow-espresso/[0.04] transition-all duration-500 overflow-hidden cursor-pointer"
               >
                 {/* Image */}
                 <div className="relative aspect-square bg-cream/30 overflow-hidden">
@@ -355,7 +398,7 @@ export default function TradingStorePage() {
                   {/* Hover Actions */}
                   <div className="absolute top-3 right-3 flex flex-col gap-2 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
                     <button
-                      onClick={(e) => { e.preventDefault(); toggleFav(product.id); }}
+                      onClick={(e) => { e.stopPropagation(); toggleFav(product.id); }}
                       className={`w-9 h-9 rounded-full flex items-center justify-center shadow-md transition-all cursor-pointer ${
                         favorites.has(product.id) ? "bg-crimson text-white" : "bg-white/90 backdrop-blur-sm text-walnut/60 hover:text-crimson"
                       }`}
@@ -363,7 +406,7 @@ export default function TradingStorePage() {
                       <Heart size={16} weight={favorites.has(product.id) ? "fill" : "regular"} />
                     </button>
                     <button
-                      onClick={(e) => { e.preventDefault(); setQuickView(product); }}
+                      onClick={(e) => { e.stopPropagation(); setQuickView(product); }}
                       className="w-9 h-9 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-walnut/60 hover:text-espresso shadow-md transition-all cursor-pointer"
                     >
                       <Eye size={16} />
@@ -396,15 +439,13 @@ export default function TradingStorePage() {
                       <span className="text-body-md font-bold text-espresso">${product.price}</span>
                       <span className="text-[10px] text-walnut/30 block font-medium">{product.priceFc}</span>
                     </div>
-                    <a
-                      href={`https://wa.me/243990301518?text=${encodeURIComponent(`Hi, I'd like to order: ${product.name} ($${product.price})`)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-[#25D366] flex items-center justify-center text-white hover:bg-[#20BD5A] transition-colors shadow-sm"
-                      title="Order via WhatsApp"
+                    <button
+                      onClick={(e) => { e.stopPropagation(); addToCart({ id: product.id, name: product.name, price: product.price, priceFc: product.priceFc, image: product.image }); }}
+                      className="w-9 h-9 md:w-10 md:h-10 rounded-xl bg-espresso flex items-center justify-center text-white hover:bg-crimson transition-colors shadow-sm cursor-pointer"
+                      title="Add to Cart"
                     >
-                      <WhatsappLogo size={18} weight="fill" />
-                    </a>
+                      <ShoppingCart size={18} weight="fill" />
+                    </button>
                   </div>
                 </div>
               </motion.div>
@@ -416,18 +457,13 @@ export default function TradingStorePage() {
       {/* ── Store Trust Banner ── */}
       <section className="bg-cream/40 border-t border-espresso/5 py-12 px-4">
         <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-          {[
-            { icon: Truck, title: "Free Local Delivery", sub: "Lubumbashi & Lagos" },
-            { icon: ShieldCheck, title: "Authentic Products", sub: "100% genuine imports" },
-            { icon: WhatsappLogo, title: "WhatsApp Ordering", sub: "Chat to buy instantly" },
-            { icon: Package, title: "Secure Packaging", sub: "Safe & discreet delivery" },
-          ].map((item, i) => (
+          {[Truck, ShieldCheck, WhatsappLogo, Package].map((IconComp, i) => (
             <div key={i} className="text-center flex flex-col items-center gap-2">
               <div className="w-12 h-12 rounded-2xl bg-white border border-espresso/5 flex items-center justify-center shadow-sm">
-                <item.icon size={22} className="text-crimson" weight="light" />
+                <IconComp size={22} className="text-crimson" weight="light" />
               </div>
-              <h4 className="text-body-sm font-bold text-espresso">{item.title}</h4>
-              <p className="text-[10px] text-walnut/40 font-medium uppercase tracking-wider">{item.sub}</p>
+              <h4 className="text-body-sm font-bold text-espresso">{ts.trustBadges[i]?.title}</h4>
+              <p className="text-[10px] text-walnut/40 font-medium uppercase tracking-wider">{ts.trustBadges[i]?.sub}</p>
             </div>
           ))}
         </div>
@@ -437,10 +473,10 @@ export default function TradingStorePage() {
       <section className="py-16 px-4" style={{ backgroundColor: "#1A1210" }}>
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-display-md font-bold text-white mb-4">
-            Want to order in bulk?
+            {ts.bulkTitle}
           </h2>
           <p className="text-body-md text-white/60 mb-8 max-w-xl mx-auto">
-            Wholesale pricing available for retailers, salons, and distributors. Contact CEO Okey Francis CHIBUEZE directly.
+            {ts.bulkSub}
           </p>
           <a
             href="https://wa.me/243990301518?text=Hi%20Okey%2C%20I'm%20interested%20in%20wholesale%20pricing%20for%20your%20beauty%20products."
@@ -450,17 +486,98 @@ export default function TradingStorePage() {
             style={{ textDecoration: "none" }}
           >
             <WhatsappLogo size={22} weight="fill" className="text-[#25D366]" />
-            <span>Chat for Wholesale Pricing</span>
+            <span>{ts.bulkCta}</span>
           </a>
         </div>
       </section>
 
+      {/* Floating Cart Button */}
+      {cartCount > 0 && (
+        <motion.button
+          initial={{ scale: 0 }} animate={{ scale: 1 }}
+          onClick={() => setCartOpen(true)}
+          className="fixed bottom-24 md:bottom-8 right-6 z-50 w-14 h-14 rounded-full bg-espresso text-white flex items-center justify-center shadow-2xl hover:bg-crimson transition-colors cursor-pointer"
+        >
+          <ShoppingCart size={24} weight="fill" />
+          <span className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-crimson text-white text-[11px] font-bold flex items-center justify-center">{cartCount}</span>
+        </motion.button>
+      )}
+
       {/* Quick View Modal */}
       <AnimatePresence>
-        {quickView && <ProductModal product={quickView} onClose={() => setQuickView(null)} />}
+        {quickView && <ProductModal product={quickView} onClose={() => setQuickView(null)} ts={ts} />}
       </AnimatePresence>
 
-      <WhatsAppButton />
+      {/* Cart Drawer */}
+      <AnimatePresence>
+        {cartOpen && (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[90] flex justify-end" onClick={() => setCartOpen(false)}>
+            <div className="absolute inset-0 bg-espresso/50 backdrop-blur-sm" />
+            <motion.div
+              initial={{ x: "100%" }} animate={{ x: 0 }} exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 30, stiffness: 300 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-md bg-white h-full flex flex-col shadow-2xl z-10"
+            >
+              {/* Header */}
+              <div className="flex items-center justify-between p-6 border-b border-espresso/5">
+                <div className="flex items-center gap-2">
+                  <ShoppingCart size={20} weight="fill" className="text-espresso" />
+                  <h3 className="text-body-lg font-bold text-espresso">Cart ({cartCount})</h3>
+                </div>
+                <button onClick={() => setCartOpen(false)} className="w-9 h-9 rounded-full bg-cream flex items-center justify-center hover:bg-pearl transition-colors cursor-pointer">
+                  <X size={16} className="text-espresso" />
+                </button>
+              </div>
+
+              {/* Items */}
+              <div className="flex-1 overflow-y-auto p-6 space-y-4">
+                {cart.length === 0 ? (
+                  <div className="text-center py-16">
+                    <ShoppingBag size={40} className="text-walnut/10 mx-auto mb-3" />
+                    <p className="text-body-sm text-walnut/40">Your cart is empty</p>
+                  </div>
+                ) : cart.map((item) => (
+                  <div key={item.id} className="flex gap-4 p-3 rounded-2xl border border-espresso/5 bg-cream/20">
+                    <div className="relative w-16 h-16 rounded-xl overflow-hidden flex-shrink-0">
+                      <Image src={item.image} alt={item.name} fill className="object-cover" sizes="64px" unoptimized />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h4 className="text-body-sm font-bold text-espresso truncate">{item.name}</h4>
+                      <p className="text-xs text-walnut/40 font-medium">${item.price} x {item.qty} = <span className="text-espresso font-bold">${item.price * item.qty}</span></p>
+                      <div className="flex items-center gap-2 mt-2">
+                        <button onClick={() => updateQty(item.id, -1)} className="w-7 h-7 rounded-lg bg-cream flex items-center justify-center hover:bg-pearl cursor-pointer"><Minus size={12} weight="bold" /></button>
+                        <span className="text-body-sm font-bold text-espresso w-6 text-center">{item.qty}</span>
+                        <button onClick={() => updateQty(item.id, 1)} className="w-7 h-7 rounded-lg bg-cream flex items-center justify-center hover:bg-pearl cursor-pointer"><Plus size={12} weight="bold" /></button>
+                        <button onClick={() => removeFromCart(item.id)} className="ml-auto w-7 h-7 rounded-lg flex items-center justify-center text-walnut/30 hover:text-crimson hover:bg-crimson/5 cursor-pointer"><Trash size={14} /></button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Footer */}
+              {cart.length > 0 && (
+                <div className="p-6 border-t border-espresso/5 space-y-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-body-sm text-walnut/60 font-medium">Total</span>
+                    <span className="text-display-sm font-bold text-espresso">${cartTotal}</span>
+                  </div>
+                  <a
+                    href={`https://wa.me/243990301518?text=${buildWhatsAppMessage()}`}
+                    target="_blank" rel="noopener noreferrer"
+                    className="w-full py-4 bg-[#25D366] text-white rounded-2xl text-center text-sm font-bold hover:bg-[#20BD5A] transition-colors flex items-center justify-center gap-2 shadow-lg"
+                    style={{ textDecoration: "none" }}
+                  >
+                    <WhatsappLogo size={22} weight="fill" />
+                    <span>{ts.orderVia}</span>
+                  </a>
+                </div>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </main>
   );
 }

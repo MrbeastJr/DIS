@@ -80,12 +80,12 @@ export default function Navbar() {
               boxShadow: "0 10px 40px rgba(26, 18, 16, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9)",
             }}
           >
-            <div className="flex items-center justify-between">
-              {/* Logo */}
+            <div className="flex items-center justify-between relative">
+              {/* Logo — left */}
               <a
                 href="#hero"
                 onClick={(e) => { e.preventDefault(); scrollTo("#hero"); }}
-                className="flex items-center gap-2 group text-decoration-none"
+                className="flex items-center group text-decoration-none"
               >
                 <Image
                   src="/assets/dis-logo.png"
@@ -97,7 +97,15 @@ export default function Navbar() {
                 />
               </a>
 
-              {/* Nav links */}
+              {/* DIS Wordmark — absolute center */}
+              <span
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[24px] font-black tracking-[0.06em] select-none pointer-events-none"
+                style={{ fontFamily: "var(--font-display)", fontStyle: "italic" }}
+              >
+                <span className="text-crimson">DIS</span><span className="text-espresso">.</span>
+              </span>
+
+              {/* Nav links — right of center */}
               <div className="flex items-center gap-1">
                 {desktopNavItems.map((item) => (
                   <button
@@ -173,7 +181,7 @@ export default function Navbar() {
       <div className="fixed top-4 left-0 right-0 z-40 flex justify-center pointer-events-none md:hidden">
         <div className="w-[calc(100%-2rem)] max-w-md pointer-events-auto">
           <div
-            className="flex items-center justify-between px-5 py-3 rounded-full"
+            className="relative flex items-center justify-between px-5 py-3 rounded-full"
             style={{
               background: "rgba(255, 255, 255, 0.75)",
               backdropFilter: "blur(24px) saturate(200%)",
@@ -182,6 +190,7 @@ export default function Navbar() {
               boxShadow: "0 8px 32px rgba(26, 18, 16, 0.08)",
             }}
           >
+            {/* Logo — left */}
             <Image
               src="/assets/dis-logo.png"
               alt="DIS"
@@ -190,7 +199,16 @@ export default function Navbar() {
               className="h-6 w-auto"
               priority
             />
-            {/* Tapping instantly cycles the language on mobile screens */}
+
+            {/* DIS Wordmark — absolute center */}
+            <span
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[20px] font-black tracking-[0.06em] select-none pointer-events-none"
+              style={{ fontFamily: "var(--font-display)", fontStyle: "italic" }}
+            >
+              <span className="text-crimson">DIS</span><span className="text-espresso">.</span>
+            </span>
+
+            {/* Language toggle — right */}
             <button
               onClick={cycleLanguage}
               className="flex items-center gap-1 text-[12px] text-walnut/60 font-medium cursor-pointer px-3 py-1.5 rounded-full hover:bg-espresso/[0.05] active:scale-95 transition-all bg-espresso/[0.03]"

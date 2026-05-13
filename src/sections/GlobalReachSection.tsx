@@ -19,10 +19,17 @@ const regions: Region[] = [
   { name: "DR Congo", x: 52, y: 63, description: "Lubumbashi — Central Africa logistics network", flag: "🇨🇩" },
   { name: "UAE", x: 63, y: 46, description: "Dubai — Middle East trade operations", flag: "🇦🇪" },
   { name: "China", x: 79, y: 41, description: "Shenzhen — Asia sourcing & manufacturing", flag: "🇨🇳" },
+  { name: "South Africa", x: 53, y: 76, description: "Johannesburg — Southern Africa distribution hub", flag: "🇿🇦" },
+  { name: "Kenya", x: 57, y: 60, description: "Nairobi — East Africa trade corridor", flag: "🇰🇪" },
+  { name: "Turkey", x: 58, y: 39, description: "Istanbul — Europe-Asia bridge operations", flag: "🇹🇷" },
+  { name: "India", x: 71, y: 48, description: "Mumbai — South Asia sourcing & logistics", flag: "🇮🇳" },
+  { name: "Saudi Arabia", x: 60, y: 48, description: "Riyadh — Gulf region trade partnerships", flag: "🇸🇦" },
 ];
 
 const connections: [number, number][] = [
   [0, 3], [0, 4], [1, 3], [2, 3], [3, 4], [0, 1], [0, 2],
+  [0, 5], [2, 5], [2, 6], [0, 6], [3, 7], [7, 4], [3, 8],
+  [8, 4], [3, 9], [9, 8], [5, 6], [7, 9],
 ];
 
 export default function GlobalReachSection() {
@@ -181,21 +188,24 @@ export default function GlobalReachSection() {
           </AnimatePresence>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mt-10">
-          {regions.map((r, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }} transition={{ delay: i * 0.08 }}
-              onMouseEnter={() => setActiveRegion(i)} onMouseLeave={() => setActiveRegion(null)}
-              className={`text-center p-5 rounded-2xl border transition-all duration-500 cursor-pointer ${
-                activeRegion === i ? "border-crimson/15 bg-crimson/[0.02]" : "border-espresso/[0.04] bg-cream/30 hover:border-espresso/[0.08]"
-              }`}>
-              <span className="text-xl mb-2 block">{r.flag}</span>
-              <span className="text-body-sm font-medium text-espresso block">{r.name}</span>
-              <span className="text-[10px] text-walnut/30 uppercase tracking-wider mt-1 block">
-                {i < 3 ? "Africa" : i === 3 ? "Middle East" : "Asia"}
-              </span>
-            </motion.div>
-          ))}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 mt-10">
+          {regions.map((r, i) => {
+            const regionLabel = i < 3 ? "Africa" : i === 5 ? "Africa" : i === 6 ? "Africa" : i === 3 || i === 9 ? "Middle East" : i === 7 ? "Europe" : "Asia";
+            return (
+              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }} transition={{ delay: i * 0.06 }}
+                onMouseEnter={() => setActiveRegion(i)} onMouseLeave={() => setActiveRegion(null)}
+                className={`text-center p-4 rounded-2xl border transition-all duration-500 cursor-pointer ${
+                  activeRegion === i ? "border-crimson/15 bg-crimson/[0.02]" : "border-espresso/[0.04] bg-cream/30 hover:border-espresso/[0.08]"
+                }`}>
+                <span className="text-xl mb-2 block">{r.flag}</span>
+                <span className="text-body-sm font-medium text-espresso block">{r.name}</span>
+                <span className="text-[10px] text-walnut/30 uppercase tracking-wider mt-1 block">
+                  {regionLabel}
+                </span>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
