@@ -58,6 +58,12 @@ export interface Translations {
     title: string;
     subtitle: string;
   };
+  industries: {
+    sectionLabel: string;
+    sectionTitle: string;
+    sectionSub: string;
+    items: { name: string; desc: string }[];
+  };
   process: {
     title: string;
     steps: { title: string; description: string }[];
@@ -79,6 +85,7 @@ export interface Translations {
   pieChart: {
     sectionLabel: string;
     sectionTitle: string;
+    sectionSub: string;
     scrollProgress: string;
     segments: { label: string }[];
   };
@@ -105,6 +112,40 @@ export interface Translations {
     packagingBadge: string;
     productNames: string[];
     productDescs: string[];
+  };
+  aboutPage: {
+    backToHome: string;
+    badge: string;
+    heroTitle: string;
+    heroSub: string;
+    statFounded: string;
+    statCountries: string;
+    statServices: string;
+    statRC: string;
+    storyLabel: string;
+    storyTitle: string;
+    storyP1: string;
+    storyP2: string;
+    servicesLabel: string;
+    servicesTitle: string;
+    svcLogistics: string; svcLogisticsDesc: string;
+    svcConsulting: string; svcConsultingDesc: string;
+    svcProcurement: string; svcProcurementDesc: string;
+    svcTrading: string; svcTradingDesc: string;
+    ceoLabel: string;
+    ceoTitle: string;
+    ceoP1: string;
+    ceoP2: string;
+    ceoP3: string;
+    hqLabel: string;
+    valuesLabel: string;
+    valuesTitle: string;
+    val1Title: string; val1Desc: string;
+    val2Title: string; val2Desc: string;
+    val3Title: string; val3Desc: string;
+    ctaTitle: string;
+    ctaSub: string;
+    ctaButton: string;
   };
 }
 
@@ -239,6 +280,23 @@ const translations: Record<Locale, Translations> = {
       subtitle:
         "Strategic presence across key markets in Africa, the Middle East, and Asia.",
     },
+    industries: {
+      sectionLabel: "Industries We Serve",
+      sectionTitle: "Powering Sectors That Move Africa",
+      sectionSub: "From natural resources to consumer goods, we deliver logistics, procurement, and consulting solutions across Africa's most critical industries.",
+      items: [
+        { name: "Mining & Minerals", desc: "Equipment supply, camp logistics, and mineral export facilitation" },
+        { name: "Oil & Gas", desc: "Upstream supply chain, refinery logistics, and energy procurement" },
+        { name: "FMCG & Retail", desc: "Fast-moving consumer goods distribution and retail supply chains" },
+        { name: "Agriculture", desc: "Farm-to-market logistics, agro-processing support, and export" },
+        { name: "Construction", desc: "Building materials sourcing, heavy equipment, and site logistics" },
+        { name: "Pharmaceuticals", desc: "Cold-chain logistics, medical supply procurement, and compliance" },
+        { name: "Energy & Power", desc: "Power infrastructure supply, solar equipment, and grid logistics" },
+        { name: "Transport & Freight", desc: "Cross-border trucking, freight forwarding, and fleet management" },
+        { name: "Real Estate", desc: "Development consulting, material procurement, and facility management" },
+        { name: "Manufacturing", desc: "Raw material sourcing, factory setup consulting, and export logistics" },
+      ],
+    },
     process: {
       title: "Our Process",
       steps: [
@@ -279,9 +337,10 @@ const translations: Record<Locale, Translations> = {
       copyright: `© ${new Date().getFullYear()} DIS Group. All rights reserved.`,
     },
     pieChart: {
-      sectionLabel: "Revenue Distribution",
-      sectionTitle: "Business Segments",
-      scrollProgress: "Scroll Progress",
+      sectionLabel: "Our Business DNA",
+      sectionTitle: "Where We Focus",
+      sectionSub: "How we allocate our operational focus and resources across our four core service pillars.",
+      scrollProgress: "",
       segments: [
         { label: "Logistics" },
         { label: "Consulting" },
@@ -335,6 +394,47 @@ const translations: Record<Locale, Translations> = {
         "Long-lasting Arabian-inspired perfume oil with rich oud, warm vanilla, and subtle musk notes.",
         "Vitamin C enriched body cream for brightening, evening skin tone, and providing all-day antioxidant protection.",
       ],
+    },
+    aboutPage: {
+      backToHome: "Back to Home",
+      badge: "About DIS Group",
+      heroTitle: "Bridging Markets. Building Futures",
+      heroSub: "Digital Integrated Services RDC is a subsidiary of COFRAN... (NIG) Ltd — a verified, multi-sector enterprise connecting African markets to global supply chains through premium logistics, consulting, procurement, and trading services.",
+      statFounded: "Founded",
+      statCountries: "Countries Served",
+      statServices: "Core Services",
+      statRC: "Registered Entity",
+      storyLabel: "Our Story",
+      storyTitle: "From Vision to Impact",
+      storyP1: "Founded by Okey Francis CHIBUEZE, Digital Integrated Services RDC was born from a deep understanding of the logistical challenges facing businesses across Central and West Africa. With operational hubs in Lubumbashi (DR Congo) and Lagos (Nigeria), DIS bridges the gap between African enterprises and global markets.",
+      storyP2: "As a subsidiary of COFRAN... (NIG) Ltd (RC: 1492798), we operate with full regulatory compliance and a commitment to transparency. Our services span logistics, strategic consulting, procurement, and a curated beauty & cosmetics trading platform.",
+      servicesLabel: "What We Do",
+      servicesTitle: "Four Pillars of Excellence",
+      svcLogistics: "Logistics & Supply Chain",
+      svcLogisticsDesc: "Multimodal cargo transport, warehousing, customs clearance, and last-mile delivery across 15+ trade corridors spanning Africa, the Middle East, and Asia.",
+      svcConsulting: "Strategic Consulting",
+      svcConsultingDesc: "Market entry strategies, intermediary alignment, corporate structuring, and operational audits for businesses expanding into African markets.",
+      svcProcurement: "Global Procurement",
+      svcProcurementDesc: "Verified supplier networks across 5 continents, competitive pricing parity, vendor auditing, and escrow-managed transactions with 48h turnaround.",
+      svcTrading: "Beauty & Cosmetics Trading",
+      svcTradingDesc: "Curated premium skincare, body care, hair care, and fragrance products imported and distributed across the DRC and West Africa.",
+      ceoLabel: "Leadership",
+      ceoTitle: "Meet Our CEO",
+      ceoP1: "Okey Francis CHIBUEZE is the visionary behind Digital Integrated Services RDC and COFRAN... (NIG) Ltd. With extensive experience in cross-border commerce, supply chain management, and strategic business consulting, he has built a multi-sector enterprise that connects African businesses to global opportunities.",
+      ceoP2: "Under his leadership, DIS has expanded operations across DR Congo, Nigeria, Ghana, UAE, China, South Africa, Kenya, Turkey, India, and Saudi Arabia — establishing a trusted network of partners, suppliers, and clients spanning five continents.",
+      ceoP3: "His hands-on approach and direct accessibility via WhatsApp reflect a commitment to personal service that sets DIS apart from conventional corporate intermediaries.",
+      hqLabel: "Headquarters",
+      valuesLabel: "Our Values",
+      valuesTitle: "What Drives Us",
+      val1Title: "Integrity & Compliance",
+      val1Desc: "Fully registered, RC-verified operations with transparent processes and documented compliance at every step.",
+      val2Title: "Partnership First",
+      val2Desc: "We don't just serve clients — we build lasting partnerships through direct CEO access, trust, and mutual growth.",
+      val3Title: "Global Vision, Local Expertise",
+      val3Desc: "Deep knowledge of African markets combined with international supply chain reach across five continents.",
+      ctaTitle: "Ready to Work With Us?",
+      ctaSub: "Connect directly with CEO Okey Francis CHIBUEZE to discuss your business needs.",
+      ctaButton: "Chat on WhatsApp",
     },
   },
   fr: {
@@ -467,6 +567,23 @@ const translations: Record<Locale, Translations> = {
       subtitle:
         "Présence stratégique sur les marchés clés en Afrique, au Moyen-Orient et en Asie.",
     },
+    industries: {
+      sectionLabel: "Industries Que Nous Servons",
+      sectionTitle: "Alimenter les Secteurs Qui Font Avancer l'Afrique",
+      sectionSub: "Des ressources naturelles aux biens de consommation, nous offrons des solutions de logistique, d'approvisionnement et de conseil dans les industries les plus critiques d'Afrique.",
+      items: [
+        { name: "Mines & Minéraux", desc: "Fourniture d'équipements, logistique de camp et facilitation d'exportation minière" },
+        { name: "Pétrole & Gaz", desc: "Chaîne d'approvisionnement amont, logistique de raffinage et approvisionnement énergétique" },
+        { name: "FMCG & Détail", desc: "Distribution de biens de consommation rapide et chaînes d'approvisionnement de détail" },
+        { name: "Agriculture", desc: "Logistique ferme-marché, soutien agro-industriel et exportation" },
+        { name: "Construction", desc: "Approvisionnement en matériaux, équipements lourds et logistique de chantier" },
+        { name: "Pharmaceutique", desc: "Logistique de chaîne du froid, approvisionnement médical et conformité" },
+        { name: "Énergie & Électricité", desc: "Fourniture d'infrastructure électrique, équipements solaires et logistique de réseau" },
+        { name: "Transport & Fret", desc: "Camionnage transfrontalier, expédition de fret et gestion de flotte" },
+        { name: "Immobilier", desc: "Conseil en développement, approvisionnement en matériaux et gestion d'établissements" },
+        { name: "Fabrication", desc: "Approvisionnement en matières premières, conseil en mise en place d'usine et logistique d'exportation" },
+      ],
+    },
     process: {
       title: "Notre Processus",
       steps: [
@@ -507,9 +624,10 @@ const translations: Record<Locale, Translations> = {
       copyright: `© ${new Date().getFullYear()} DIS Group. Tous droits réservés.`,
     },
     pieChart: {
-      sectionLabel: "Répartition des Revenus",
-      sectionTitle: "Segments d'Activité",
-      scrollProgress: "Progression du Défilement",
+      sectionLabel: "Notre ADN Commercial",
+      sectionTitle: "Où Nous Concentrons Nos Efforts",
+      sectionSub: "Comment nous répartissons notre attention opérationnelle et nos ressources entre nos quatre piliers de services.",
+      scrollProgress: "",
       segments: [
         { label: "Logistique" },
         { label: "Conseil" },
@@ -563,6 +681,47 @@ const translations: Record<Locale, Translations> = {
         "Huile parfumée d'inspiration arabe longue durée avec oud riche, vanille chaude et notes de musc subtiles.",
         "Crème corporelle enrichie en Vitamine C pour éclaircir, unifier le teint et offrir une protection antioxydante toute la journée.",
       ],
+    },
+    aboutPage: {
+      backToHome: "Retour à l'Accueil",
+      badge: "À Propos du Groupe DIS",
+      heroTitle: "Relier les Marchés. Construire l'Avenir",
+      heroSub: "Digital Integrated Services RDC est une filiale de COFRAN... (NIG) Ltd — une entreprise multi-sectorielle vérifiée connectant les marchés africains aux chaînes d'approvisionnement mondiales.",
+      statFounded: "Fondée",
+      statCountries: "Pays Desservis",
+      statServices: "Services Principaux",
+      statRC: "Entité Enregistrée",
+      storyLabel: "Notre Histoire",
+      storyTitle: "De la Vision à l'Impact",
+      storyP1: "Fondée par Okey Francis CHIBUEZE, Digital Integrated Services RDC est née d'une compréhension profonde des défis logistiques auxquels font face les entreprises d'Afrique centrale et occidentale. Avec des centres opérationnels à Lubumbashi (RDC) et Lagos (Nigeria), DIS comble le fossé entre les entreprises africaines et les marchés mondiaux.",
+      storyP2: "En tant que filiale de COFRAN... (NIG) Ltd (RC: 1492798), nous opérons en pleine conformité réglementaire avec un engagement envers la transparence. Nos services couvrent la logistique, le conseil stratégique, l'approvisionnement et une plateforme de commerce de beauté et cosmétiques.",
+      servicesLabel: "Ce Que Nous Faisons",
+      servicesTitle: "Quatre Piliers d'Excellence",
+      svcLogistics: "Logistique & Chaîne d'Approvisionnement",
+      svcLogisticsDesc: "Transport cargo multimodal, entreposage, dédouanement et livraison dernière mile à travers 15+ corridors commerciaux en Afrique, au Moyen-Orient et en Asie.",
+      svcConsulting: "Conseil Stratégique",
+      svcConsultingDesc: "Stratégies d'entrée sur le marché, alignement d'intermédiaires, structuration d'entreprise et audits opérationnels pour les entreprises s'étendant en Afrique.",
+      svcProcurement: "Approvisionnement Mondial",
+      svcProcurementDesc: "Réseaux de fournisseurs vérifiés sur 5 continents, parité de prix compétitive, audit de fournisseurs et transactions gérées en séquestre avec délai de 48h.",
+      svcTrading: "Commerce Beauté & Cosmétiques",
+      svcTradingDesc: "Produits premium de soins de la peau, du corps, des cheveux et parfums importés et distribués en RDC et Afrique de l'Ouest.",
+      ceoLabel: "Direction",
+      ceoTitle: "Rencontrez Notre PDG",
+      ceoP1: "Okey Francis CHIBUEZE est le visionnaire derrière Digital Integrated Services RDC et COFRAN... (NIG) Ltd. Fort d'une vaste expérience en commerce transfrontalier, gestion de chaîne d'approvisionnement et conseil stratégique, il a bâti une entreprise multi-sectorielle connectant les entreprises africaines aux opportunités mondiales.",
+      ceoP2: "Sous sa direction, DIS a étendu ses opérations en RDC, Nigeria, Ghana, EAU, Chine, Afrique du Sud, Kenya, Turquie, Inde et Arabie Saoudite — établissant un réseau de confiance de partenaires, fournisseurs et clients sur cinq continents.",
+      ceoP3: "Son approche pratique et son accessibilité directe via WhatsApp reflètent un engagement envers le service personnel qui distingue DIS des intermédiaires corporatifs conventionnels.",
+      hqLabel: "Siège Social",
+      valuesLabel: "Nos Valeurs",
+      valuesTitle: "Ce Qui Nous Anime",
+      val1Title: "Intégrité & Conformité",
+      val1Desc: "Opérations entièrement enregistrées et vérifiées RC avec des processus transparents et une conformité documentée à chaque étape.",
+      val2Title: "Le Partenariat d'Abord",
+      val2Desc: "Nous ne servons pas simplement des clients — nous construisons des partenariats durables grâce à un accès direct au PDG, la confiance et la croissance mutuelle.",
+      val3Title: "Vision Mondiale, Expertise Locale",
+      val3Desc: "Connaissance approfondie des marchés africains combinée à une portée internationale de chaîne d'approvisionnement sur cinq continents.",
+      ctaTitle: "Prêt à Travailler Avec Nous ?",
+      ctaSub: "Connectez-vous directement avec le PDG Okey Francis CHIBUEZE pour discuter de vos besoins.",
+      ctaButton: "Discuter sur WhatsApp",
     },
   },
   es: {
@@ -695,6 +854,23 @@ const translations: Record<Locale, Translations> = {
       subtitle:
         "Presencia estratégica en mercados clave de África, Medio Oriente y Asia.",
     },
+    industries: {
+      sectionLabel: "Industrias Que Servimos",
+      sectionTitle: "Impulsando los Sectores Que Mueven África",
+      sectionSub: "Desde recursos naturales hasta bienes de consumo, ofrecemos soluciones de logística, adquisiciones y consultoría en las industrias más críticas de África.",
+      items: [
+        { name: "Minería y Minerales", desc: "Suministro de equipos, logística de campamentos y facilitación de exportación minera" },
+        { name: "Petróleo y Gas", desc: "Cadena de suministro upstream, logística de refinería y adquisición energética" },
+        { name: "FMCG y Retail", desc: "Distribución de bienes de consumo rápido y cadenas de suministro minoristas" },
+        { name: "Agricultura", desc: "Logística del campo al mercado, apoyo agroindustrial y exportación" },
+        { name: "Construcción", desc: "Abastecimiento de materiales, equipos pesados y logística de obra" },
+        { name: "Farmacéutica", desc: "Logística de cadena de frío, adquisición de suministros médicos y cumplimiento" },
+        { name: "Energía y Electricidad", desc: "Suministro de infraestructura eléctrica, equipos solares y logística de red" },
+        { name: "Transporte y Carga", desc: "Camiones transfronterizos, envío de carga y gestión de flotas" },
+        { name: "Bienes Raíces", desc: "Consultoría de desarrollo, adquisición de materiales y gestión de instalaciones" },
+        { name: "Manufactura", desc: "Abastecimiento de materias primas, consultoría de planta y logística de exportación" },
+      ],
+    },
     process: {
       title: "Nuestro Proceso",
       steps: [
@@ -735,9 +911,10 @@ const translations: Record<Locale, Translations> = {
       copyright: `© ${new Date().getFullYear()} DIS Group. Todos los derechos reservados.`,
     },
     pieChart: {
-      sectionLabel: "Distribución de Ingresos",
-      sectionTitle: "Segmentos de Negocio",
-      scrollProgress: "Progreso de Desplazamiento",
+      sectionLabel: "Nuestro ADN Empresarial",
+      sectionTitle: "Donde Enfocamos Nuestros Esfuerzos",
+      sectionSub: "Cómo distribuimos nuestro enfoque operativo y recursos entre nuestros cuatro pilares de servicios.",
+      scrollProgress: "",
       segments: [
         { label: "Logística" },
         { label: "Consultoría" },
@@ -791,6 +968,47 @@ const translations: Record<Locale, Translations> = {
         "Aceite perfumado de inspiración árabe de larga duración con oud rico, vainilla cálida y notas sutiles de almizcle.",
         "Crema corporal enriquecida con Vitamina C para iluminar, unificar el tono de piel y brindar protección antioxidante todo el día.",
       ],
+    },
+    aboutPage: {
+      backToHome: "Volver al Inicio",
+      badge: "Sobre el Grupo DIS",
+      heroTitle: "Conectando Mercados. Construyendo Futuros",
+      heroSub: "Digital Integrated Services RDC es una subsidiaria de COFRAN... (NIG) Ltd — una empresa multi-sectorial verificada que conecta los mercados africanos con las cadenas de suministro globales.",
+      statFounded: "Fundada",
+      statCountries: "Países Atendidos",
+      statServices: "Servicios Principales",
+      statRC: "Entidad Registrada",
+      storyLabel: "Nuestra Historia",
+      storyTitle: "De la Visión al Impacto",
+      storyP1: "Fundada por Okey Francis CHIBUEZE, Digital Integrated Services RDC nació de una profunda comprensión de los desafíos logísticos que enfrentan las empresas de África Central y Occidental. Con centros operativos en Lubumbashi (RDC) y Lagos (Nigeria), DIS cierra la brecha entre las empresas africanas y los mercados globales.",
+      storyP2: "Como subsidiaria de COFRAN... (NIG) Ltd (RC: 1492798), operamos con plena conformidad regulatoria y un compromiso con la transparencia. Nuestros servicios abarcan logística, consultoría estratégica, adquisiciones y una plataforma de comercio de belleza y cosmética.",
+      servicesLabel: "Lo Que Hacemos",
+      servicesTitle: "Cuatro Pilares de Excelencia",
+      svcLogistics: "Logística y Cadena de Suministro",
+      svcLogisticsDesc: "Transporte de carga multimodal, almacenamiento, despacho aduanero y entrega de última milla en más de 15 corredores comerciales en África, Medio Oriente y Asia.",
+      svcConsulting: "Consultoría Estratégica",
+      svcConsultingDesc: "Estrategias de entrada al mercado, alineación de intermediarios, estructuración corporativa y auditorías operativas para empresas que se expanden a África.",
+      svcProcurement: "Adquisiciones Globales",
+      svcProcurementDesc: "Redes de proveedores verificados en 5 continentes, paridad de precios competitiva, auditoría de proveedores y transacciones con custodia en 48h.",
+      svcTrading: "Comercio de Belleza y Cosmética",
+      svcTradingDesc: "Productos premium de cuidado de la piel, cuerpo, cabello y fragancias importados y distribuidos en la RDC y África Occidental.",
+      ceoLabel: "Liderazgo",
+      ceoTitle: "Conozca a Nuestro CEO",
+      ceoP1: "Okey Francis CHIBUEZE es el visionario detrás de Digital Integrated Services RDC y COFRAN... (NIG) Ltd. Con amplia experiencia en comercio transfronterizo, gestión de cadena de suministro y consultoría estratégica, ha construido una empresa multi-sectorial que conecta negocios africanos con oportunidades globales.",
+      ceoP2: "Bajo su liderazgo, DIS ha expandido operaciones en RDC, Nigeria, Ghana, EAU, China, Sudáfrica, Kenia, Turquía, India y Arabia Saudita — estableciendo una red confiable de socios, proveedores y clientes en cinco continentes.",
+      ceoP3: "Su enfoque práctico y accesibilidad directa vía WhatsApp reflejan un compromiso con el servicio personal que distingue a DIS de los intermediarios corporativos convencionales.",
+      hqLabel: "Sede Central",
+      valuesLabel: "Nuestros Valores",
+      valuesTitle: "Lo Que Nos Impulsa",
+      val1Title: "Integridad y Cumplimiento",
+      val1Desc: "Operaciones completamente registradas y verificadas con procesos transparentes y cumplimiento documentado en cada paso.",
+      val2Title: "Asociación Primero",
+      val2Desc: "No solo servimos clientes — construimos asociaciones duraderas a través del acceso directo al CEO, confianza y crecimiento mutuo.",
+      val3Title: "Visión Global, Expertise Local",
+      val3Desc: "Conocimiento profundo de los mercados africanos combinado con alcance internacional de cadena de suministro en cinco continentes.",
+      ctaTitle: "¿Listo para Trabajar con Nosotros?",
+      ctaSub: "Conéctese directamente con el CEO Okey Francis CHIBUEZE para discutir sus necesidades.",
+      ctaButton: "Chatear en WhatsApp",
     },
   },
 };

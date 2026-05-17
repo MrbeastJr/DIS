@@ -12,6 +12,7 @@ import HeroSection from "@/sections/HeroSection";
 import TrustStrip from "@/sections/TrustStrip";
 import StackingServiceCards from "@/sections/StackingServiceCards";
 import InteractivePieChart from "@/sections/InteractivePieChart";
+import IndustriesSection from "@/sections/IndustriesSection";
 import GlobalReachSection from "@/sections/GlobalReachSection";
 import ProcessFlowSection from "@/sections/ProcessFlowSection";
 import TestimonialsSection from "@/sections/TestimonialsSection";
@@ -60,6 +61,7 @@ export default function Home() {
               <TrustStrip />
               <StackingServiceCards />
               <InteractivePieChart />
+              <IndustriesSection />
               <GlobalReachSection />
               <ProcessFlowSection />
               <TestimonialsSection />

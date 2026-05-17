@@ -6,10 +6,10 @@ import { Package, Lightbulb, ShoppingCart, TrendUp } from "@phosphor-icons/react
 import { useLanguage } from "@/context/LanguageContext";
 
 const segments = [
-  { pct: 45, color: "#8B2020", icon: Package },
-  { pct: 30, color: "#2A1F14", icon: Lightbulb },
-  { pct: 15, color: "#A33030", icon: ShoppingCart },
-  { pct: 10, color: "#5C4A38", icon: TrendUp },
+  { pct: 25, color: "#8B2020", icon: Package },
+  { pct: 25, color: "#2A1F14", icon: Lightbulb },
+  { pct: 25, color: "#A33030", icon: ShoppingCart },
+  { pct: 25, color: "#5C4A38", icon: TrendUp },
 ];
 
 export default function InteractivePieChart() {
@@ -56,7 +56,8 @@ export default function InteractivePieChart() {
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }} transition={{ duration: 0.8 }}>
           <span className="text-caption uppercase tracking-[0.2em] text-crimson/50 mb-4 block">{t.pieChart.sectionLabel}</span>
-          <h2 className="text-display-lg font-bold text-espresso mb-16">{t.pieChart.sectionTitle}</h2>
+          <h2 className="text-display-lg font-bold text-espresso mb-4">{t.pieChart.sectionTitle}</h2>
+          <p className="text-body-md text-walnut/50 max-w-xl mb-16">{t.pieChart.sectionSub}</p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
@@ -91,7 +92,6 @@ export default function InteractivePieChart() {
               <span className="text-[42px] font-bold text-espresso tracking-tight leading-none">
                 {Math.round(progress * 100)}<span className="text-[22px] text-crimson/50">%</span>
               </span>
-              <span className="text-[9px] uppercase tracking-[0.25em] text-walnut/30 mt-2 font-medium">{t.pieChart.scrollProgress}</span>
             </div>
           </motion.div>
 
@@ -119,7 +119,7 @@ export default function InteractivePieChart() {
                   </div>
                   <span className={`text-display-sm font-bold tracking-tight transition-colors duration-500 ${
                     myProgress > 0 ? "text-espresso" : "text-walnut/15"
-                  }`}>{seg.pct}%</span>
+                  }`}>{Math.round(myProgress * 100)}%</span>
                 </motion.div>
               );
             })}

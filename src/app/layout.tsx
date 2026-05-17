@@ -68,7 +68,7 @@ export const metadata: Metadata = {
     shortcut: "/assets/dis-icon.png",
     apple: "/assets/dis-icon.png",
   },
-  metadataBase: new URL("https://dis-group.com"),
+  metadataBase: new URL("https://dis-omega.vercel.app"),
   alternates: {
     canonical: "/",
   },
@@ -76,6 +76,8 @@ export const metadata: Metadata = {
 };
 
 import { LanguageProvider } from "@/context/LanguageContext";
+import CookieConsent from "@/components/CookieConsent";
+import LanguagePopup from "@/components/LanguagePopup";
 
 export default function RootLayout({
   children,
@@ -109,7 +111,11 @@ export default function RootLayout({
         />
       </head>
       <body className="font-sans">
-        <LanguageProvider>{children}</LanguageProvider>
+        <LanguageProvider>
+          {children}
+          <CookieConsent />
+          <LanguagePopup />
+        </LanguageProvider>
       </body>
     </html>
   );

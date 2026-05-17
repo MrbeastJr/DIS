@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { useRouter, usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { GlobeSimple, House, Briefcase, Buildings, User, ChatCircle } from "@phosphor-icons/react";
 import { useLanguage } from "@/context/LanguageContext";
@@ -10,19 +11,23 @@ import Image from "next/image";
 const localeLabels: Record<Locale, string> = { en: "EN", fr: "FR", es: "ES" };
 
 const mobileNavItems = [
-  { icon: House, href: "#hero", key: "home" },
-  { icon: Briefcase, href: "#services", key: "services" },
-  { icon: Buildings, href: "#industries", key: "industries" },
-  { icon: User, href: "#about", key: "about" },
-  { icon: ChatCircle, href: "#contact", key: "contact" },
+  { icon: House, href: "/#hero", key: "home", isPage: false },
+  { icon: Briefcase, href: "/#services", key: "services", isPage: false },
+  { icon: Buildings, href: "/#industries", key: "industries", isPage: false },
+  { icon: User, href: "/about", key: "about", isPage: true },
+  { icon: ChatCircle, href: "/#contact", key: "contact", isPage: false },
 ];
 
 export default function Navbar() {
   const { locale, setLocale, t } = useLanguage();
+  const router = useRouter();
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [langOpen, setLangOpen] = useState(false);
+
+  const isHomePage = pathname === "/";
 
   const handleScroll = useCallback(() => {
     const y = window.scrollY;
@@ -38,16 +43,35 @@ export default function Navbar() {
   }, [handleScroll]);
 
   const desktopNavItems = [
-    { label: t.nav.home, href: "#hero" },
-    { label: t.nav.services, href: "#services" },
-    { label: t.nav.industries, href: "#industries" },
-    { label: t.nav.about, href: "#about" },
-    { label: t.nav.contact, href: "#contact" },
+    { label: t.nav.home, href: "/#hero", isPage: false },
+    { label: t.nav.services, href: "/#services", isPage: false },
+    { label: t.nav.industries, href: "/#industries", isPage: false },
+    { label: t.nav.about, href: "/about", isPage: true },
+    { label: t.nav.contact, href: "/#contact", isPage: false },
   ];
 
-  const scrollTo = (href: string) => {
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+  const navigate = (href: string, isPage: boolean) => {
+    if (isPage) {
+      router.push(href);
+      return;
+    }
+    // Hash-based section link
+    const hash = href.replace("/", "");
+    if (isHomePage) {
+      const el = document.querySelector(hash);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    } else {
+      // Navigate to home page with hash — browser will scroll to section
+      window.location.href = href;
+    }
+  };
+
+  const goHome = () => {
+    if (isHomePage) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      router.push("/");
+    }
   };
 
   // Instant continuous cycle function for mobile screens
@@ -61,7 +85,6 @@ export default function Navbar() {
     <>
       {/* ═══════════════════════════════════════
           DESKTOP NAVBAR — True Floating Island Top Bar
-          Wrapped in a dedicated Flexbox row to guarantee horizontal centering
           ═══════════════════════════════════════ */}
       <div className="fixed top-6 left-0 right-0 z-50 flex justify-center pointer-events-none hidden md:flex">
         <motion.nav
@@ -80,12 +103,12 @@ export default function Navbar() {
               boxShadow: "0 10px 40px rgba(26, 18, 16, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9)",
             }}
           >
-            <div className="flex items-center justify-between relative">
-              {/* Logo — left */}
+            <div className="flex items-center justify-between">
+              {/* Logo + DIS Wordmark — left aligned */}
               <a
-                href="#hero"
-                onClick={(e) => { e.preventDefault(); scrollTo("#hero"); }}
-                className="flex items-center group text-decoration-none"
+                href="/"
+                onClick={(e) => { e.preventDefault(); goHome(); }}
+                className="flex items-center gap-2.5 group text-decoration-none flex-shrink-0"
               >
                 <Image
                   src="/assets/dis-logo.png"
@@ -95,23 +118,25 @@ export default function Navbar() {
                   className="h-8 w-auto relative z-10"
                   priority
                 />
+                <span
+                  className="text-[22px] font-black tracking-[0.06em] select-none"
+                  style={{ fontFamily: "var(--font-display)", fontStyle: "italic" }}
+                >
+                  <span className="text-crimson">DIS</span><span className="text-espresso">.</span>
+                </span>
               </a>
 
-              {/* DIS Wordmark — absolute center */}
-              <span
-                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[24px] font-black tracking-[0.06em] select-none pointer-events-none"
-                style={{ fontFamily: "var(--font-display)", fontStyle: "italic" }}
-              >
-                <span className="text-crimson">DIS</span><span className="text-espresso">.</span>
-              </span>
-
-              {/* Nav links — right of center */}
+              {/* Nav links */}
               <div className="flex items-center gap-1">
                 {desktopNavItems.map((item) => (
                   <button
                     key={item.href}
-                    onClick={() => scrollTo(item.href)}
-                    className="px-4 py-2 text-[13px] font-medium text-walnut/70 hover:text-espresso transition-colors duration-300 rounded-full hover:bg-espresso/[0.04] cursor-pointer"
+                    onClick={() => navigate(item.href, item.isPage)}
+                    className={`px-4 py-2 text-[13px] font-medium transition-colors duration-300 rounded-full hover:bg-espresso/[0.04] cursor-pointer ${
+                      item.isPage && pathname === item.href
+                        ? "text-crimson"
+                        : "text-walnut/70 hover:text-espresso"
+                    }`}
                   >
                     {item.label}
                   </button>
@@ -164,7 +189,7 @@ export default function Navbar() {
 
                 {/* CTA */}
                 <button
-                  onClick={() => scrollTo("#contact")}
+                  onClick={() => navigate("/#contact", false)}
                   className="px-6 py-2.5 text-[13px] font-semibold bg-espresso text-white rounded-full hover:bg-cocoa transition-all duration-300 cursor-pointer shadow-sm"
                 >
                   {t.hero.cta1}
@@ -181,7 +206,7 @@ export default function Navbar() {
       <div className="fixed top-4 left-0 right-0 z-40 flex justify-center pointer-events-none md:hidden">
         <div className="w-[calc(100%-2rem)] max-w-md pointer-events-auto">
           <div
-            className="relative flex items-center justify-between px-5 py-3 rounded-full"
+            className="flex items-center justify-between px-4 py-2.5 rounded-full"
             style={{
               background: "rgba(255, 255, 255, 0.75)",
               backdropFilter: "blur(24px) saturate(200%)",
@@ -190,30 +215,23 @@ export default function Navbar() {
               boxShadow: "0 8px 32px rgba(26, 18, 16, 0.08)",
             }}
           >
-            {/* Logo — left */}
-            <Image
-              src="/assets/dis-logo.png"
-              alt="DIS"
-              width={120}
-              height={35}
-              className="h-6 w-auto"
-              priority
-            />
-
-            {/* DIS Wordmark — absolute center */}
-            <span
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[20px] font-black tracking-[0.06em] select-none pointer-events-none"
-              style={{ fontFamily: "var(--font-display)", fontStyle: "italic" }}
-            >
-              <span className="text-crimson">DIS</span><span className="text-espresso">.</span>
-            </span>
+            {/* Logo + DIS — left aligned */}
+            <a href="/" onClick={(e) => { e.preventDefault(); goHome(); }} className="flex items-center gap-1.5 text-decoration-none">
+              <Image src="/assets/dis-logo.png" alt="DIS" width={100} height={30} className="h-5 w-auto" priority />
+              <span
+                className="text-[15px] font-black tracking-[0.06em] select-none"
+                style={{ fontFamily: "var(--font-display)", fontStyle: "italic" }}
+              >
+                <span className="text-crimson">DIS</span><span className="text-espresso">.</span>
+              </span>
+            </a>
 
             {/* Language toggle — right */}
             <button
               onClick={cycleLanguage}
-              className="flex items-center gap-1 text-[12px] text-walnut/60 font-medium cursor-pointer px-3 py-1.5 rounded-full hover:bg-espresso/[0.05] active:scale-95 transition-all bg-espresso/[0.03]"
+              className="flex items-center gap-1 text-[11px] text-walnut/60 font-medium cursor-pointer px-2.5 py-1.5 rounded-full hover:bg-espresso/[0.05] active:scale-95 transition-all bg-espresso/[0.03]"
             >
-              <GlobeSimple size={14} className="text-crimson/80" />
+              <GlobeSimple size={13} className="text-crimson/80" />
               <span className="font-bold text-espresso">{localeLabels[locale]}</span>
             </button>
           </div>
@@ -222,8 +240,6 @@ export default function Navbar() {
 
       {/* ═══════════════════════════════════════
           MOBILE BOTTOM NAVBAR — True Floating Liquid Glass Capsule
-          Wrapped in a standard Flexbox container to make horizontal centering
-          100% immune to Framer Motion transform resetting overrides.
           ═══════════════════════════════════════ */}
       <div className="fixed bottom-6 left-0 right-0 z-50 flex justify-center pointer-events-none md:hidden">
         <motion.nav
@@ -246,18 +262,19 @@ export default function Navbar() {
               {mobileNavItems.map((item) => {
                 const Icon = item.icon;
                 const label = t.nav[item.key as keyof typeof t.nav];
+                const isActive = item.isPage && pathname === item.href;
                 return (
                   <button
                     key={item.href}
-                    onClick={() => scrollTo(item.href)}
+                    onClick={() => navigate(item.href, item.isPage)}
                     className="flex flex-col items-center gap-0.5 px-3 py-1.5 rounded-full transition-all duration-300 active:scale-95 group cursor-pointer"
                   >
                     <Icon
                       size={22}
-                      weight="regular"
-                      className="text-walnut/50 group-active:text-crimson transition-colors"
+                      weight={isActive ? "fill" : "regular"}
+                      className={`transition-colors ${isActive ? "text-crimson" : "text-walnut/50 group-active:text-crimson"}`}
                     />
-                    <span className="text-[9px] font-medium text-walnut/40 group-active:text-crimson uppercase tracking-wider">
+                    <span className={`text-[9px] font-medium uppercase tracking-wider ${isActive ? "text-crimson" : "text-walnut/40 group-active:text-crimson"}`}>
                       {label}
                     </span>
                   </button>
