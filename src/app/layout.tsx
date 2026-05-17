@@ -78,6 +78,7 @@ export const metadata: Metadata = {
 import { LanguageProvider } from "@/context/LanguageContext";
 import CookieConsent from "@/components/CookieConsent";
 import LanguagePopup from "@/components/LanguagePopup";
+import FloatingOrderButton from "@/components/FloatingOrderButton";
 
 export default function RootLayout({
   children,
@@ -115,6 +116,7 @@ export default function RootLayout({
           {children}
           <CookieConsent />
           <LanguagePopup />
+          <FloatingOrderButton />
         </LanguageProvider>
       </body>
     </html>

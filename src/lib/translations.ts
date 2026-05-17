@@ -75,6 +75,7 @@ export interface Translations {
     headline: string;
     button: string;
   };
+  floatingOrder: string;
   loader: {
     subtitle: string;
   };
@@ -329,6 +330,7 @@ const translations: Record<Locale, Translations> = {
       headline: "Built for businesses\nthat move globally.",
       button: "Start a Conversation",
     },
+    floatingOrder: "Order Now",
     loader: {
       subtitle: "Building Global Operational Excellence",
     },
@@ -616,6 +618,7 @@ const translations: Record<Locale, Translations> = {
       headline: "Conçu pour les entreprises\nqui opèrent mondialement.",
       button: "Démarrer une Conversation",
     },
+    floatingOrder: "Commander",
     loader: {
       subtitle: "Construire l'Excellence Opérationnelle Mondiale",
     },
@@ -903,6 +906,7 @@ const translations: Record<Locale, Translations> = {
       headline: "Diseñado para empresas\nque operan globalmente.",
       button: "Iniciar una Conversación",
     },
+    floatingOrder: "Comprar Ahora",
     loader: {
       subtitle: "Construyendo Excelencia Operacional Global",
     },
