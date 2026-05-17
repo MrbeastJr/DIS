@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import {
-  Pickaxe, Drop, ShoppingBag, Plant, HardHat, Pill,
+  Diamond, Drop, ShoppingBag, Plant, HardHat, Pill,
   Lightning, Truck, Buildings, Factory,
 } from "@phosphor-icons/react";
 import { useLanguage } from "@/context/LanguageContext";
@@ -10,7 +10,7 @@ import { useLanguage } from "@/context/LanguageContext";
 const fadeUp = { initial: { opacity: 0, y: 30 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true } };
 
 const industries = [
-  { icon: Pickaxe, color: "#8B6914" },
+  { icon: Diamond, color: "#8B6914" },
   { icon: Drop, color: "#2D5F8A" },
   { icon: ShoppingBag, color: "#A33030" },
   { icon: Plant, color: "#2D7A3A" },
