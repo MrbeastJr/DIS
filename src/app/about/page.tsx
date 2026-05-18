@@ -119,7 +119,7 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16 items-start">
           <motion.div {...fadeUp} transition={{ duration: 0.8 }} className="lg:col-span-2">
             <div className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl max-w-sm mx-auto lg:mx-0">
-              <Image src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&h=800&fit=crop" alt="Okey Francis CHIBUEZE — CEO" fill className="object-cover" unoptimized />
+              <Image src="/assets/ceo-image.png" alt="Okey Francis CHIBUEZE — CEO" fill className="object-cover" unoptimized />
               <div className="absolute inset-0 bg-gradient-to-t from-espresso/50 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-6">
                 <h3 className="text-body-lg font-bold text-white">Okey Francis CHIBUEZE</h3>
