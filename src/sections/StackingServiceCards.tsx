@@ -1,8 +1,7 @@
 "use client";
 
-import { useRef } from "react";
 import { motion } from "framer-motion";
-import { Package, Lightbulb, ShoppingCart, TrendUp, ArrowUpRight, CaretLeft, CaretRight } from "@phosphor-icons/react";
+import { Package, Lightbulb, ShoppingCart, TrendUp, ArrowUpRight } from "@phosphor-icons/react";
 import { useLanguage } from "@/context/LanguageContext";
 import Link from "next/link";
 
@@ -24,7 +23,6 @@ const serviceRoutes = [
 
 export default function StackingServiceCards() {
   const { t } = useLanguage();
-  const scrollRef = useRef<HTMLDivElement>(null);
 
   const serviceTitle = t?.services?.title || "What We Do";
   const serviceSubtitle = t?.services?.subtitle || "Core capabilities that drive global operations";
@@ -45,16 +43,6 @@ export default function StackingServiceCards() {
     t?.nav?.home === "Inicio" ? "Saber más" : "Learn more"
   ) : "Learn more";
 
-  const scroll = (direction: "left" | "right") => {
-    if (!scrollRef.current) return;
-    const cardWidth = scrollRef.current.querySelector("a")?.offsetWidth || 400;
-    const gap = 24;
-    const scrollAmount = cardWidth + gap;
-    scrollRef.current.scrollBy({
-      left: direction === "left" ? -scrollAmount : scrollAmount,
-      behavior: "smooth",
-    });
-  };
 
   return (
     <section id="services" className="relative bg-white" style={{ padding: "7rem 0" }}>
@@ -69,58 +57,11 @@ export default function StackingServiceCards() {
               {serviceSubtitle}
             </h2>
           </motion.div>
-
-          {/* Scroll arrows — desktop only */}
-          <div style={{ display: "flex", gap: "0.5rem" }} className="hidden md:flex">
-            <button
-              onClick={() => scroll("left")}
-              aria-label="Scroll left"
-              style={{
-                width: 48, height: 48, borderRadius: "50%",
-                border: "1px solid rgba(42,31,20,0.1)", background: "transparent",
-                display: "flex", alignItems: "center", justifyContent: "center",
-                cursor: "pointer", transition: "all 0.3s",
-              }}
-              onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(139,32,32,0.4)"; e.currentTarget.style.background = "rgba(139,32,32,0.04)"; }}
-              onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(42,31,20,0.1)"; e.currentTarget.style.background = "transparent"; }}
-            >
-              <CaretLeft size={20} weight="bold" className="text-walnut/50" />
-            </button>
-            <button
-              onClick={() => scroll("right")}
-              aria-label="Scroll right"
-              style={{
-                width: 48, height: 48, borderRadius: "50%",
-                border: "1px solid rgba(42,31,20,0.1)", background: "transparent",
-                display: "flex", alignItems: "center", justifyContent: "center",
-                cursor: "pointer", transition: "all 0.3s",
-              }}
-              onMouseEnter={e => { e.currentTarget.style.borderColor = "rgba(139,32,32,0.4)"; e.currentTarget.style.background = "rgba(139,32,32,0.04)"; }}
-              onMouseLeave={e => { e.currentTarget.style.borderColor = "rgba(42,31,20,0.1)"; e.currentTarget.style.background = "transparent"; }}
-            >
-              <CaretRight size={20} weight="bold" className="text-walnut/50" />
-            </button>
-          </div>
         </div>
       </div>
 
-      {/* Horizontal scroll track */}
-      <div
-        ref={scrollRef}
-        style={{
-          display: "flex",
-          gap: "1.5rem",
-          overflowX: "auto",
-          scrollSnapType: "x mandatory",
-          WebkitOverflowScrolling: "touch",
-          paddingLeft: "max(1rem, calc((100vw - 80rem) / 2 + 1rem))",
-          paddingRight: "2rem",
-          paddingBottom: "1rem",
-          scrollbarWidth: "none",
-          msOverflowStyle: "none",
-        }}
-        className="hide-scrollbar"
-      >
+      {/* Vertical Stacking Track */}
+      <div className="max-w-4xl mx-auto px-4 flex flex-col relative pb-32">
         {services.map((service, i) => {
           const Icon = service.icon;
           return (
@@ -130,23 +71,23 @@ export default function StackingServiceCards() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              style={{ scrollSnapAlign: "start", flexShrink: 0 }}
+              className="w-full mb-8"
             >
               <Link
                 href={service.href}
-                className="block rounded-3xl overflow-hidden border hover:border-crimson/30 transition-all duration-700 group cursor-pointer"
+                className="block rounded-3xl overflow-hidden border hover:border-crimson/30 transition-all duration-700 group cursor-pointer relative"
                 style={{
-                  width: "min(380px, 80vw)",
                   backgroundColor: service.color.bg,
                   borderColor: service.color.border,
                   textDecoration: "none",
-                  boxShadow: "0 4px 24px rgba(26,18,16,0.06), 0 1px 4px rgba(26,18,16,0.03)",
+                  boxShadow: "0 -10px 40px rgba(26,18,16,0.03), 0 2px 10px rgba(26,18,16,0.02)",
                   display: "flex",
                   flexDirection: "column",
-                  height: "100%",
+                  height: "auto",
+                  minHeight: "340px"
                 }}
               >
-                <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-crimson/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-crimson/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 z-10" />
 
                 <div style={{ padding: "2rem 2rem 2.5rem" }} className="flex flex-col flex-1">
                   <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: "1.5rem" }}>
