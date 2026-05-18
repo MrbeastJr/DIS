@@ -87,30 +87,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <head>
-        {/* Satoshi Font */}
-        <link
-          href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700,800,900&display=swap"
-          rel="stylesheet"
-        />
-        {/* Playfair Display — Premium DIS Wordmark */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&display=swap"
-          rel="stylesheet"
-        />
-        <style
-          dangerouslySetInnerHTML={{
-            __html: `
-              :root {
-                --font-satoshi: 'Satoshi', system-ui, sans-serif;
-                --font-display: 'Playfair Display', 'Georgia', serif;
-              }
-            `,
-          }}
-        />
-      </head>
+
       <body className="font-sans">
         <LanguageProvider>
           {children}
