@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { GlobeSimple, House, Briefcase, Buildings, User, ChatCircle } from "@phosphor-icons/react";
+import { GlobeSimple, House, ShoppingCart, Package, User, ChatCircle } from "@phosphor-icons/react";
 import { useLanguage } from "@/context/LanguageContext";
 import type { Locale } from "@/lib/translations";
 import Image from "next/image";
@@ -11,9 +11,9 @@ import Image from "next/image";
 const localeLabels: Record<Locale, string> = { en: "EN", fr: "FR", es: "ES" };
 
 const mobileNavItems = [
-  { icon: House, href: "/#hero", key: "home", isPage: false },
-  { icon: Briefcase, href: "/#services", key: "services", isPage: false },
-  { icon: Buildings, href: "/#industries", key: "industries", isPage: false },
+  { icon: House, href: "/", key: "home", isPage: true },
+  { icon: ShoppingCart, href: "/trading", key: "trading", isPage: true },
+  { icon: Package, href: "/services/logistics", key: "logistics", isPage: true },
   { icon: User, href: "/about", key: "about", isPage: true },
   { icon: ChatCircle, href: "/#contact", key: "contact", isPage: false },
 ];

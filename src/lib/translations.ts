@@ -15,6 +15,8 @@ export interface Translations {
     industries: string;
     about: string;
     contact: string;
+    trading?: string;
+    logistics?: string;
   };
   hero: {
     headline: string;
@@ -158,6 +160,8 @@ const translations: Record<Locale, Translations> = {
       industries: "Industries",
       about: "About",
       contact: "Contact",
+      trading: "Trading",
+      logistics: "Logistics",
     },
     hero: {
       headline: "Modern Logistics &\nStrategic Consulting for\nAfrican Commerce",
@@ -446,6 +450,8 @@ const translations: Record<Locale, Translations> = {
       industries: "Industries",
       about: "À Propos",
       contact: "Contact",
+      trading: "Négoce",
+      logistics: "Logistique",
     },
     hero: {
       headline: "Logistique Moderne &\nConseil Stratégique pour\nle Commerce Africain",
@@ -732,8 +738,10 @@ const translations: Record<Locale, Translations> = {
       home: "Inicio",
       services: "Servicios",
       industries: "Industrias",
-      about: "Acerca de",
+      about: "Nosotros",
       contact: "Contacto",
+      trading: "Comercio",
+      logistics: "Logística",
     },
     hero: {
       headline: "Logística Moderna y\nConsultoría Estratégica para\nel Comercio Africano",
