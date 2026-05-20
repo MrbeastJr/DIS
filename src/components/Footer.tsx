@@ -118,9 +118,9 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="border-t border-white/10 pt-8 pb-12 md:pb-0 flex flex-col md:flex-row items-center justify-between gap-4 text-center">
             <p className="text-xs text-white/70 font-medium">{copyright}</p>
-            <div className="flex gap-6 items-center">
+            <div className="flex flex-wrap justify-center gap-x-6 gap-y-3 items-center">
               <span className="text-xs text-white/50">RC: 1492798 | ID.NAT.14-A-180</span>
               <Link href="/privacy" className="text-xs text-white/70 hover:text-white transition-colors font-medium">Privacy Policy</Link>
               <Link href="/admin" className="text-xs text-white/70 hover:text-crimson transition-colors font-bold">Admin</Link>
