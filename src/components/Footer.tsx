@@ -2,6 +2,7 @@
 
 import { useLanguage } from "@/context/LanguageContext";
 import Image from "next/image";
+import Link from "next/link";
 import {
   LinkedinLogo, FacebookLogo,
   EnvelopeSimple, MapPin, WhatsappLogo,
@@ -20,7 +21,7 @@ export default function Footer() {
       className="relative border-t border-white/10 w-full max-w-full overflow-hidden text-white bg-espresso"
       style={{ backgroundColor: "#1A1210" }}
     >
-      <div className="section-padding py-16 md:py-20">
+      <div className="section-padding pt-16 pb-28 md:pt-20 md:pb-24 lg:pb-20">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
             {/* Brand */}
@@ -40,7 +41,7 @@ export default function Footer() {
               </p>
               <p className="text-xs text-white/80 leading-relaxed mb-4 font-medium">
                 DIGITAL INTEGRATED SERVICES RDC<br />
-                <span className="text-[10px] text-white/50 block mt-0.5">Subsidiary of COFRAN... (NIG) Ltd (RC:1492798)</span>
+                <span className="text-[10px] text-white/50 block mt-0.5">Subsidiary of COFRANCE INTEGRATED CONCEPTS (NIG) Ltd</span>
               </p>
               <p className="text-xs text-white/70 leading-relaxed mb-6 font-light">
                 Beauty, cosmetic & personal care &middot; Trading, Logistics and Consulting Services.
@@ -97,11 +98,11 @@ export default function Footer() {
               <ul className="space-y-4">
                 <li className="flex items-start gap-3 text-body-sm text-white/90 font-medium">
                   <MapPin size={18} className="text-crimson mt-0.5 flex-shrink-0" />
-                  <span className="leading-relaxed">32, Av. Sendwe / Des Usines, Lubumbashi, Haut-Katanga, DR Congo</span>
+                  <span className="leading-relaxed">32, Av. Sendwe / Des Usines, C/Lubumbashi, Haut-Katanga, DR Congo</span>
                 </li>
                 <li className="flex items-start gap-3 text-body-sm text-white/90 font-medium">
                   <MapPin size={18} className="text-crimson mt-0.5 flex-shrink-0" />
-                  <span>Nigeria Hub: 2, Olugbenga St, Lagos</span>
+                  <span>Nigeria: 2 Olugbenga St, Amuwo Odofin, Lagos</span>
                 </li>
                 <li className="flex items-start gap-3 text-body-sm text-white/90 font-medium">
                   <EnvelopeSimple size={18} className="text-crimson mt-0.5 flex-shrink-0" />
@@ -119,9 +120,10 @@ export default function Footer() {
 
           <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-xs text-white/70 font-medium">{copyright}</p>
-            <div className="flex gap-6">
-              <span className="text-xs text-white/50">RC: 1492798</span>
-              <a href="#" className="text-xs text-white/70 hover:text-white transition-colors font-medium">Privacy Policy</a>
+            <div className="flex gap-6 items-center">
+              <span className="text-xs text-white/50">RC: 1492798 | ID.NAT.14-A-180</span>
+              <Link href="/privacy" className="text-xs text-white/70 hover:text-white transition-colors font-medium">Privacy Policy</Link>
+              <Link href="/admin" className="text-xs text-white/70 hover:text-crimson transition-colors font-bold">Admin</Link>
             </div>
           </div>
         </div>

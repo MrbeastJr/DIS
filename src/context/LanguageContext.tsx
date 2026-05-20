@@ -10,13 +10,13 @@ interface LanguageContextType {
 }
 
 const LanguageContext = createContext<LanguageContextType>({
-  locale: "en",
-  t: translations.en,
+  locale: "fr",
+  t: translations.fr,
   setLocale: () => {},
 });
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>("en");
+  const [locale, setLocaleState] = useState<Locale>("fr");
 
   const setLocale = useCallback((newLocale: Locale) => {
     setLocaleState(newLocale);

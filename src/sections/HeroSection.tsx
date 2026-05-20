@@ -144,24 +144,8 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2.5, duration: 1 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-10 md:bottom-10 bottom-24"
-      >
-        <span className="text-[9px] uppercase tracking-[0.3em] text-white/30 font-medium">
-          Scroll to explore
-        </span>
-        <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
-          className="w-5 h-8 rounded-full border border-white/15 flex justify-center pt-2"
-        >
-          <div className="w-[3px] h-[6px] bg-white/30 rounded-full" />
-        </motion.div>
-      </motion.div>
+
+
     </section>
   );
 }

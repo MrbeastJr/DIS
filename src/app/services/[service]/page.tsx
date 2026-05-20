@@ -35,58 +35,11 @@ const sideImages: Record<string, string> = {
 };
 
 /* ── Per-service stats ── */
-const serviceStats: Record<string, { value: string; label: string }[]> = {
-  logistics: [
-    { value: "15+", label: "Trade Corridors" },
-    { value: "3", label: "Hub Cities" },
-    { value: "99.2%", label: "On-Time Rate" },
-    { value: "24/7", label: "Operations" },
-  ],
-  consulting: [
-    { value: "50+", label: "Projects Delivered" },
-    { value: "12", label: "Industries Served" },
-    { value: "8", label: "African Markets" },
-    { value: "100%", label: "Client Retention" },
-  ],
-  procurement: [
-    { value: "200+", label: "Verified Suppliers" },
-    { value: "30%", label: "Cost Savings Avg" },
-    { value: "5", label: "Continents Covered" },
-    { value: "48h", label: "Turnaround Time" },
-  ],
-};
 
-/* ── Per-service feature highlights ── */
-const serviceHighlights: Record<string, { icon: any; title: string; desc: string }[]> = {
-  logistics: [
-    { icon: Truck, title: "Express Cargo Routes", desc: "Multimodal transport across DR Congo, Nigeria, and global corridors with real-time tracking." },
-    { icon: Globe, title: "Cross-Border Clearance", desc: "End-to-end customs compliance and documentation for seamless border crossings." },
-    { icon: Buildings, title: "Warehouse Network", desc: "Secure warehousing facilities across Lubumbashi and Lagos with inventory management." },
-    { icon: ShieldCheck, title: "Insured Shipments", desc: "Full cargo insurance coverage with dedicated claims support and risk mitigation." },
-    { icon: ChartLineUp, title: "Supply Chain Analytics", desc: "Data-driven insights to optimize routes, reduce costs, and improve delivery performance." },
-    { icon: Lightning, title: "Same-Day Processing", desc: "Expedited handling for urgent shipments with priority lane access at all hubs." },
-  ],
-  consulting: [
-    { icon: Globe, title: "Market Entry Strategy", desc: "Comprehensive feasibility studies and go-to-market playbooks for African expansion." },
-    { icon: Handshake, title: "Intermediary Alignment", desc: "Verified introductions between global buyers and local sellers with due diligence." },
-    { icon: Buildings, title: "Corporate Structuring", desc: "Entity formation, licensing support, and RC alignment for regulatory compliance." },
-    { icon: ChartLineUp, title: "Operational Audits", desc: "Deep-dive diagnostics to identify inefficiencies and optimize business processes." },
-    { icon: UsersThree, title: "Stakeholder Management", desc: "Local intelligence and relationship management with government and industry bodies." },
-    { icon: Lightning, title: "Digital Infrastructure", desc: "Scalable enterprise platform architecture scoping for high-performance backend systems." },
-  ],
-  procurement: [
-    { icon: ShieldCheck, title: "Vendor Verification", desc: "Rigorous multi-point supplier auditing ensuring quality, reliability, and compliance." },
-    { icon: Globe, title: "Global Sourcing", desc: "Access to verified suppliers across 5 continents with competitive pricing parity." },
-    { icon: Handshake, title: "Buyer-Seller Matching", desc: "Direct intermediary introduction protocols connecting demand with trusted supply." },
-    { icon: ChartLineUp, title: "Price Optimization", desc: "Data-driven procurement strategies delivering average 30% cost reduction." },
-    { icon: Buildings, title: "Escrow Management", desc: "Secure transaction facilitation with structured payment guidelines and oversight." },
-    { icon: Lightning, title: "Rapid Fulfillment", desc: "48-hour turnaround from order to dispatch across commodity and finished goods." },
-  ],
-};
 
 export default function ServicePage() {
   const params = useParams();
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
   const key = (params?.service as string) || "logistics";
 
   const validKeys = ["logistics", "consulting", "procurement"] as const;
@@ -101,10 +54,63 @@ export default function ServicePage() {
   };
   const faqs = sd?.faqs || [];
   const Icon = iconMap[safeKey] || Package;
+
+  /* ── Localized Per-service stats ── */
+  const serviceStats: Record<string, { value: string; label: string }[]> = {
+    logistics: [
+      { value: "15+", label: locale === "fr" ? "Corridors Commerciaux" : locale === "es" ? "Corredores Comerciales" : "Trade Corridors" },
+      { value: "3", label: locale === "fr" ? "Villes Hub" : locale === "es" ? "Ciudades Hub" : "Hub Cities" },
+      { value: "99.2%", label: locale === "fr" ? "Taux de Ponctualité" : locale === "es" ? "Tasa de Puntualidad" : "On-Time Rate" },
+      { value: "24/7", label: locale === "fr" ? "Opérations" : locale === "es" ? "Operaciones" : "Operations" },
+    ],
+    consulting: [
+      { value: "50+", label: locale === "fr" ? "Projets Livrés" : locale === "es" ? "Proyectos Entregados" : "Projects Delivered" },
+      { value: "12", label: locale === "fr" ? "Industries Desservies" : locale === "es" ? "Industrias Atendidas" : "Industries Served" },
+      { value: "8", label: locale === "fr" ? "Marchés Africains" : locale === "es" ? "Mercados Africanos" : "African Markets" },
+      { value: "100%", label: locale === "fr" ? "Fidélisation Client" : locale === "es" ? "Retención de Clientes" : "Client Retention" },
+    ],
+    procurement: [
+      { value: "200+", label: locale === "fr" ? "Fournisseurs Vérifiés" : locale === "es" ? "Proveedores Verificados" : "Verified Suppliers" },
+      { value: "30%", label: locale === "fr" ? "Économies Moyennes" : locale === "es" ? "Ahorro Promedio" : "Cost Savings Avg" },
+      { value: "5", label: locale === "fr" ? "Continents Couverts" : locale === "es" ? "Continentes Cubiertos" : "Continents Covered" },
+      { value: "48h", label: locale === "fr" ? "Délai d'Exécution" : locale === "es" ? "Tiempo de Respuesta" : "Turnaround Time" },
+    ],
+  };
+
+  /* ── Localized Per-service feature highlights ── */
+  const serviceHighlights: Record<string, { icon: any; title: string; desc: string }[]> = {
+    logistics: [
+      { icon: Truck, title: locale === "fr" ? "Itinéraires Express" : locale === "es" ? "Rutas Exprés" : "Express Cargo Routes", desc: locale === "fr" ? "Transport multimodal avec suivi en temps réel." : locale === "es" ? "Transporte multimodal con seguimiento en tiempo real." : "Multimodal transport across DR Congo, Nigeria, and global corridors with real-time tracking." },
+      { icon: Globe, title: locale === "fr" ? "Dédouanement" : locale === "es" ? "Despacho de Aduanas" : "Cross-Border Clearance", desc: locale === "fr" ? "Conformité douanière pour des passages frontaliers fluides." : locale === "es" ? "Cumplimiento aduanero para cruces fronterizos sin problemas." : "End-to-end customs compliance and documentation for seamless border crossings." },
+      { icon: Buildings, title: locale === "fr" ? "Réseau d'Entrepôts" : locale === "es" ? "Red de Almacenes" : "Warehouse Network", desc: locale === "fr" ? "Installations sécurisées avec gestion des stocks." : locale === "es" ? "Instalaciones seguras con gestión de inventario." : "Secure warehousing facilities across Lubumbashi and Lagos with inventory management." },
+      { icon: ShieldCheck, title: locale === "fr" ? "Expéditions Assurées" : locale === "es" ? "Envíos Asegurados" : "Insured Shipments", desc: locale === "fr" ? "Couverture complète d'assurance avec soutien dédié." : locale === "es" ? "Cobertura completa de seguro con soporte dedicado." : "Full cargo insurance coverage with dedicated claims support and risk mitigation." },
+      { icon: ChartLineUp, title: locale === "fr" ? "Analyse Logistique" : locale === "es" ? "Análisis Logístico" : "Supply Chain Analytics", desc: locale === "fr" ? "Insights pour optimiser les itinéraires et réduire les coûts." : locale === "es" ? "Perspectivas para optimizar rutas y reducir costos." : "Data-driven insights to optimize routes, reduce costs, and improve delivery performance." },
+      { icon: Lightning, title: locale === "fr" ? "Traitement Prioritaire" : locale === "es" ? "Procesamiento Prioritario" : "Same-Day Processing", desc: locale === "fr" ? "Traitement accéléré pour les envois urgents." : locale === "es" ? "Manejo acelerado para envíos urgentes." : "Expedited handling for urgent shipments with priority lane access at all hubs." },
+    ],
+    consulting: [
+      { icon: Globe, title: locale === "fr" ? "Stratégie de Marché" : locale === "es" ? "Estrategia de Mercado" : "Market Entry Strategy", desc: locale === "fr" ? "Études de faisabilité pour l'expansion africaine." : locale === "es" ? "Estudios de viabilidad para la expansión en África." : "Comprehensive feasibility studies and go-to-market playbooks for African expansion." },
+      { icon: Handshake, title: locale === "fr" ? "Alignement d'Intermédiaires" : locale === "es" ? "Alineación de Intermediarios" : "Intermediary Alignment", desc: locale === "fr" ? "Introductions vérifiées avec diligence raisonnable." : locale === "es" ? "Presentaciones verificadas con diligencia debida." : "Verified introductions between global buyers and local sellers with due diligence." },
+      { icon: Buildings, title: locale === "fr" ? "Structuration d'Entreprise" : locale === "es" ? "Estructuración Corporativa" : "Corporate Structuring", desc: locale === "fr" ? "Formation d'entité et support de conformité réglementaire." : locale === "es" ? "Formación de entidades y soporte de cumplimiento normativo." : "Entity formation, licensing support, and RC alignment for regulatory compliance." },
+      { icon: ChartLineUp, title: locale === "fr" ? "Audits Opérationnels" : locale === "es" ? "Auditorías Operativas" : "Operational Audits", desc: locale === "fr" ? "Diagnostics pour optimiser les processus d'affaires." : locale === "es" ? "Diagnósticos para optimizar los procesos comerciales." : "Deep-dive diagnostics to identify inefficiencies and optimize business processes." },
+      { icon: UsersThree, title: locale === "fr" ? "Gestion des Parties Prenantes" : locale === "es" ? "Gestión de Interesados" : "Stakeholder Management", desc: locale === "fr" ? "Gestion des relations avec le gouvernement et l'industrie." : locale === "es" ? "Gestión de relaciones con el gobierno y la industria." : "Local intelligence and relationship management with government and industry bodies." },
+      { icon: Lightning, title: locale === "fr" ? "Infrastructure Numérique" : locale === "es" ? "Infraestructura Digital" : "Digital Infrastructure", desc: locale === "fr" ? "Architecture de plateforme évolutive pour haute performance." : locale === "es" ? "Arquitectura de plataforma escalable para alto rendimiento." : "Scalable enterprise platform architecture scoping for high-performance backend systems." },
+    ],
+    procurement: [
+      { icon: ShieldCheck, title: locale === "fr" ? "Vérification des Vendeurs" : locale === "es" ? "Verificación de Proveedores" : "Vendor Verification", desc: locale === "fr" ? "Audit rigoureux garantissant qualité et fiabilité." : locale === "es" ? "Auditoría rigurosa que garantiza calidad y fiabilidad." : "Rigorous multi-point supplier auditing ensuring quality, reliability, and compliance." },
+      { icon: Globe, title: locale === "fr" ? "Sourcing Mondial" : locale === "es" ? "Sourcing Global" : "Global Sourcing", desc: locale === "fr" ? "Accès aux fournisseurs vérifiés sur 5 continents." : locale === "es" ? "Acceso a proveedores verificados en 5 continentes." : "Access to verified suppliers across 5 continents with competitive pricing parity." },
+      { icon: Handshake, title: locale === "fr" ? "Mise en Relation" : locale === "es" ? "Coincidencia de Compradores" : "Buyer-Seller Matching", desc: locale === "fr" ? "Protocoles d'introduction d'intermédiaires directs." : locale === "es" ? "Protocolos directos de introducción de intermediarios." : "Direct intermediary introduction protocols connecting demand with trusted supply." },
+      { icon: ChartLineUp, title: locale === "fr" ? "Optimisation des Prix" : locale === "es" ? "Optimización de Precios" : "Price Optimization", desc: locale === "fr" ? "Stratégies générant une réduction moyenne de 30 %." : locale === "es" ? "Estrategias que ofrecen una reducción promedio del 30%." : "Data-driven procurement strategies delivering average 30% cost reduction." },
+      { icon: Buildings, title: locale === "fr" ? "Gestion Sécurisée" : locale === "es" ? "Gestión de Depósito" : "Escrow Management", desc: locale === "fr" ? "Facilitation des transactions avec directives structurées." : locale === "es" ? "Facilitación de transacciones con directrices estructuradas." : "Secure transaction facilitation with structured payment guidelines and oversight." },
+      { icon: Lightning, title: locale === "fr" ? "Fulfillment Rapide" : locale === "es" ? "Cumplimiento Rápido" : "Rapid Fulfillment", desc: locale === "fr" ? "Délai de 48 heures de la commande à l'expédition." : locale === "es" ? "Respuesta de 48 horas desde el pedido hasta el envío." : "48-hour turnaround from order to dispatch across commodity and finished goods." },
+    ],
+  };
+
   const stats = serviceStats[safeKey] || [];
   const highlights = serviceHighlights[safeKey] || [];
 
   const isConsulting = safeKey === "consulting";
+  const isLogistics = safeKey === "logistics";
+  const isProcurement = safeKey === "procurement";
 
   return (
     <main className="bg-white min-h-screen text-espresso selection:bg-crimson/10 w-full max-w-full overflow-hidden">
@@ -334,7 +340,7 @@ export default function ServicePage() {
             </motion.div>
 
             <div className="space-y-4">
-              {faqs.map((faq, idx) => (
+              {(sd?.consultingFaqs || []).map((faq, idx) => (
                 <motion.div
                   key={idx}
                   initial={{ opacity: 0, y: 20 }}
@@ -350,6 +356,144 @@ export default function ServicePage() {
                   <p className="text-body-sm text-walnut/70 leading-relaxed pl-6 font-light">
                     {faq.a}
                   </p>
+                  {faq.whatsappMsg && (
+                    <div className="mt-5 pl-6 flex justify-end">
+                      <a
+                        href={`https://wa.me/243990301518?text=${encodeURIComponent(faq.whatsappMsg)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-crimson/10 text-crimson font-bold text-[11px] uppercase tracking-wider rounded-full hover:bg-crimson hover:text-white transition-all duration-300 w-full sm:w-auto"
+                        style={{ textDecoration: "none" }}
+                      >
+                        <WhatsappLogo size={16} weight="fill" />
+                        {sd?.makeEnquiry || "Make more enquiry"}
+                      </a>
+                    </div>
+                  )}
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ═══════════════════════════════════════
+          LOGISTICS FAQ (only on logistics page)
+          ═══════════════════════════════════════ */}
+      {isLogistics && (
+        <section className="section-padding bg-white">
+          <div className="max-w-4xl mx-auto px-4">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="text-center mb-12"
+            >
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-espresso/[0.06] text-espresso text-[10px] font-bold uppercase tracking-wider mb-3">
+                <Question size={12} weight="bold" /> FAQ
+              </span>
+              <h3 className="text-display-sm font-bold text-espresso mb-3">
+                {sd?.faqTitle || "Common Logistics Inquiries"}
+              </h3>
+              <p className="text-body-sm text-walnut/60 max-w-xl mx-auto">
+                {sd?.faqSub || "Clear answers regarding intercontinental shipping, customs, and delivery."}
+              </p>
+            </motion.div>
+
+            <div className="space-y-4">
+              {(sd?.logisticsFaqs || []).map((faq, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1, duration: 0.5 }}
+                  className="p-6 md:p-8 rounded-2xl bg-cream/30 border border-espresso/[0.05] hover:border-crimson/10 transition-colors duration-300"
+                >
+                  <h4 className="text-body-md font-bold text-espresso mb-3 flex items-start gap-2">
+                    <span className="text-crimson shrink-0 mt-0.5">Q:</span>
+                    <span>{faq.q}</span>
+                  </h4>
+                  <p className="text-body-sm text-walnut/70 leading-relaxed pl-6 font-light">
+                    {faq.a}
+                  </p>
+                  {(faq as any).whatsappMsg && (
+                    <div className="mt-5 pl-6 flex justify-end">
+                      <a
+                        href={`https://wa.me/243990301518?text=${encodeURIComponent((faq as any).whatsappMsg)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-crimson/10 text-crimson font-bold text-[11px] uppercase tracking-wider rounded-full hover:bg-crimson hover:text-white transition-all duration-300 w-full sm:w-auto"
+                        style={{ textDecoration: "none" }}
+                      >
+                        <WhatsappLogo size={16} weight="fill" />
+                        {sd?.makeEnquiry || "Make more enquiry"}
+                      </a>
+                    </div>
+                  )}
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ═══════════════════════════════════════
+          PROCUREMENT FAQ (only on procurement page)
+          ═══════════════════════════════════════ */}
+      {isProcurement && (
+        <section className="section-padding bg-white">
+          <div className="max-w-4xl mx-auto px-4">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="text-center mb-12"
+            >
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-espresso/[0.06] text-espresso text-[10px] font-bold uppercase tracking-wider mb-3">
+                <Question size={12} weight="bold" /> FAQ
+              </span>
+              <h3 className="text-display-sm font-bold text-espresso mb-3">
+                {sd?.faqTitle || "Common Inquiries"}
+              </h3>
+              <p className="text-body-sm text-walnut/60 max-w-xl mx-auto">
+                {sd?.faqSub || "Clear answers regarding intermediary representation and operational structuring."}
+              </p>
+            </motion.div>
+
+            <div className="space-y-4">
+              {(sd?.procurementFaqs || []).map((faq, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1, duration: 0.5 }}
+                  className="p-6 md:p-8 rounded-2xl bg-cream/30 border border-espresso/[0.05] hover:border-crimson/10 transition-colors duration-300"
+                >
+                  <h4 className="text-body-md font-bold text-espresso mb-3 flex items-start gap-2">
+                    <span className="text-crimson shrink-0 mt-0.5">Q:</span>
+                    <span>{faq.q}</span>
+                  </h4>
+                  <p className="text-body-sm text-walnut/70 leading-relaxed pl-6 font-light">
+                    {faq.a}
+                  </p>
+                  {(faq as any).whatsappMsg && (
+                    <div className="mt-5 pl-6 flex justify-end">
+                      <a
+                        href={`https://wa.me/243990301518?text=${encodeURIComponent((faq as any).whatsappMsg)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-crimson/10 text-crimson font-bold text-[11px] uppercase tracking-wider rounded-full hover:bg-crimson hover:text-white transition-all duration-300 w-full sm:w-auto"
+                        style={{ textDecoration: "none" }}
+                      >
+                        <WhatsappLogo size={16} weight="fill" />
+                        {sd?.makeEnquiry || "Make more enquiry"}
+                      </a>
+                    </div>
+                  )}
                 </motion.div>
               ))}
             </div>

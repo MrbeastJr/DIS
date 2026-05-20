@@ -42,7 +42,7 @@ export default function AboutPage() {
               {a.heroTitle || "Bridging Markets. Building Futures."}<span className="text-crimson">.</span>
             </h1>
             <p className="text-body-lg text-white/55 max-w-2xl leading-relaxed">
-              {a.heroSub || "Digital Integrated Services RDC is a subsidiary of COFRAN... (NIG) Ltd — a verified, multi-sector enterprise connecting African markets to global supply chains through premium logistics, consulting, procurement, and trading services."}
+              {a.heroSub || "Digital Integrated Services RDC is a subsidiary of COFRANCE INTEGRATED CONCEPT LTD — a verified, multi-sector enterprise connecting African markets to global supply chains through premium logistics, consulting, procurement, and trading services."}
             </p>
           </motion.div>
         </div>
@@ -51,9 +51,9 @@ export default function AboutPage() {
       {/* ═══ COMPANY STATS ═══ */}
       <section className="bg-cream/40 border-b border-espresso/5">
         <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4">
-          {[
-            { value: "2020", label: a.statFounded || "Founded" },
-            { value: "10+", label: a.statCountries || "Countries Served" },
+            {[
+              { value: "2013", label: a.statFounded || "Founded" },
+              { value: "10+", label: a.statCountries || "Countries Served" },
             { value: "4", label: a.statServices || "Core Services" },
             { value: "RC: 1492798", label: a.statRC || "Registered Entity" },
           ].map((stat, i) => (
@@ -75,7 +75,7 @@ export default function AboutPage() {
               {a.storyP1 || "Founded by Okey Francis CHIBUEZE, Digital Integrated Services RDC was born from a deep understanding of the logistical challenges facing businesses across Central and West Africa. With operational hubs in Lubumbashi (DR Congo) and Lagos (Nigeria), DIS bridges the gap between African enterprises and global markets."}
             </p>
             <p className="text-body-md text-walnut/70 leading-[1.85]">
-              {a.storyP2 || "As a subsidiary of COFRAN... (NIG) Ltd (RC: 1492798), we operate with full regulatory compliance and a commitment to transparency. Our services span logistics, strategic consulting, procurement, and a curated beauty & cosmetics trading platform."}
+              {a.storyP2 || "As a subsidiary of COFRANCE INTEGRATED CONCEPT LTD (RC: 1492798), we operate with full regulatory compliance and a commitment to transparency. Our services span logistics, strategic consulting, procurement, and a curated beauty & cosmetics trading platform."}
             </p>
           </motion.div>
           <motion.div {...fadeUp} transition={{ duration: 0.8, delay: 0.2 }} className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl">
@@ -132,7 +132,7 @@ export default function AboutPage() {
             <span className="text-caption uppercase tracking-[0.2em] text-crimson/60 font-medium">{a.ceoLabel || "Leadership"}</span>
             <h2 className="text-display-md font-bold text-espresso leading-tight">{a.ceoTitle || "Meet Our CEO"}</h2>
             <p className="text-body-md text-walnut/70 leading-[1.85]">
-              {a.ceoP1 || "Okey Francis CHIBUEZE is the visionary behind Digital Integrated Services RDC and COFRAN... (NIG) Ltd. With extensive experience in cross-border commerce, supply chain management, and strategic business consulting, he has built a multi-sector enterprise that connects African businesses to global opportunities."}
+              {a.ceoP1 || "Okey Francis CHIBUEZE is the visionary behind Digital Integrated Services RDC and COFRANCE INTEGRATED CONCEPT LTD. With extensive experience in cross-border commerce, supply chain management, and strategic business consulting, he has built a multi-sector enterprise that connects African businesses to global opportunities."}
             </p>
             <p className="text-body-md text-walnut/70 leading-[1.85]">
               {a.ceoP2 || "Under his leadership, DIS has expanded operations across DR Congo, Nigeria, Ghana, UAE, China, South Africa, Kenya, Turkey, India, and Saudi Arabia — establishing a trusted network of partners, suppliers, and clients spanning five continents."}

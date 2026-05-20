@@ -55,6 +55,10 @@ export interface Translations {
     procurement: ServiceDetailTranslation;
     trading: ServiceDetailTranslation;
     faqs: { q: string; a: string }[];
+    logisticsFaqs: { q: string; a: string; whatsappMsg: string }[];
+    consultingFaqs: { q: string; a: string; whatsappMsg: string }[];
+    procurementFaqs: { q: string; a: string; whatsappMsg: string }[];
+    makeEnquiry: string;
   };
   globalReach: {
     title: string;
@@ -276,7 +280,104 @@ const translations: Record<Locale, Translations> = {
         },
         {
           q: "Are your regional entities fully verified and licensed?",
-          a: "Absolutely. DIGITAL INTEGRATED SERVICES RDC operates in direct alignment with our registered Nigerian trading headquarter (Subsidiary of COFRAN... (NIG) Ltd RC:1492798), guaranteeing institutional transparency.",
+          a: "Absolutely. DIGITAL INTEGRATED SERVICES RDC operates in direct alignment with our registered Nigerian trading headquarter (Subsidiary of COFRANCE INTEGRATED CONCEPT LTD RC:1492798), guaranteeing institutional transparency.",
+        },
+      ],
+      makeEnquiry: "Make more enquiry",
+      consultingFaqs: [
+        {
+          q: "How do we initiate a consulting engagement with DIS?",
+          a: "Simply reach out via WhatsApp to CEO Okey Francis CHIBUEZE (+243 990 301 518). We start with a free discovery call to understand your business goals, market of interest, and timeline before presenting a tailored advisory roadmap.",
+          whatsappMsg: "Hello CEO, I am interested in initiating a consulting engagement with DIS. Could we schedule a discovery call?",
+        },
+        {
+          q: "What African markets do you have on-the-ground expertise in?",
+          a: "We have direct operational presence and verified networks across DR Congo, Nigeria, Ghana, Kenya, and South Africa. We also facilitate entry into UAE, China, Turkey, India, and Saudi Arabia through our global partner network.",
+          whatsappMsg: "Hello CEO, I would like to know more about your on-the-ground expertise in specific African markets.",
+        },
+        {
+          q: "Can you help us set up a registered business entity in Africa?",
+          a: "Yes. We provide full corporate structuring support including entity formation, RC registration, licensing, and regulatory compliance alignment in both DR Congo and Nigeria.",
+          whatsappMsg: "Hello CEO, I need assistance with setting up a registered business entity in Africa.",
+        },
+        {
+          q: "Do you offer ongoing advisory or just one-time project consulting?",
+          a: "Both. We provide one-time market entry feasibility studies as well as long-term retained advisory for companies with ongoing African operations. Our 100% client retention rate reflects the depth of our engagement.",
+          whatsappMsg: "Hello CEO, I'd like to discuss ongoing advisory and retained consulting services.",
+        },
+        {
+          q: "How do you vet and introduce intermediary partners?",
+          a: "Every intermediary, supplier, or buyer in our network undergoes a multi-point verification process including legal entity checks, trade references, and on-site due diligence before any introduction is made.",
+          whatsappMsg: "Hello CEO, I have questions about your intermediary vetting and partner introduction process.",
+        },
+        {
+          q: "What industries have you delivered consulting projects for?",
+          a: "We've served 12+ industries including mining, oil & gas, agriculture, FMCG, construction, pharmaceuticals, telecommunications, and real estate. Each project is led by sector specialists with deep regional knowledge.",
+          whatsappMsg: "Hello CEO, I'd like to learn about your consulting experience in my specific industry.",
+        },
+      ],
+      logisticsFaqs: [
+        {
+          q: "Do you handle intercontinental shipping as well as local state-level deliveries?",
+          a: "Yes, we manage both. We handle massive intercontinental ocean/air freight (e.g., Asia to Africa), cross-border transport between African nations, and localized state-to-state or city-to-city deliveries within DR Congo and Nigeria.",
+          whatsappMsg: "Hello CEO, I have an inquiry regarding your intercontinental and local state-level shipping logistics.",
+        },
+        {
+          q: "How long does shipping typically take?",
+          a: "Intercontinental ocean freight takes 3-5 weeks. Air freight arrives within 3-7 days. For local state-level or intra-country logistics, deliveries typically take 24-72 hours depending on the route.",
+          whatsappMsg: "Hello CEO, I would like to make an inquiry about your shipping timelines and express delivery options.",
+        },
+        {
+          q: "Do you handle customs clearance for imported goods?",
+          a: "Yes, we provide end-to-end customs clearance. Our deep understanding of local regulations ensures your cargo passes through border control seamlessly without unexpected delays or fines.",
+          whatsappMsg: "Hello CEO, I need assistance or an inquiry regarding customs clearance for imported goods.",
+        },
+        {
+          q: "Is my cargo insured during transit?",
+          a: "Absolutely. All cargo managed by DIS is fully insured against loss or damage during transit, giving you complete peace of mind from departure to final delivery.",
+          whatsappMsg: "Hello CEO, I have an inquiry regarding your cargo insurance policies.",
+        },
+        {
+          q: "Can you consolidate shipments from multiple international suppliers?",
+          a: "Yes, our hub facilities in major trade cities allow us to consolidate goods from various suppliers into a single container, significantly reducing your overall shipping costs.",
+          whatsappMsg: "Hello CEO, I'm interested in consolidating shipments from multiple suppliers and would like to know more.",
+        },
+        {
+          q: "What types of goods are restricted or require special handling?",
+          a: "While we transport a wide range of commercial goods, hazardous materials, cold-chain pharmaceuticals, and specific chemicals require special documentation. Contact us directly to verify your specific cargo.",
+          whatsappMsg: "Hello CEO, I want to make an inquiry about shipping restricted or specialized goods.",
+        },
+      ],
+      procurementFaqs: [
+        {
+          q: "How do you ensure the quality of sourced goods?",
+          a: "We conduct rigorous multi-point supplier auditing, on-site inspections, and quality assurance checks before any shipment is dispatched, ensuring all commodities and finished goods meet international standards.",
+          whatsappMsg: "Hello CEO, I have an inquiry about your quality assurance process for sourced goods.",
+        },
+        {
+          q: "Can you source specialized or niche products?",
+          a: "Yes. Our global network spans 5 continents, allowing us to source a wide variety of products ranging from heavy machinery and raw materials to premium lifestyle goods and custom components.",
+          whatsappMsg: "Hello CEO, I would like to know if you can source a specific specialized product for my business.",
+        },
+        {
+          q: "What is your typical turnaround time for procurement?",
+          a: "For standard commodities and verified suppliers, we guarantee a 48-hour turnaround from order placement to dispatch. Custom or highly specialized sourcing may take longer depending on the specifications.",
+          whatsappMsg: "Hello CEO, I want to inquire about the estimated turnaround time for a procurement order.",
+        },
+        {
+          q: "How do you manage price fluctuations and negotiate costs?",
+          a: "Our data-driven procurement strategies and direct relationships with manufacturers allow us to bypass middlemen, delivering an average of 30% cost savings while maintaining competitive global pricing parity.",
+          whatsappMsg: "Hello CEO, I am interested in how DIS can help optimize our procurement costs.",
+        },
+        {
+          q: "Do you handle the payment and escrow process?",
+          a: "Absolutely. We provide secure transaction facilitation with structured payment guidelines and escrow oversight, protecting both buyers and sellers throughout the procurement lifecycle.",
+          whatsappMsg: "Hello CEO, I have questions regarding your escrow management and secure payment processes.",
+        },
+        {
+          q: "Can you integrate procurement with logistics?",
+          a: "Yes. Procurement and logistics are seamlessly integrated at DIS. Once goods are sourced and verified, our multimodal transport networks handle the entire journey to your final destination.",
+          whatsappMsg: "Hello CEO, I would like to discuss an integrated procurement and logistics solution.",
         },
       ],
     },
@@ -355,9 +456,9 @@ const translations: Record<Locale, Translations> = {
       ],
     },
     tradingStore: {
-      badge: "DIS Beauty & Cosmetics",
-      heroTitle: "Premium Beauty\nCollection",
-      heroSub: "Curated skincare, body care, and fragrance imports. Direct from trusted global suppliers to your doorstep.",
+      badge: "DIS Beauty, Cosmetics & Accessories",
+      heroTitle: "Premium Beauty\n& Mobile Collection",
+      heroSub: "Curated skincare, body care, fragrance, and mobile accessory imports. Direct from trusted global suppliers to your doorstep.",
       productsCount: "Products",
       freeDelivery: "Free Local Delivery",
       searchPlaceholder: "Search products...",
@@ -365,7 +466,7 @@ const translations: Record<Locale, Translations> = {
       products: "products",
       noResults: "No products found",
       noResultsSub: "Try adjusting your search or filter",
-      categories: ["All", "Skincare", "Body Care", "Hair Care", "Fragrance"],
+      categories: ["All", "Skincare", "Body Care", "Hair Care", "Fragrance", "Mobile Accessories"],
       trustBadges: [
         { title: "Free Local Delivery", sub: "Lubumbashi & Lagos" },
         { title: "Authentic Products", sub: "100% genuine imports" },
@@ -405,7 +506,7 @@ const translations: Record<Locale, Translations> = {
       backToHome: "Back to Home",
       badge: "About DIS Group",
       heroTitle: "Bridging Markets. Building Futures",
-      heroSub: "Digital Integrated Services RDC is a subsidiary of COFRAN... (NIG) Ltd — a verified, multi-sector enterprise connecting African markets to global supply chains through premium logistics, consulting, procurement, and trading services.",
+      heroSub: "Digital Integrated Services RDC is a subsidiary of COFRANCE INTEGRATED CONCEPT LTD — a verified, multi-sector enterprise connecting African markets to global supply chains through premium logistics, consulting, procurement, and trading services.",
       statFounded: "Founded",
       statCountries: "Countries Served",
       statServices: "Core Services",
@@ -413,7 +514,7 @@ const translations: Record<Locale, Translations> = {
       storyLabel: "Our Story",
       storyTitle: "From Vision to Impact",
       storyP1: "Founded by Okey Francis CHIBUEZE, Digital Integrated Services RDC was born from a deep understanding of the logistical challenges facing businesses across Central and West Africa. With operational hubs in Lubumbashi (DR Congo) and Lagos (Nigeria), DIS bridges the gap between African enterprises and global markets.",
-      storyP2: "As a subsidiary of COFRAN... (NIG) Ltd (RC: 1492798), we operate with full regulatory compliance and a commitment to transparency. Our services span logistics, strategic consulting, procurement, and a curated beauty & cosmetics trading platform.",
+      storyP2: "As a subsidiary of COFRANCE INTEGRATED CONCEPT LTD (RC: 1492798), we operate with full regulatory compliance and a commitment to transparency. Our services span logistics, strategic consulting, procurement, and a curated beauty, cosmetics & mobile accessories trading platform.",
       servicesLabel: "What We Do",
       servicesTitle: "Four Pillars of Excellence",
       svcLogistics: "Logistics & Supply Chain",
@@ -426,7 +527,7 @@ const translations: Record<Locale, Translations> = {
       svcTradingDesc: "Curated premium skincare, body care, hair care, and fragrance products imported and distributed across the DRC and West Africa.",
       ceoLabel: "Leadership",
       ceoTitle: "Meet Our CEO",
-      ceoP1: "Okey Francis CHIBUEZE is the visionary behind Digital Integrated Services RDC and COFRAN... (NIG) Ltd. With extensive experience in cross-border commerce, supply chain management, and strategic business consulting, he has built a multi-sector enterprise that connects African businesses to global opportunities.",
+      ceoP1: "Okey Francis CHIBUEZE is the visionary behind Digital Integrated Services RDC and COFRANCE INTEGRATED CONCEPT LTD. With extensive experience in cross-border commerce, supply chain management, and strategic business consulting, he has built a multi-sector enterprise that connects African businesses to global opportunities.",
       ceoP2: "Under his leadership, DIS has expanded operations across DR Congo, Nigeria, Ghana, UAE, China, South Africa, Kenya, Turkey, India, and Saudi Arabia — establishing a trusted network of partners, suppliers, and clients spanning five continents.",
       ceoP3: "His hands-on approach and direct accessibility via WhatsApp reflect a commitment to personal service that sets DIS apart from conventional corporate intermediaries.",
       hqLabel: "Headquarters",
@@ -565,8 +666,105 @@ const translations: Record<Locale, Translations> = {
           a: "Nous déployons des architectures d'entreprise optimisées pour la mise à l'échelle, intégrant des environnements backend haute performance pour la gestion des clients et les intégrations de messagerie.",
         },
         {
-          q: "Vos entités régionales sont-elles entièrement vérifiées ?",
-          a: "Absolument. DIGITAL INTEGRATED SERVICES RDC opère en alignement direct avec notre siège commercial nigérian enregistré (Filiale de COFRAN... (NIG) Ltd RC:1492798), garantissant la transparence institutionnelle.",
+          q: "Vos entités régionales sont-elles entièrement vérifiées et agréées ?",
+          a: "Absolument. DIGITAL INTEGRATED SERVICES RDC opère en alignement direct avec notre siège commercial nigérian enregistré (Filiale de COFRANCE INTEGRATED CONCEPT LTD RC:1492798), garantissant la transparence institutionnelle.",
+        },
+      ],
+      makeEnquiry: "Faire plus de demandes",
+      consultingFaqs: [
+        {
+          q: "Comment initier un engagement de conseil avec DIS ?",
+          a: "Contactez simplement le PDG Okey Francis CHIBUEZE via WhatsApp (+243 990 301 518). Nous commençons par un appel découverte gratuit pour comprendre vos objectifs, le marché ciblé et le calendrier avant de présenter une feuille de route sur mesure.",
+          whatsappMsg: "Bonjour PDG, je suis intéressé par un engagement de conseil avec DIS. Pourrions-nous planifier un appel découverte ?",
+        },
+        {
+          q: "Dans quels marchés africains avez-vous une expertise sur le terrain ?",
+          a: "Nous avons une présence opérationnelle directe en RDC, au Nigeria, au Ghana, au Kenya et en Afrique du Sud. Nous facilitons également l'entrée aux EAU, en Chine, en Turquie, en Inde et en Arabie Saoudite via notre réseau mondial.",
+          whatsappMsg: "Bonjour PDG, je voudrais en savoir plus sur votre expertise terrain dans des marchés africains spécifiques.",
+        },
+        {
+          q: "Pouvez-vous nous aider à créer une entité commerciale enregistrée en Afrique ?",
+          a: "Oui. Nous offrons un soutien complet en structuration d'entreprise incluant la formation d'entité, l'enregistrement RC, les licences et la conformité réglementaire en RDC et au Nigeria.",
+          whatsappMsg: "Bonjour PDG, j'ai besoin d'aide pour créer une entité commerciale enregistrée en Afrique.",
+        },
+        {
+          q: "Proposez-vous un conseil continu ou uniquement des projets ponctuels ?",
+          a: "Les deux. Nous fournissons des études de faisabilité ponctuelles ainsi qu'un conseil retenu à long terme pour les entreprises ayant des opérations africaines en cours. Notre taux de fidélisation de 100% témoigne de la profondeur de nos engagements.",
+          whatsappMsg: "Bonjour PDG, je souhaite discuter de vos services de conseil continu et de consultation retenue.",
+        },
+        {
+          q: "Comment vérifiez-vous et présentez-vous les partenaires intermédiaires ?",
+          a: "Chaque intermédiaire, fournisseur ou acheteur de notre réseau fait l'objet d'un processus de vérification multi-points incluant des contrôles juridiques, des références commerciales et une diligence raisonnable sur site.",
+          whatsappMsg: "Bonjour PDG, j'ai des questions sur votre processus de vérification et d'introduction de partenaires.",
+        },
+        {
+          q: "Dans quelles industries avez-vous réalisé des projets de conseil ?",
+          a: "Nous avons servi plus de 12 industries dont les mines, le pétrole et gaz, l'agriculture, les FMCG, la construction, la pharmacie, les télécommunications et l'immobilier. Chaque projet est dirigé par des spécialistes sectoriels.",
+          whatsappMsg: "Bonjour PDG, je voudrais connaître votre expérience de conseil dans mon industrie spécifique.",
+        },
+      ],
+      logisticsFaqs: [
+        {
+          q: "Gérez-vous l'expédition intercontinentale ainsi que les livraisons locales/provinciales ?",
+          a: "Oui, nous gérons les deux. Nous nous occupons du fret intercontinental (par ex. de l'Asie vers l'Afrique), du transport transfrontalier entre nations africaines, ainsi que des livraisons locales de province à province ou de ville à ville en RDC et au Nigeria.",
+          whatsappMsg: "Bonjour PDG, j'ai une demande concernant vos services logistiques intercontinentaux et locaux.",
+        },
+        {
+          q: "Combien de temps prend généralement l'expédition ?",
+          a: "Le fret maritime intercontinental prend de 3 à 5 semaines. Le fret aérien arrive en 3 à 7 jours. Pour la logistique locale ou intra-pays, les livraisons prennent généralement de 24 à 72 heures.",
+          whatsappMsg: "Bonjour PDG, je voudrais me renseigner sur vos délais d'expédition et options de livraison express.",
+        },
+        {
+          q: "Gérez-vous le dédouanement pour les marchandises importées ?",
+          a: "Oui, nous fournissons un dédouanement de bout en bout. Notre compréhension approfondie des réglementations locales garantit que votre cargaison passe les contrôles frontaliers sans retards.",
+          whatsappMsg: "Bonjour PDG, j'ai besoin d'assistance ou d'informations concernant le dédouanement des marchandises importées.",
+        },
+        {
+          q: "Ma cargaison est-elle assurée pendant le transit ?",
+          a: "Absolument. Toute cargaison gérée par DIS est entièrement assurée contre la perte ou les dommages pendant le transit, vous offrant une totale tranquillité d'esprit.",
+          whatsappMsg: "Bonjour PDG, j'ai une question concernant vos polices d'assurance fret.",
+        },
+        {
+          q: "Pouvez-vous consolider les envois de plusieurs fournisseurs internationaux ?",
+          a: "Oui, nos installations dans les grandes villes commerciales nous permettent de consolider les marchandises de divers fournisseurs dans un seul conteneur, réduisant considérablement vos coûts.",
+          whatsappMsg: "Bonjour PDG, je suis intéressé par la consolidation d'envois de plusieurs fournisseurs et souhaiterais en savoir plus.",
+        },
+        {
+          q: "Quels types de marchandises nécessitent une manutention spéciale ?",
+          a: "Bien que nous transportions une large gamme de biens commerciaux, les matières dangereuses et les produits chimiques spécifiques nécessitent une documentation spéciale.",
+          whatsappMsg: "Bonjour PDG, je souhaite me renseigner sur l'expédition de marchandises restreintes ou spécialisées.",
+        },
+      ],
+      procurementFaqs: [
+        {
+          q: "Comment garantissez-vous la qualité des biens approvisionnés ?",
+          a: "Nous effectuons des audits rigoureux de fournisseurs à multiples points, des inspections sur site et des contrôles d'assurance qualité avant toute expédition, garantissant que tous les produits répondent aux normes internationales.",
+          whatsappMsg: "Bonjour PDG, j'ai une question sur votre processus d'assurance qualité pour les biens approvisionnés.",
+        },
+        {
+          q: "Pouvez-vous sourcer des produits spécialisés ou de niche ?",
+          a: "Oui. Notre réseau mondial s'étend sur 5 continents, nous permettant de sourcer une grande variété de produits allant de la machinerie lourde et des matières premières aux biens de style de vie haut de gamme.",
+          whatsappMsg: "Bonjour PDG, je voudrais savoir si vous pouvez sourcer un produit spécialisé spécifique pour mon entreprise.",
+        },
+        {
+          q: "Quel est votre délai d'exécution typique pour l'approvisionnement ?",
+          a: "Pour les produits standard et les fournisseurs vérifiés, nous garantissons un délai de 48 heures entre la commande et l'expédition. Les approvisionnements sur mesure peuvent prendre plus de temps selon les spécifications.",
+          whatsappMsg: "Bonjour PDG, je souhaite me renseigner sur le délai estimé pour une commande d'approvisionnement.",
+        },
+        {
+          q: "Comment gérez-vous les fluctuations de prix et les négociations ?",
+          a: "Nos stratégies d'approvisionnement basées sur les données et nos relations directes avec les fabricants nous permettent de contourner les intermédiaires, offrant en moyenne 30% d'économies tout en maintenant une tarification compétitive.",
+          whatsappMsg: "Bonjour PDG, je suis intéressé par la façon dont DIS peut aider à optimiser nos coûts d'approvisionnement.",
+        },
+        {
+          q: "Gérez-vous le processus de paiement et d'escrow ?",
+          a: "Absolument. Nous facilitons les transactions sécurisées avec des directives de paiement structurées et une supervision escrow, protégeant à la fois les acheteurs et les vendeurs.",
+          whatsappMsg: "Bonjour PDG, j'ai des questions concernant votre gestion de l'escrow et vos processus de paiement sécurisé.",
+        },
+        {
+          q: "Pouvez-vous intégrer l'approvisionnement avec la logistique ?",
+          a: "Oui. L'approvisionnement et la logistique sont parfaitement intégrés chez DIS. Une fois les biens sourcés et vérifiés, nos réseaux de transport multimodal gèrent l'ensemble du voyage jusqu'à votre destination finale.",
+          whatsappMsg: "Bonjour PDG, je voudrais discuter d'une solution intégrée d'approvisionnement et de logistique.",
         },
       ],
     },
@@ -645,9 +843,9 @@ const translations: Record<Locale, Translations> = {
       ],
     },
     tradingStore: {
-      badge: "DIS Beauté & Cosmétiques",
-      heroTitle: "Collection Beauté\nPremium",
-      heroSub: "Importations sélectionnées de soins de la peau, soins corporels et parfums. Directement de fournisseurs mondiaux de confiance.",
+      badge: "DIS Beauté, Cosmétiques & Accessoires",
+      heroTitle: "Collection Beauté\n& Mobile Premium",
+      heroSub: "Importations sélectionnées de soins de la peau, soins corporels, parfums et accessoires mobiles. Directement de fournisseurs mondiaux de confiance.",
       productsCount: "Produits",
       freeDelivery: "Livraison Locale Gratuite",
       searchPlaceholder: "Rechercher des produits...",
@@ -655,7 +853,7 @@ const translations: Record<Locale, Translations> = {
       products: "produits",
       noResults: "Aucun produit trouvé",
       noResultsSub: "Essayez d'ajuster votre recherche ou filtre",
-      categories: ["Tous", "Soins Peau", "Soins Corps", "Soins Cheveux", "Parfum"],
+      categories: ["Tous", "Soins Peau", "Soins Corps", "Soins Cheveux", "Parfum", "Accessoires Mobiles"],
       trustBadges: [
         { title: "Livraison Locale Gratuite", sub: "Lubumbashi & Lagos" },
         { title: "Produits Authentiques", sub: "100% importations authentiques" },
@@ -695,7 +893,7 @@ const translations: Record<Locale, Translations> = {
       backToHome: "Retour à l'Accueil",
       badge: "À Propos du Groupe DIS",
       heroTitle: "Relier les Marchés. Construire l'Avenir",
-      heroSub: "Digital Integrated Services RDC est une filiale de COFRAN... (NIG) Ltd — une entreprise multi-sectorielle vérifiée connectant les marchés africains aux chaînes d'approvisionnement mondiales.",
+      heroSub: "Digital Integrated Services RDC est une filiale de COFRANCE INTEGRATED CONCEPT LTD — une entreprise multi-sectorielle vérifiée connectant les marchés africains aux chaînes d'approvisionnement mondiales.",
       statFounded: "Fondée",
       statCountries: "Pays Desservis",
       statServices: "Services Principaux",
@@ -703,7 +901,7 @@ const translations: Record<Locale, Translations> = {
       storyLabel: "Notre Histoire",
       storyTitle: "De la Vision à l'Impact",
       storyP1: "Fondée par Okey Francis CHIBUEZE, Digital Integrated Services RDC est née d'une compréhension profonde des défis logistiques auxquels font face les entreprises d'Afrique centrale et occidentale. Avec des centres opérationnels à Lubumbashi (RDC) et Lagos (Nigeria), DIS comble le fossé entre les entreprises africaines et les marchés mondiaux.",
-      storyP2: "En tant que filiale de COFRAN... (NIG) Ltd (RC: 1492798), nous opérons en pleine conformité réglementaire avec un engagement envers la transparence. Nos services couvrent la logistique, le conseil stratégique, l'approvisionnement et une plateforme de commerce de beauté et cosmétiques.",
+      storyP2: "En tant que filiale de COFRANCE INTEGRATED CONCEPT LTD (RC: 1492798), nous opérons en pleine conformité réglementaire avec un engagement envers la transparence. Nos services couvrent la logistique, le conseil stratégique, l'approvisionnement et une plateforme de commerce de beauté, cosmétiques et accessoires mobiles.",
       servicesLabel: "Ce Que Nous Faisons",
       servicesTitle: "Quatre Piliers d'Excellence",
       svcLogistics: "Logistique & Chaîne d'Approvisionnement",
@@ -716,7 +914,7 @@ const translations: Record<Locale, Translations> = {
       svcTradingDesc: "Produits premium de soins de la peau, du corps, des cheveux et parfums importés et distribués en RDC et Afrique de l'Ouest.",
       ceoLabel: "Direction",
       ceoTitle: "Rencontrez Notre PDG",
-      ceoP1: "Okey Francis CHIBUEZE est le visionnaire derrière Digital Integrated Services RDC et COFRAN... (NIG) Ltd. Fort d'une vaste expérience en commerce transfrontalier, gestion de chaîne d'approvisionnement et conseil stratégique, il a bâti une entreprise multi-sectorielle connectant les entreprises africaines aux opportunités mondiales.",
+      ceoP1: "Okey Francis CHIBUEZE est le visionnaire derrière Digital Integrated Services RDC et COFRANCE INTEGRATED CONCEPT LTD. Fort d'une vaste expérience en commerce transfrontalier, gestion de chaîne d'approvisionnement et conseil stratégique, il a bâti une entreprise multi-sectorielle connectant les entreprises africaines aux opportunités mondiales.",
       ceoP2: "Sous sa direction, DIS a étendu ses opérations en RDC, Nigeria, Ghana, EAU, Chine, Afrique du Sud, Kenya, Turquie, Inde et Arabie Saoudite — établissant un réseau de confiance de partenaires, fournisseurs et clients sur cinq continents.",
       ceoP3: "Son approche pratique et son accessibilité directe via WhatsApp reflètent un engagement envers le service personnel qui distingue DIS des intermédiaires corporatifs conventionnels.",
       hqLabel: "Siège Social",
@@ -835,9 +1033,9 @@ const translations: Record<Locale, Translations> = {
         ],
       },
       trading: {
-        title: "Comercio de Belleza, Cosméticos y Materias Primas",
-        subtitle: "Importaciones premium de cosméticos y estilo de vida gestionadas con ejecución retail global.",
-        description: "DIGITAL INTEGRATED SERVICES RDC mantiene un próspero mercado comercial especializado en bienestar cutáneo altamente curado, formulaciones de brillo y productos de cuidado personal distribuidos directamente a través de nuestros hubs locales.",
+        title: "Comercio de Belleza, Cosméticos, Accesorios Móviles y Materias Primas",
+        subtitle: "Importaciones premium de cosméticos, accesorios móviles y estilo de vida gestionadas con ejecución retail global.",
+        description: "DIGITAL INTEGRATED SERVICES RDC maintains a thriving commercial marketplace specializing in highly curated skin wellness, glow formulations, and personal care products distributed directly across our local hubs.",
         capabilities: [
           "Optimización de Redes Mayoristas y Minoristas",
           "Distribución de Lociones Premium de Brillo y Exfoliación",
@@ -855,8 +1053,105 @@ const translations: Record<Locale, Translations> = {
           a: "Desplegamos arquitecturas empresariales optimizadas para escalabilidad, incorporando entornos backend de alto rendimiento para gestión de clientes e integraciones de mensajería.",
         },
         {
-          q: "¿Sus entidades regionales están completamente verificadas?",
-          a: "Absolutamente. DIGITAL INTEGRATED SERVICES RDC opera en alineación directa con nuestra sede comercial nigeriana registrada (Subsidiaria de COFRAN... (NIG) Ltd RC:1492798), garantizando transparencia institucional.",
+          q: "¿Están sus entidades regionales completamente verificadas y licenciadas?",
+          a: "Absolutamente. DIGITAL INTEGRATED SERVICES RDC opera en alineación directa con nuestra sede comercial nigeriana registrada (Subsidiaria de COFRANCE INTEGRATED CONCEPT LTD RC:1492798), garantizando transparencia institucional.",
+        },
+      ],
+      makeEnquiry: "Hacer más consultas",
+      consultingFaqs: [
+        {
+          q: "¿Cómo iniciar un compromiso de consultoría con DIS?",
+          a: "Simplemente contáctese vía WhatsApp con el CEO Okey Francis CHIBUEZE (+243 990 301 518). Comenzamos con una llamada de descubrimiento gratuita para entender sus objetivos, mercado de interés y cronograma antes de presentar una hoja de ruta personalizada.",
+          whatsappMsg: "Hola CEO, estoy interesado en iniciar un compromiso de consultoría con DIS. ¿Podríamos programar una llamada de descubrimiento?",
+        },
+        {
+          q: "¿En qué mercados africanos tienen experiencia directa?",
+          a: "Tenemos presencia operativa directa en RDC, Nigeria, Ghana, Kenia y Sudáfrica. También facilitamos la entrada a EAU, China, Turquía, India y Arabia Saudita a través de nuestra red global de socios.",
+          whatsappMsg: "Hola CEO, me gustaría saber más sobre su experiencia directa en mercados africanos específicos.",
+        },
+        {
+          q: "¿Pueden ayudarnos a establecer una entidad comercial registrada en África?",
+          a: "Sí. Proporcionamos soporte completo de estructuración corporativa incluyendo formación de entidad, registro RC, licencias y cumplimiento regulatorio en la RDC y Nigeria.",
+          whatsappMsg: "Hola CEO, necesito asistencia para establecer una entidad comercial registrada en África.",
+        },
+        {
+          q: "¿Ofrecen asesoría continua o solo consultoría de proyectos puntuales?",
+          a: "Ambos. Proporcionamos estudios de viabilidad puntuales así como asesoría retenida a largo plazo para empresas con operaciones africanas en curso. Nuestra tasa de retención del 100% refleja la profundidad de nuestros compromisos.",
+          whatsappMsg: "Hola CEO, me gustaría discutir servicios de asesoría continua y consultoría retenida.",
+        },
+        {
+          q: "¿Cómo verifican y presentan a los socios intermediarios?",
+          a: "Cada intermediario, proveedor o comprador en nuestra red pasa por un proceso de verificación multi-punto incluyendo verificaciones legales, referencias comerciales y diligencia debida in situ.",
+          whatsappMsg: "Hola CEO, tengo preguntas sobre su proceso de verificación e introducción de socios.",
+        },
+        {
+          q: "¿En qué industrias han realizado proyectos de consultoría?",
+          a: "Hemos servido más de 12 industrias incluyendo minería, petróleo y gas, agricultura, FMCG, construcción, farmacéutica, telecomunicaciones e inmobiliaria. Cada proyecto es liderado por especialistas sectoriales.",
+          whatsappMsg: "Hola CEO, me gustaría conocer su experiencia de consultoría en mi industria específica.",
+        },
+      ],
+      logisticsFaqs: [
+        {
+          q: "¿Manejan envíos intercontinentales así como entregas locales a nivel estatal/provincial?",
+          a: "Sí, manejamos ambos. Operamos grandes fletes marítimos/aéreos intercontinentales, transporte transfronterizo entre naciones africanas y entregas localizadas de estado a estado o de ciudad a ciudad en la RDC y Nigeria.",
+          whatsappMsg: "Hola CEO, tengo una consulta sobre su logística de envío intercontinental y local a nivel estatal.",
+        },
+        {
+          q: "¿Cuánto tiempo toma típicamente el envío?",
+          a: "El flete marítimo intercontinental toma de 3 a 5 semanas. El flete aéreo llega entre 3 y 7 días. Para la logística local o dentro del país, las entregas suelen tardar de 24 a 72 horas.",
+          whatsappMsg: "Hola CEO, me gustaría hacer una consulta sobre los plazos de envío y las opciones de entrega exprés.",
+        },
+        {
+          q: "¿Manejan el despacho de aduanas para mercancías importadas?",
+          a: "Sí, proporcionamos despacho de aduanas de extremo a extremo. Nuestro profundo conocimiento de las regulaciones locales asegura que su carga pase el control fronterizo sin demoras.",
+          whatsappMsg: "Hola CEO, necesito asistencia o tengo una consulta relacionada con el despacho de aduanas para bienes importados.",
+        },
+        {
+          q: "¿Está asegurada mi carga durante el tránsito?",
+          a: "Absolutamente. Toda la carga gestionada por DIS está completamente asegurada contra pérdida o daño durante el tránsito, brindándole total tranquilidad desde la salida hasta la entrega final.",
+          whatsappMsg: "Hola CEO, tengo una consulta sobre sus pólizas de seguro de carga.",
+        },
+        {
+          q: "¿Pueden consolidar envíos de múltiples proveedores internacionales?",
+          a: "Sí, nuestras instalaciones en importantes ciudades comerciales nos permiten consolidar mercancías de varios proveedores en un solo contenedor, reduciendo significativamente los costos.",
+          whatsappMsg: "Hola CEO, me interesa la consolidación de envíos de múltiples proveedores y quisiera saber más.",
+        },
+        {
+          q: "¿Qué tipos de mercancías requieren manejo especial?",
+          a: "Aunque transportamos una amplia gama de bienes comerciales, materiales peligrosos y productos químicos específicos requieren documentación especial.",
+          whatsappMsg: "Hola CEO, quiero realizar una consulta sobre el envío de mercancías restringidas o especializadas.",
+        },
+      ],
+      procurementFaqs: [
+        {
+          q: "¿Cómo garantizan la calidad de los bienes adquiridos?",
+          a: "Realizamos rigurosas auditorías de proveedores de múltiples puntos, inspecciones in situ y controles de garantía de calidad antes del envío, asegurando que todos los productos cumplen con estándares internacionales.",
+          whatsappMsg: "Hola CEO, tengo una consulta sobre su proceso de garantía de calidad para bienes adquiridos.",
+        },
+        {
+          q: "¿Pueden abastecer productos especializados o de nicho?",
+          a: "Sí. Nuestra red global abarca 5 continentes, permitiéndonos adquirir una gran variedad de productos, desde maquinaria pesada y materias primas hasta bienes de estilo de vida premium.",
+          whatsappMsg: "Hola CEO, me gustaría saber si pueden abastecer un producto especializado específico para mi negocio.",
+        },
+        {
+          q: "¿Cuál es su tiempo de respuesta típico para adquisiciones?",
+          a: "Para productos estándar y proveedores verificados, garantizamos un plazo de 48 horas desde el pedido hasta el despacho. Las adquisiciones personalizadas pueden demorar más según las especificaciones.",
+          whatsappMsg: "Hola CEO, quiero consultar el tiempo de respuesta estimado para un pedido de adquisición.",
+        },
+        {
+          q: "¿Cómo gestionan las fluctuaciones de precios y negocian costos?",
+          a: "Nuestras estrategias de adquisición basadas en datos y relaciones directas con fabricantes nos permiten evitar intermediarios, brindando un ahorro de costos del 30% en promedio.",
+          whatsappMsg: "Hola CEO, estoy interesado en cómo DIS puede ayudar a optimizar nuestros costos de adquisición.",
+        },
+        {
+          q: "¿Manejan el proceso de pago y depósito (escrow)?",
+          a: "Absolutamente. Facilitamos transacciones seguras con directrices de pago estructuradas y supervisión de depósito, protegiendo tanto a compradores como a vendedores durante todo el ciclo de adquisición.",
+          whatsappMsg: "Hola CEO, tengo preguntas con respecto a su gestión de depósito y procesos de pago seguro.",
+        },
+        {
+          q: "¿Pueden integrar las adquisiciones con la logística?",
+          a: "Sí. Las adquisiciones y la logística están perfectamente integradas en DIS. Una vez que se adquieren y verifican los bienes, nuestras redes de transporte multimodal manejan el viaje completo.",
+          whatsappMsg: "Hola CEO, me gustaría discutir una solución integrada de adquisición y logística.",
         },
       ],
     },
@@ -945,7 +1240,7 @@ const translations: Record<Locale, Translations> = {
       products: "productos",
       noResults: "No se encontraron productos",
       noResultsSub: "Intente ajustar su búsqueda o filtro",
-      categories: ["Todos", "Cuidado Piel", "Cuidado Corporal", "Cuidado Capilar", "Fragancia"],
+      categories: ["Todos", "Cuidado de la Piel", "Cuidado Corporal", "Cuidado Capilar", "Fragancias", "Accesorios Móviles"],
       trustBadges: [
         { title: "Entrega Local Gratuita", sub: "Lubumbashi & Lagos" },
         { title: "Productos Auténticos", sub: "100% importaciones genuinas" },
@@ -985,7 +1280,7 @@ const translations: Record<Locale, Translations> = {
       backToHome: "Volver al Inicio",
       badge: "Sobre el Grupo DIS",
       heroTitle: "Conectando Mercados. Construyendo Futuros",
-      heroSub: "Digital Integrated Services RDC es una subsidiaria de COFRAN... (NIG) Ltd — una empresa multi-sectorial verificada que conecta los mercados africanos con las cadenas de suministro globales.",
+      heroSub: "Digital Integrated Services RDC es una subsidiaria de COFRANCE INTEGRATED CONCEPT LTD — una empresa multi-sectorial verificada que conecta los mercados africanos con las cadenas de suministro globales.",
       statFounded: "Fundada",
       statCountries: "Países Atendidos",
       statServices: "Servicios Principales",
@@ -993,7 +1288,7 @@ const translations: Record<Locale, Translations> = {
       storyLabel: "Nuestra Historia",
       storyTitle: "De la Visión al Impacto",
       storyP1: "Fundada por Okey Francis CHIBUEZE, Digital Integrated Services RDC nació de una profunda comprensión de los desafíos logísticos que enfrentan las empresas de África Central y Occidental. Con centros operativos en Lubumbashi (RDC) y Lagos (Nigeria), DIS cierra la brecha entre las empresas africanas y los mercados globales.",
-      storyP2: "Como subsidiaria de COFRAN... (NIG) Ltd (RC: 1492798), operamos con plena conformidad regulatoria y un compromiso con la transparencia. Nuestros servicios abarcan logística, consultoría estratégica, adquisiciones y una plataforma de comercio de belleza y cosmética.",
+      storyP2: "Como subsidiaria de COFRANCE INTEGRATED CONCEPT LTD (RC: 1492798), operamos con plena conformidad regulatoria y un compromiso con la transparencia. Nuestros servicios abarcan logística, consultoría estratégica, adquisiciones y una plataforma de comercio de belleza, cosmética y accesorios móviles.",
       servicesLabel: "Lo Que Hacemos",
       servicesTitle: "Cuatro Pilares de Excelencia",
       svcLogistics: "Logística y Cadena de Suministro",
@@ -1006,7 +1301,7 @@ const translations: Record<Locale, Translations> = {
       svcTradingDesc: "Productos premium de cuidado de la piel, cuerpo, cabello y fragancias importados y distribuidos en la RDC y África Occidental.",
       ceoLabel: "Liderazgo",
       ceoTitle: "Conozca a Nuestro CEO",
-      ceoP1: "Okey Francis CHIBUEZE es el visionario detrás de Digital Integrated Services RDC y COFRAN... (NIG) Ltd. Con amplia experiencia en comercio transfronterizo, gestión de cadena de suministro y consultoría estratégica, ha construido una empresa multi-sectorial que conecta negocios africanos con oportunidades globales.",
+      ceoP1: "Okey Francis CHIBUEZE es el visionario detrás de Digital Integrated Services RDC y COFRANCE INTEGRATED CONCEPT LTD. Con amplia experiencia en comercio transfronterizo, gestión de cadena de suministro y consultoría estratégica, ha construido una empresa multi-sectorial que conecta negocios africanos con oportunidades globales.",
       ceoP2: "Bajo su liderazgo, DIS ha expandido operaciones en RDC, Nigeria, Ghana, EAU, China, Sudáfrica, Kenia, Turquía, India y Arabia Saudita — estableciendo una red confiable de socios, proveedores y clientes en cinco continentes.",
       ceoP3: "Su enfoque práctico y accesibilidad directa vía WhatsApp reflejan un compromiso con el servicio personal que distingue a DIS de los intermediarios corporativos convencionales.",
       hqLabel: "Sede Central",

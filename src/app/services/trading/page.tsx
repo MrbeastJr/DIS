@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
@@ -22,13 +22,14 @@ interface CartItem {
   qty: number;
 }
 
-/* ── Product Catalog ── */
+/* ── Product Catalog (Mock DB State) ── */
 const categoryKeys = ["All", "Skincare", "Body Care", "Hair Care", "Fragrance"] as const;
 
-const productsData = [
+const MOCK_DB_INITIAL_DATA = [
   {
     id: 1,
-    nameIndex: 0,
+    name: "Luminous Glow Serum",
+    desc: "A powerful brightening serum infused with Vitamin C and botanical extracts.",
     price: 25,
     priceFc: "50,000 FC",
     category: "Skincare",
@@ -39,7 +40,8 @@ const productsData = [
   },
   {
     id: 2,
-    nameIndex: 1,
+    name: "Hydrating Day Cream",
+    desc: "Daily moisturizer providing 24-hour hydration and environmental protection.",
     price: 40,
     priceFc: "80,000 FC",
     category: "Skincare",
@@ -50,7 +52,8 @@ const productsData = [
   },
   {
     id: 3,
-    nameIndex: 2,
+    name: "Shea Butter Body Wash",
+    desc: "Rich, nourishing body wash formulated with pure African shea butter.",
     price: 30,
     priceFc: "60,000 FC",
     category: "Body Care",
@@ -61,7 +64,8 @@ const productsData = [
   },
   {
     id: 4,
-    nameIndex: 3,
+    name: "Exfoliating Body Scrub",
+    desc: "Gentle exfoliating scrub to reveal smoother, radiant skin.",
     price: 20,
     priceFc: "40,000 FC",
     category: "Body Care",
@@ -72,7 +76,8 @@ const productsData = [
   },
   {
     id: 5,
-    nameIndex: 4,
+    name: "Argan Oil Hair Mask",
+    desc: "Deep conditioning treatment for damaged or dry hair.",
     price: 35,
     priceFc: "70,000 FC",
     category: "Hair Care",
@@ -83,7 +88,8 @@ const productsData = [
   },
   {
     id: 6,
-    nameIndex: 5,
+    name: "Purifying Clay Mask",
+    desc: "Detoxifying face mask that draws out impurities and minimizes pores.",
     price: 18,
     priceFc: "36,000 FC",
     category: "Skincare",
@@ -94,18 +100,20 @@ const productsData = [
   },
   {
     id: 7,
-    nameIndex: 6,
+    name: "Oud & Rose Perfume",
+    desc: "Signature luxury fragrance blending traditional oud with fresh rose.",
     price: 55,
     priceFc: "110,000 FC",
     category: "Fragrance",
     tag: "Premium",
     rating: 4.9,
-    reviews: 42,
-    image: "https://images.unsplash.com/photo-1594035910387-fea081e84dfb?w=600&h=600&fit=crop",
+    reviews: 312,
+    image: "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=600&h=600&fit=crop",
   },
   {
     id: 8,
-    nameIndex: 7,
+    name: "Nourishing Body Oil",
+    desc: "Lightweight, fast-absorbing body oil for a natural, healthy glow.",
     price: 28,
     priceFc: "56,000 FC",
     category: "Body Care",
@@ -209,7 +217,28 @@ function ProductModal({ product, onClose, ts }: {
 /* ── Main Store Page ── */
 export default function TradingStorePage() {
   const { t } = useLanguage();
-  const ts = t.tradingStore;
+  const ts = t?.tradingStore || t?.trading;
+
+  const [productsData, setProductsData] = useState<any[]>(MOCK_DB_INITIAL_DATA);
+  const [isLoadingProducts, setIsLoadingProducts] = useState(true);
+
+  // MOCK API FETCH - Placeholder for PythonAnywhere Backend
+  useEffect(() => {
+    const fetchBackendProducts = async () => {
+      // TODO: Replace with actual Django API URL
+      // const res = await fetch("https://your-pythonanywhere-app.com/api/products/");
+      // const data = await res.json();
+      // setProductsData(data);
+      
+      // Simulating backend network delay for now
+      setTimeout(() => {
+        setProductsData(MOCK_DB_INITIAL_DATA);
+        setIsLoadingProducts(false);
+      }, 500);
+    };
+    fetchBackendProducts();
+  }, []);
+
   const [search, setSearch] = useState("");
   const [activeCategoryIndex, setActiveCategoryIndex] = useState(0);
   const [quickView, setQuickView] = useState<{ name: string; desc: string; price: number; priceFc: string; category: string; tag: string; rating: number; reviews: number; image: string } | null>(null);
@@ -251,12 +280,12 @@ export default function TradingStorePage() {
     );
   };
 
-  // Build localized products
+  // Use translations for the initial 8 mock products, fallback to the dynamic DB name
   const products = useMemo(() => productsData.map((p) => ({
     ...p,
-    name: ts.productNames[p.nameIndex] || "",
-    desc: ts.productDescs[p.nameIndex] || "",
-  })), [ts]);
+    name: (p.id <= 8 ? ts?.productNames?.[p.id - 1] : p.name) || p.name || `Product ${p.id}`,
+    desc: (p.id <= 8 ? ts?.productDescs?.[p.id - 1] : p.desc) || p.desc || "Premium quality product.",
+  })), [ts, productsData]);
 
   const filtered = useMemo(() => {
     return products.filter((p) => {
@@ -363,7 +392,20 @@ export default function TradingStorePage() {
           </p>
         </div>
 
-        {filtered.length === 0 ? (
+        {isLoadingProducts ? (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+            {[1, 2, 3, 4, 5, 6, 7, 8].map((skeleton) => (
+              <div key={skeleton} className="rounded-2xl md:rounded-3xl border border-gray-100 bg-white overflow-hidden animate-pulse">
+                <div className="aspect-square bg-gray-200" />
+                <div className="p-4 space-y-3">
+                  <div className="w-1/3 h-3 bg-gray-200 rounded" />
+                  <div className="w-3/4 h-4 bg-gray-200 rounded" />
+                  <div className="w-1/2 h-4 bg-gray-200 rounded" />
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : filtered.length === 0 ? (
           <div className="text-center py-24">
             <MagnifyingGlass size={48} className="text-walnut/10 mx-auto mb-4" />
             <p className="text-body-lg text-walnut/40 font-medium">{ts.noResults}</p>
