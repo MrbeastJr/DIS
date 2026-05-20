@@ -55,7 +55,7 @@ export default function PrivacyPolicyPage() {
           
           <h2>1. Introduction</h2>
           <p>
-            DIGITAL INTEGRATED SERVICES RDC (referred to as "DIS", "we", "us", or "our"), a subsidiary of COFRANCE INTEGRATED CONCEPTS (NIG) Ltd (RC:1492798), operates the DIS website and associated services. This Privacy Policy outlines how we collect, use, and protect your personal information when you engage with our Trading, Logistics, Consulting, and Procurement services.
+            DIGITAL INTEGRATED SERVICES RDC (referred to as &quot;DIS&quot;, &quot;we&quot;, &quot;us&quot;, or &quot;our&quot;), a subsidiary of COFRANCE INTEGRATED CONCEPTS (NIG) Ltd (RC:1492798), operates the DIS website and associated services. This Privacy Policy outlines how we collect, use, and protect your personal information when you engage with our Trading, Logistics, Consulting, and Procurement services.
           </p>
 
           <h2>2. Information We Collect</h2>
