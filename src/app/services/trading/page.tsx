@@ -217,7 +217,7 @@ function ProductModal({ product, onClose, ts }: {
 /* ── Main Store Page ── */
 export default function TradingStorePage() {
   const { t } = useLanguage();
-  const ts = t?.tradingStore || t?.trading;
+  const ts = t?.tradingStore;
 
   const [productsData, setProductsData] = useState<any[]>(MOCK_DB_INITIAL_DATA);
   const [isLoadingProducts, setIsLoadingProducts] = useState(true);
