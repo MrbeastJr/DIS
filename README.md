@@ -1,5 +1,7 @@
 # DIS — Digital Integrated Services
 
+🌐 **Live Website:** [disgateway.com](https://disgateway.com)
+
 > **Corporate website for DIGITAL INTEGRATED SERVICES RDC** — a modern African logistics, consulting, procurement, beauty/cosmetic trading, and global commerce enterprise.
 
 **CEO:** Okey Francis CHIBUEZE  
@@ -131,12 +133,12 @@ npm start
 
 ## 🚢 Deployment
 
-Optimized for **Vercel** deployment:
+Currently deployed on **Vercel** and connected to the custom domain **disgateway.com**.
 
-1. Push to GitHub
-2. Connect repo to Vercel
-3. Set framework preset to **Next.js**
-4. Deploy
+To deploy updates:
+1. Push changes to the `main` branch on GitHub.
+2. Vercel will automatically trigger a production build.
+3. Once compiled, updates will instantly reflect on [disgateway.com](https://disgateway.com).
 
 ### Required Assets
 
