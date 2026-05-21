@@ -2,10 +2,11 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Quotes, Star } from "@phosphor-icons/react";
+import { Quotes, Star, CircleNotch } from "@phosphor-icons/react";
 import { useLanguage } from "@/context/LanguageContext";
+import { API_BASE_URL } from "@/lib/api";
 
-const testimonials = [
+const DEFAULT_TESTIMONIALS = [
   {
     quote: "DIS transformed our cross-border supply chain. Their understanding of African markets is unmatched — they delivered what global firms couldn't.",
     author: "Amara Okafor",
@@ -26,16 +27,42 @@ const testimonials = [
   },
 ];
 
+interface Testimonial {
+  quote: string;
+  author: string;
+  role: string;
+  region: string;
+}
+
 export default function TestimonialsSection() {
   const { t } = useLanguage();
   const [current, setCurrent] = useState(0);
-
-  const next = useCallback(() => setCurrent((c) => (c + 1) % testimonials.length), []);
+  const [testimonials, setTestimonials] = useState<Testimonial[]>(DEFAULT_TESTIMONIALS);
 
   useEffect(() => {
+    const fetchTestimonials = async () => {
+      try {
+        const res = await fetch(`${API_BASE_URL}/testimonials/`);
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.length > 0) {
+            setTestimonials(data);
+          }
+        }
+      } catch (err) {
+        console.error("Failed to fetch testimonials", err);
+      }
+    };
+    fetchTestimonials();
+  }, []);
+
+  const next = useCallback(() => setCurrent((c) => (c + 1) % testimonials.length), [testimonials.length]);
+
+  useEffect(() => {
+    if (testimonials.length === 0) return;
     const interval = setInterval(next, 7000);
     return () => clearInterval(interval);
-  }, [next]);
+  }, [next, testimonials.length]);
 
   const title = t?.testimonials?.title || "What Our Partners Say";
 

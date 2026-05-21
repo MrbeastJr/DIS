@@ -76,9 +76,12 @@ export const metadata: Metadata = {
 };
 
 import { LanguageProvider } from "@/context/LanguageContext";
+import { ConfigProvider } from "@/context/ConfigContext";
 import CookieConsent from "@/components/CookieConsent";
 import LanguagePopup from "@/components/LanguagePopup";
 import FloatingOrderButton from "@/components/FloatingOrderButton";
+
+import { Toaster } from "react-hot-toast";
 
 export default function RootLayout({
   children,
@@ -89,12 +92,15 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth">
 
       <body className="font-sans">
-        <LanguageProvider>
-          {children}
-          <CookieConsent />
-          <LanguagePopup />
-          <FloatingOrderButton />
-        </LanguageProvider>
+        <ConfigProvider>
+          <LanguageProvider>
+            {children}
+            <CookieConsent />
+            <LanguagePopup />
+            <FloatingOrderButton />
+            <Toaster position="bottom-right" />
+          </LanguageProvider>
+        </ConfigProvider>
       </body>
     </html>
   );

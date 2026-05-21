@@ -4,8 +4,10 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import {
-  SignOut, Plus, Trash, Storefront, Package, Info, CheckCircle
+  SignOut, Plus, Trash, Storefront, Package, Info, CheckCircle, PencilSimple
 } from "@phosphor-icons/react";
+import { API_BASE_URL, getAuthHeaders, getImageUrl } from "@/lib/api";
+import toast from "react-hot-toast";
 
 /* ── Mirroring the Trading Page Data Structure ── */
 interface AdminProduct {
@@ -28,7 +30,7 @@ export default function AdminDashboardPage() {
 
   // Form State
   const [isAdding, setIsAdding] = useState(false);
-  const [successMsg, setSuccessMsg] = useState("");
+  const [editingId, setEditingId] = useState<number | null>(null);
   const [formData, setFormData] = useState({
     name: "",
     desc: "",
@@ -58,33 +60,26 @@ export default function AdminDashboardPage() {
     }
   };
 
-  // Fetch mock products (Prepping for PythonAnywhere API)
-  useEffect(() => {
-    const fetchProducts = async () => {
-      // MOCK FETCH:
-      // const res = await fetch("https://your-pythonanywhere-app.com/api/products/");
-      // const data = await res.json();
-      
-      // Simulating network delay
-      setTimeout(() => {
-        setProducts([
-          {
-            id: 1,
-            name: "Luminous Glow Serum",
-            desc: "A powerful brightening serum infused with Vitamin C and botanical extracts.",
-            price: 25,
-            priceFc: "50,000 FC",
-            category: "Skincare",
-            tag: "Best Seller",
-            rating: 4.8,
-            reviews: 124,
-            image: "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=600&h=600&fit=crop",
-          }
-        ]);
-        setLoading(false);
-      }, 800);
-    };
+  // Fetch products from PythonAnywhere API
+  const fetchProducts = async () => {
+    try {
+      const res = await fetch(`${API_BASE_URL}/products/`);
+      if (res.ok) {
+        const data = await res.json();
+        const formattedData = data.map((item: any) => ({
+          ...item,
+          image: getImageUrl(item.image)
+        }));
+        setProducts(formattedData);
+      }
+    } catch (err) {
+      console.error("Failed to fetch dashboard products", err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchProducts();
   }, []);
 
@@ -93,50 +88,105 @@ export default function AdminDashboardPage() {
     router.push("/admin");
   };
 
+  const handleEdit = (product: AdminProduct) => {
+    setEditingId(product.id);
+    setFormData({
+      name: product.name,
+      desc: product.desc,
+      price: product.price,
+      priceFc: product.priceFc,
+      category: product.category,
+      tag: product.tag || "",
+      rating: product.rating,
+      reviews: product.reviews,
+    });
+    setImageFile(null);
+    setImageError("");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleDelete = async (id: number) => {
+    if (!confirm("Are you sure you want to delete this product?")) return;
+    
+    try {
+      const res = await fetch(`${API_BASE_URL}/products/${id}/`, {
+        method: "DELETE",
+        headers: getAuthHeaders()
+      });
+      if (res.ok) {
+        setProducts(products.filter(p => p.id !== id));
+        toast.success("Product deleted.");
+      } else {
+        toast.error("Failed to delete product.");
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error("Network error.");
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsAdding(true);
 
-    // MOCK POST REQUEST TO DJANGO BACKEND:
-    // const payload = new FormData();
-    // payload.append("name", formData.name);
-    // payload.append("desc", formData.desc);
-    // ...
-    // if (imageFile) payload.append("image", imageFile);
-    // await fetch("https://your-pythonanywhere-app.com/api/products/", {
-    //   method: "POST",
-    //   body: payload
-    // });
+    try {
+      const payload = new FormData();
+      payload.append("name", formData.name);
+      payload.append("desc", formData.desc);
+      payload.append("price", String(formData.price));
+      payload.append("priceFc", formData.priceFc);
+      payload.append("category", formData.category);
+      payload.append("tag", formData.tag);
+      payload.append("rating", String(formData.rating));
+      payload.append("reviews", String(formData.reviews));
+      if (imageFile) payload.append("image", imageFile);
 
-    setTimeout(() => {
-      const mockImageUrl = imageFile ? URL.createObjectURL(imageFile) : "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=600&h=600&fit=crop";
-      
-      const newProduct: AdminProduct = {
-        id: Date.now(), // Mock ID from DB
-        ...formData,
-        image: mockImageUrl
-      };
-      
-      setProducts([newProduct, ...products]);
-      setSuccessMsg("Product successfully added to the database!");
-      setIsAdding(false);
-      
-      // Reset form
-      setFormData({
-        name: "",
-        desc: "",
-        price: 0,
-        priceFc: "",
-        category: "Skincare",
-        tag: "",
-        rating: 5.0,
-        reviews: 0,
+      const url = editingId 
+        ? `${API_BASE_URL}/products/${editingId}/` 
+        : `${API_BASE_URL}/products/`;
+        
+      const method = editingId ? "PATCH" : "POST";
+
+      const headers = getAuthHeaders();
+      // Browser automatically sets Content-Type for FormData, so we delete it if present
+      const cleanHeaders: any = { ...headers };
+      delete cleanHeaders["Content-Type"];
+
+      const res = await fetch(url, {
+        method,
+        headers: cleanHeaders,
+        body: payload
       });
-      setImageFile(null);
-      setImageError("");
 
-      setTimeout(() => setSuccessMsg(""), 3000);
-    }, 1000);
+      if (res.ok) {
+        toast.success(editingId ? "Product successfully updated!" : "Product successfully added!");
+        setEditingId(null);
+        setFormData({
+          name: "", desc: "", price: 0, priceFc: "",
+          category: "Skincare", tag: "", rating: 5.0, reviews: 0,
+        });
+        setImageFile(null);
+        setImageError("");
+        fetchProducts(); // Refresh list
+      } else {
+        toast.error("Failed to save product.");
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error("Network error. Please check your connection.");
+    } finally {
+      setIsAdding(false);
+    }
+  };
+
+  const cancelEdit = () => {
+    setEditingId(null);
+    setFormData({
+      name: "", desc: "", price: 0, priceFc: "",
+      category: "Skincare", tag: "", rating: 5.0, reviews: 0,
+    });
+    setImageFile(null);
+    setImageError("");
   };
 
   return (
@@ -183,17 +233,17 @@ export default function AdminDashboardPage() {
           {/* Add Product Form */}
           <div className="xl:col-span-1">
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-              <h2 className="text-lg font-bold text-gray-900 mb-6 flex items-center gap-2">
-                <Plus size={20} className="text-crimson" />
-                Add New Product
-              </h2>
-
-              {successMsg && (
-                <div className="mb-6 p-4 rounded-xl bg-green-50 border border-green-100 text-green-700 text-sm font-medium flex items-center gap-2">
-                  <CheckCircle size={18} weight="fill" />
-                  {successMsg}
-                </div>
-              )}
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+                  {editingId ? <PencilSimple size={20} className="text-blue-600" /> : <Plus size={20} className="text-crimson" />}
+                  {editingId ? "Edit Product" : "Add New Product"}
+                </h2>
+                {editingId && (
+                  <button type="button" onClick={cancelEdit} className="text-xs font-bold text-gray-500 hover:text-gray-800 bg-gray-100 px-3 py-1.5 rounded-md transition-colors">
+                    Cancel
+                  </button>
+                )}
+              </div>
 
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -262,6 +312,8 @@ export default function AdminDashboardPage() {
                 >
                   {isAdding ? (
                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  ) : editingId ? (
+                    <>Save Changes</>
                   ) : (
                     <>Add Product to DB</>
                   )}
@@ -272,8 +324,7 @@ export default function AdminDashboardPage() {
             <div className="mt-6 bg-blue-50 border border-blue-100 rounded-2xl p-5 flex gap-3 text-blue-800">
               <Info size={24} className="shrink-0 text-blue-600" />
               <p className="text-xs leading-relaxed font-medium">
-                <strong>Backend Ready:</strong> This interface is prepared for the PythonAnywhere endpoints. 
-                Currently running in mock-mode. Real DB integration will replace the `fetch()` placeholders in the codebase.
+                <strong>Backend Ready:</strong> This interface makes live API requests to your PythonAnywhere database endpoints (GET, POST, PATCH, DELETE).
               </p>
             </div>
           </div>
@@ -330,8 +381,11 @@ export default function AdminDashboardPage() {
                               <p className="text-sm font-bold text-gray-900">${product.price}</p>
                               <p className="text-xs text-gray-500">{product.priceFc}</p>
                             </td>
-                            <td className="p-4">
-                              <button className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors" title="Delete Product (Mock)">
+                            <td className="p-4 flex items-center gap-2">
+                              <button onClick={() => handleEdit(product)} className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors" title="Edit Product">
+                                <PencilSimple size={18} weight="fill" />
+                              </button>
+                              <button onClick={() => handleDelete(product.id)} className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors" title="Delete Product">
                                 <Trash size={18} weight="fill" />
                               </button>
                             </td>

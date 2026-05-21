@@ -2,11 +2,15 @@
 
 import { motion } from "framer-motion";
 import { WhatsappLogo } from "@phosphor-icons/react";
+import { useConfig } from "@/context/ConfigContext";
 
 export default function WhatsAppButton() {
+  const { config } = useConfig();
+  const waNumber = (config?.whatsappNumber || "243990301518").replace(/[^0-9]/g, "");
+
   return (
     <motion.a
-      href="https://wa.me/243990301518"
+      href={`https://wa.me/${waNumber}`}
       target="_blank"
       rel="noopener noreferrer"
       initial={{ scale: 0, opacity: 0 }}

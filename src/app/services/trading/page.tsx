@@ -11,6 +11,7 @@ import {
 } from "@phosphor-icons/react";
 import Navbar from "@/components/Navbar";
 import { useLanguage } from "@/context/LanguageContext";
+import { API_BASE_URL, getImageUrl } from "@/lib/api";
 
 /* ── Cart Item Type ── */
 interface CartItem {
@@ -222,19 +223,26 @@ export default function TradingStorePage() {
   const [productsData, setProductsData] = useState<any[]>(MOCK_DB_INITIAL_DATA);
   const [isLoadingProducts, setIsLoadingProducts] = useState(true);
 
-  // MOCK API FETCH - Placeholder for PythonAnywhere Backend
   useEffect(() => {
     const fetchBackendProducts = async () => {
-      // TODO: Replace with actual Django API URL
-      // const res = await fetch("https://your-pythonanywhere-app.com/api/products/");
-      // const data = await res.json();
-      // setProductsData(data);
-      
-      // Simulating backend network delay for now
-      setTimeout(() => {
+      try {
+        const res = await fetch(`${API_BASE_URL}/products/`);
+        if (res.ok) {
+          const data = await res.json();
+          const formattedData = data.map((item: any) => ({
+            ...item,
+            image: getImageUrl(item.image)
+          }));
+          setProductsData(formattedData.length > 0 ? formattedData : MOCK_DB_INITIAL_DATA);
+        } else {
+          setProductsData(MOCK_DB_INITIAL_DATA);
+        }
+      } catch (err) {
+        console.error("Network error fetching products", err);
         setProductsData(MOCK_DB_INITIAL_DATA);
+      } finally {
         setIsLoadingProducts(false);
-      }, 500);
+      }
     };
     fetchBackendProducts();
   }, []);

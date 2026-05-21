@@ -1,6 +1,7 @@
 "use client";
 
 import { useLanguage } from "@/context/LanguageContext";
+import { useConfig } from "@/context/ConfigContext";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -10,6 +11,7 @@ import {
 
 export default function Footer() {
   const { t } = useLanguage();
+  const { config } = useConfig();
 
   const about = t?.nav?.about || "About";
   const services = t?.nav?.services || "Services";
@@ -39,30 +41,14 @@ export default function Footer() {
               <p className="text-xs text-crimson/90 uppercase tracking-widest font-bold mb-3">
                 CEO &middot; Founder
               </p>
-              <p className="text-xs text-white/80 leading-relaxed mb-4 font-medium">
-                DIGITAL INTEGRATED SERVICES RDC<br />
-                <span className="text-[10px] text-white/50 block mt-0.5">Subsidiary of COFRANCE INTEGRATED CONCEPTS (NIG) Ltd</span>
+              <p className="text-white/70 text-body-sm max-w-sm mt-6">
+                {config?.companyName || "DIGITAL INTEGRATED SERVICES RDC"}
               </p>
-              <p className="text-xs text-white/70 leading-relaxed mb-6 font-light">
-                Beauty, cosmetic & personal care &middot; Trading, Logistics and Consulting Services.
-              </p>
-              <div className="flex gap-3">
-                <a
-                  href="https://www.linkedin.com/in/okey-francis-chibueze-3b803063"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center text-white/90 hover:text-crimson hover:bg-white/20 transition-all duration-300"
-                  aria-label="LinkedIn Profile"
-                >
+              <div className="flex items-center gap-4 mt-8">
+                <a href={config?.linkedinUrl || "#"} className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:text-white hover:bg-crimson transition-all" aria-label="LinkedIn">
                   <LinkedinLogo size={20} weight="fill" />
                 </a>
-                <a
-                  href="https://www.facebook.com/DigitalRationalServicesLtd/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center text-white/90 hover:text-crimson hover:bg-white/20 transition-all duration-300"
-                  aria-label="Facebook Page"
-                >
+                <a href={config?.facebookUrl || "#"} className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:text-white hover:bg-crimson transition-all" aria-label="Facebook">
                   <FacebookLogo size={20} weight="fill" />
                 </a>
               </div>
@@ -72,11 +58,10 @@ export default function Footer() {
             <div>
               <h4 className="text-xs uppercase tracking-[0.2em] text-crimson/90 mb-6 font-bold">Company</h4>
               <ul className="space-y-3">
-                {[about, services, industries, "Careers"].map((label, i) => (
-                  <li key={i}>
-                    <a href="#" className="text-body-sm text-white/90 hover:text-white font-medium transition-colors duration-300">{label}</a>
-                  </li>
-                ))}
+                <li><Link href="/about" className="text-body-sm text-white/90 hover:text-white font-medium transition-colors duration-300">{about}</Link></li>
+                <li><Link href="/#services" className="text-body-sm text-white/90 hover:text-white font-medium transition-colors duration-300">{services}</Link></li>
+                <li><Link href="/#industries" className="text-body-sm text-white/90 hover:text-white font-medium transition-colors duration-300">{industries}</Link></li>
+                <li><Link href="/careers" className="text-body-sm text-white/90 hover:text-white font-medium transition-colors duration-300">Careers</Link></li>
               </ul>
             </div>
 
@@ -84,11 +69,11 @@ export default function Footer() {
             <div>
               <h4 className="text-xs uppercase tracking-[0.2em] text-crimson/90 mb-6 font-bold">Services</h4>
               <ul className="space-y-3">
-                {["Logistics", "Consulting", "Procurement", "Trading", "Beauty & Cosmetics"].map((s) => (
-                  <li key={s}>
-                    <a href="#services" className="text-body-sm text-white/90 hover:text-white font-medium transition-colors duration-300">{s}</a>
-                  </li>
-                ))}
+                <li><Link href="/services/logistics" className="text-body-sm text-white/90 hover:text-white font-medium transition-colors duration-300">Logistics</Link></li>
+                <li><Link href="/services/consulting" className="text-body-sm text-white/90 hover:text-white font-medium transition-colors duration-300">Consulting</Link></li>
+                <li><Link href="/services/procurement" className="text-body-sm text-white/90 hover:text-white font-medium transition-colors duration-300">Procurement</Link></li>
+                <li><Link href="/services/trading" className="text-body-sm text-white/90 hover:text-white font-medium transition-colors duration-300">Trading</Link></li>
+                <li><Link href="/services/trading" className="text-body-sm text-white/90 hover:text-white font-medium transition-colors duration-300">Beauty & Cosmetics</Link></li>
               </ul>
             </div>
 
@@ -96,22 +81,30 @@ export default function Footer() {
             <div>
               <h4 className="text-xs uppercase tracking-[0.2em] text-crimson/90 mb-6 font-bold">Contact Info</h4>
               <ul className="space-y-4">
-                <li className="flex items-start gap-3 text-body-sm text-white/90 font-medium">
+                <li className="flex items-start gap-3 text-body-sm text-white/70">
                   <MapPin size={18} className="text-crimson mt-0.5 flex-shrink-0" />
-                  <span className="leading-relaxed">32, Av. Sendwe / Des Usines, C/Lubumbashi, Haut-Katanga, DR Congo</span>
+                  <span>
+                    <strong>DR Congo:</strong><br/>
+                    {config?.officeDrCongo || "32, Av. Sendwe / Des Usines, C/Lubumbashi, Haut-Katanga"}
+                  </span>
                 </li>
-                <li className="flex items-start gap-3 text-body-sm text-white/90 font-medium">
+                <li className="flex items-start gap-3 text-body-sm text-white/70">
                   <MapPin size={18} className="text-crimson mt-0.5 flex-shrink-0" />
-                  <span>Nigeria: 2 Olugbenga St, Amuwo Odofin, Lagos</span>
+                  <span>
+                    <strong>Nigeria:</strong><br/>
+                    {config?.officeNigeria || "2 Olugbenga St, Amuwo Odofin, Lagos"}
+                  </span>
                 </li>
-                <li className="flex items-start gap-3 text-body-sm text-white/90 font-medium">
+                <li className="flex items-start gap-3 text-body-sm text-white/70">
                   <EnvelopeSimple size={18} className="text-crimson mt-0.5 flex-shrink-0" />
-                  <a href="mailto:okeycongo@gmail.com" className="text-white/90 hover:underline">okeycongo@gmail.com</a>
+                  <a href={`mailto:${config?.emailAddress || "okeycongo@gmail.com"}`} className="hover:text-white transition-colors">
+                    {config?.emailAddress || "okeycongo@gmail.com"}
+                  </a>
                 </li>
                 <li className="flex items-start gap-3 text-body-sm text-white/90 font-medium">
                   <WhatsappLogo size={18} className="text-[#25D366] mt-0.5 flex-shrink-0" />
-                  <a href="https://wa.me/243990301518" target="_blank" rel="noopener noreferrer" className="text-white/90 hover:underline">
-                    +243 990 301 518
+                  <a href={`https://wa.me/${(config?.whatsappNumber || "243990301518").replace(/[^0-9]/g, "")}`} target="_blank" rel="noopener noreferrer" className="text-white/90 hover:underline">
+                    {config?.whatsappNumber || "+243 990 301 518"}
                   </a>
                 </li>
               </ul>
@@ -121,7 +114,7 @@ export default function Footer() {
           <div className="border-t border-white/10 pt-8 pb-12 md:pb-0 flex flex-col md:flex-row items-center justify-between gap-4 text-center">
             <p className="text-xs text-white/70 font-medium">{copyright}</p>
             <div className="flex flex-wrap justify-center gap-x-6 gap-y-3 items-center">
-              <span className="text-xs text-white/50">RC: 1492798 | ID.NAT.14-A-180</span>
+              <span className="text-xs text-white/50">{config?.rcNumber || "RC: 1492798 | ID.NAT.14-A-180"}</span>
               <Link href="/privacy" className="text-xs text-white/70 hover:text-white transition-colors font-medium">Privacy Policy</Link>
               <Link href="/admin" className="text-xs text-white/70 hover:text-crimson transition-colors font-bold">Admin</Link>
             </div>
