@@ -68,6 +68,11 @@ export default function AdminDashboardPage() {
         const data = await res.json();
         const formattedData = data.map((item: any) => ({
           ...item,
+          desc: item.description,
+          price: item.price_usd,
+          priceFc: item.price_fc,
+          rating: 5.0, // Mocked since backend doesn't support it
+          reviews: 0, // Mocked since backend doesn't support it
           image: getImageUrl(item.image)
         }));
         setProducts(formattedData);
@@ -132,13 +137,11 @@ export default function AdminDashboardPage() {
     try {
       const payload = new FormData();
       payload.append("name", formData.name);
-      payload.append("desc", formData.desc);
-      payload.append("price", String(formData.price));
-      payload.append("priceFc", formData.priceFc);
+      payload.append("description", formData.desc);
+      payload.append("price_usd", String(formData.price));
+      payload.append("price_fc", formData.priceFc);
       payload.append("category", formData.category);
       payload.append("tag", formData.tag);
-      payload.append("rating", String(formData.rating));
-      payload.append("reviews", String(formData.reviews));
       if (imageFile) payload.append("image", imageFile);
 
       const url = editingId 

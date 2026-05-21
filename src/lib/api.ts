@@ -11,7 +11,7 @@ export const getAuthHeaders = (): HeadersInit => {
   if (token) {
     return {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`
+      "Authorization": `Token ${token}`
     };
   }
   return { "Content-Type": "application/json" };
