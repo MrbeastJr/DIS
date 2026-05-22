@@ -229,8 +229,14 @@ export default function TradingStorePage() {
         const res = await fetch(`${API_BASE_URL}/products/`);
         if (res.ok) {
           const data = await res.json();
-          const formattedData = data.map((item: any) => ({
+          const productsArray = data.results || data;
+          const formattedData = productsArray.map((item: any) => ({
             ...item,
+            desc: item.description,
+            price: item.price_usd,
+            priceFc: item.price_fc,
+            rating: 5.0, // Mock fallback
+            reviews: 0,  // Mock fallback
             image: getImageUrl(item.image)
           }));
           setProductsData(formattedData.length > 0 ? formattedData : MOCK_DB_INITIAL_DATA);

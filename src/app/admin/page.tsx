@@ -2,11 +2,12 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { ShieldCheck, LockKey, User } from "@phosphor-icons/react";
+import { ShieldCheck, LockKey, EnvelopeSimple } from "@phosphor-icons/react";
 import { API_BASE_URL } from "@/lib/api";
+import { toast } from "react-hot-toast";
 
 export default function AdminLoginPage() {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -24,7 +25,7 @@ export default function AdminLoginPage() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          username,
+          username: email, // Django DRF requires this key to be "username" even if we pass an email
           password,
         }),
       });
@@ -32,14 +33,17 @@ export default function AdminLoginPage() {
       if (res.ok) {
         const data = await res.json();
         localStorage.setItem("dis_admin_token", data.token);
+        toast.success("Login successful!");
         router.push("/admin/dashboard");
       } else {
         setError("Invalid username or password.");
+        toast.error("Invalid username or password.");
         setLoading(false);
       }
     } catch (err) {
       console.error(err);
       setError("Network error. Please check your connection.");
+      toast.error("Network error. Please check your connection.");
       setLoading(false);
     }
   };
@@ -74,15 +78,15 @@ export default function AdminLoginPage() {
 
             <div className="space-y-1.5">
               <label className="text-xs font-bold text-white/70 uppercase tracking-wider ml-1">
-                Username
+                Email Address
               </label>
               <div className="relative">
-                <User size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40" />
+                <EnvelopeSimple size={20} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40" />
                 <input
-                  type="text"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  placeholder="admin"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="admin@dis.com"
                   className="w-full bg-black/20 border border-white/10 rounded-xl py-3.5 pl-12 pr-4 text-white placeholder-white/20 focus:outline-none focus:border-crimson/50 focus:ring-1 focus:ring-crimson/50 transition-all"
                   required
                 />

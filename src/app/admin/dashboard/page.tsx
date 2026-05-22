@@ -36,7 +36,7 @@ export default function AdminDashboardPage() {
     desc: "",
     price: 0,
     priceFc: "",
-    category: "Skincare",
+    category: "cosmetics",
     tag: "",
     rating: 5.0,
     reviews: 0,
@@ -66,7 +66,8 @@ export default function AdminDashboardPage() {
       const res = await fetch(`${API_BASE_URL}/products/`);
       if (res.ok) {
         const data = await res.json();
-        const formattedData = data.map((item: any) => ({
+        const productsArray = data.results || data;
+        const formattedData = productsArray.map((item: any) => ({
           ...item,
           desc: item.description,
           price: item.price_usd,
@@ -79,6 +80,7 @@ export default function AdminDashboardPage() {
       }
     } catch (err) {
       console.error("Failed to fetch dashboard products", err);
+      toast.error("Failed to fetch products from the database.");
     } finally {
       setLoading(false);
     }
@@ -166,7 +168,7 @@ export default function AdminDashboardPage() {
         setEditingId(null);
         setFormData({
           name: "", desc: "", price: 0, priceFc: "",
-          category: "Skincare", tag: "", rating: 5.0, reviews: 0,
+          category: "cosmetics", tag: "", rating: 5.0, reviews: 0
         });
         setImageFile(null);
         setImageError("");
@@ -275,10 +277,15 @@ export default function AdminDashboardPage() {
                   <div>
                     <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Category</label>
                     <select value={formData.category} onChange={(e) => setFormData({...formData, category: e.target.value})} className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-crimson focus:ring-1 focus:ring-crimson transition-all">
-                      <option>Skincare</option>
-                      <option>Body Care</option>
-                      <option>Hair Care</option>
-                      <option>Fragrance</option>
+                      <option value="cosmetics">Cosmetics & Personal Care</option>
+                      <option value="electronics">Consumer Electronics & Gadgets</option>
+                      <option value="appliances">Home & Kitchen Appliances</option>
+                      <option value="accessories">Fashion & Accessories</option>
+                      <option value="automobiles">Automobiles & Vehicles</option>
+                      <option value="industrial">Industrial Machinery & Equipment</option>
+                      <option value="agriculture">Agriculture & Food Products</option>
+                      <option value="construction">Building & Construction Materials</option>
+                      <option value="general">General Merchandise</option>
                     </select>
                   </div>
                   <div>
