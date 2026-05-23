@@ -193,9 +193,9 @@ export default function AchievementsPage() {
                 <p className="text-xl font-medium text-espresso mb-8 pb-8 border-b border-espresso/10">
                   {selectedPaper.content}
                 </p>
-                <p>
+                <div className="whitespace-pre-wrap text-base">
                   {selectedPaper.fullText}
-                </p>
+                </div>
               </div>
 
               <div className="mt-12 pt-8 border-t border-espresso/10 flex justify-end">
