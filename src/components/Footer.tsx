@@ -62,6 +62,7 @@ export default function Footer() {
                 <li><Link href="/achievements" className="text-body-sm text-white/90 hover:text-white font-medium transition-colors duration-300">{t.nav.achievements || "Achievements"}</Link></li>
                 <li><Link href="/#services" className="text-body-sm text-white/90 hover:text-white font-medium transition-colors duration-300">{services}</Link></li>
                 <li><Link href="/#industries" className="text-body-sm text-white/90 hover:text-white font-medium transition-colors duration-300">{industries}</Link></li>
+                <li><Link href="/careers" className="text-body-sm text-white/90 hover:text-white font-medium transition-colors duration-300">Careers</Link></li>
               </ul>
             </div>
 

@@ -3,13 +3,15 @@
 import { useLanguage } from "@/context/LanguageContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { motion } from "framer-motion";
-import { Lightbulb, Trophy, CheckCircle, ArrowRight, CaretRight } from "@phosphor-icons/react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Lightbulb, Trophy, CheckCircle, ArrowRight, CaretRight, X } from "@phosphor-icons/react";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function AchievementsPage() {
   const { t } = useLanguage();
   const ts = t.achievementsPage;
+  const [selectedPaper, setSelectedPaper] = useState<any>(null);
 
   return (
     <main className="bg-white min-h-screen text-espresso w-full overflow-hidden">
@@ -67,7 +69,8 @@ export default function AchievementsPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="bg-white p-8 rounded-3xl border border-espresso/5 shadow-sm hover:shadow-lg transition-all duration-300 group"
+                onClick={() => insight.fullText && setSelectedPaper(insight)}
+                className={`bg-white p-8 rounded-3xl border border-espresso/5 shadow-sm transition-all duration-300 group ${insight.fullText ? 'cursor-pointer hover:shadow-lg hover:border-crimson/20' : ''}`}
               >
                 <div className="w-12 h-12 bg-crimson/5 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                   <Lightbulb size={24} className="text-crimson" weight="fill" />
@@ -75,9 +78,14 @@ export default function AchievementsPage() {
                 <h3 className="text-xl font-bold text-espresso mb-4 leading-snug">
                   {insight.title}
                 </h3>
-                <p className="text-walnut/80 leading-relaxed">
+                <p className="text-walnut/80 leading-relaxed mb-6">
                   {insight.content}
                 </p>
+                {insight.fullText && (
+                  <button className="text-crimson font-bold text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
+                    {ts.readPaper || "Read Paper"} <ArrowRight weight="bold" />
+                  </button>
+                )}
               </motion.div>
             ))}
           </div>
@@ -147,6 +155,61 @@ export default function AchievementsPage() {
       </section>
 
       <Footer />
+
+      {/* ── Research Paper Modal ── */}
+      <AnimatePresence>
+        {selectedPaper && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-espresso/80 backdrop-blur-sm"
+            onClick={() => setSelectedPaper(null)}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-white rounded-3xl p-8 md:p-12 max-w-3xl w-full max-h-[90vh] overflow-y-auto relative shadow-2xl"
+            >
+              <button 
+                onClick={() => setSelectedPaper(null)}
+                className="absolute top-6 right-6 w-10 h-10 bg-cream rounded-full flex items-center justify-center text-espresso hover:bg-crimson hover:text-white transition-colors"
+              >
+                <X size={20} weight="bold" />
+              </button>
+              
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-crimson/10 mb-6">
+                <Lightbulb size={14} weight="fill" className="text-crimson" />
+                <span className="text-crimson text-xs font-bold tracking-widest uppercase">Research Paper</span>
+              </div>
+
+              <h2 className="text-3xl md:text-4xl font-black text-espresso mb-6 leading-tight">
+                {selectedPaper.title}
+              </h2>
+
+              <div className="prose prose-lg prose-p:text-walnut/80 prose-p:leading-relaxed max-w-none">
+                <p className="text-xl font-medium text-espresso mb-8 pb-8 border-b border-espresso/10">
+                  {selectedPaper.content}
+                </p>
+                <p>
+                  {selectedPaper.fullText}
+                </p>
+              </div>
+
+              <div className="mt-12 pt-8 border-t border-espresso/10 flex justify-end">
+                <button 
+                  onClick={() => setSelectedPaper(null)}
+                  className="px-6 py-3 bg-espresso text-white rounded-xl font-bold hover:bg-crimson transition-colors"
+                >
+                  {ts.closePaper || "Close"}
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </main>
   );
 }

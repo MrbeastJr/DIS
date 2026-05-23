@@ -160,9 +160,11 @@ export interface Translations {
     heroSub: string;
     researchTitle: string;
     researchDesc: string;
-    insights: { title: string; content: string }[];
+    insights: { title: string; content: string; fullText: string }[];
     milestonesTitle: string;
     milestones: { year: string; role: string; details: string }[];
+    readPaper: string;
+    closePaper: string;
   };
 }
 
@@ -560,16 +562,19 @@ const translations: Record<Locale, Translations> = {
       researchTitle: "Applied Research & Strategic Insights",
       researchDesc: "Practical frameworks developed by CEO Okey Francis CHIBUEZE to address systemic inefficiencies in regional trade.",
       insights: [
-        { title: "Cross-Border Customs Harmonization", content: "Proposed comprehensive digital clearance protocols to reduce transit delays across the DRC-Zambia border, improving cargo velocity by an estimated 24%." },
-        { title: "Multimodal Transport Integration", content: "Researched the efficacy of combining rail and road freight networks to lower procurement logistics costs for industrial sectors in Haut-Katanga." },
-        { title: "Supply Chain Resilience in Emerging Markets", content: "Developed adaptive procurement models that mitigate disruptions caused by currency volatility and geopolitical shifts in West Africa." }
+        { title: "Cross-Border Customs Harmonization", content: "Proposed comprehensive digital clearance protocols to reduce transit delays across the DRC-Zambia border, improving cargo velocity by an estimated 24%.", fullText: "This research paper outlines a 5-step framework for digitizing cross-border customs protocols between the DRC and Zambia. The study demonstrates that replacing manual ledger systems with API-driven manifest sharing can reduce average border wait times from 48 hours to under 12 hours. The paper details the structural requirements for implementation, including stakeholder alignment, necessary hardware infrastructure at border posts, and the projected economic impact on regional trade volumes." },
+        { title: "Multimodal Transport Integration", content: "Researched the efficacy of combining rail and road freight networks to lower procurement logistics costs for industrial sectors in Haut-Katanga.", fullText: "This white paper analyzes the cost-benefit ratio of multimodal transport networks in Haut-Katanga. By shifting 40% of heavy industrial procurement from exclusive road transport to a hybrid rail-road model, enterprises can achieve a 15% reduction in landed costs. The research provides a comprehensive analysis of current rail capacities, required investments in transfer nodes, and a risk mitigation strategy for infrastructure deficits." },
+        { title: "Supply Chain Resilience in Emerging Markets", content: "Developed adaptive procurement models that mitigate disruptions caused by currency volatility and geopolitical shifts in West Africa.", fullText: "A detailed academic analysis on building resilient supply chains in volatile emerging markets. The paper introduces an adaptive procurement model that utilizes decentralized warehousing, multi-currency hedging strategies, and dynamic supplier diversification. Case studies from recent West African market fluctuations highlight how this model prevents stockouts and maintains margin stability during economic shocks." }
       ],
       milestonesTitle: "Professional Milestones",
       milestones: [
         { year: "2024", role: "Founder & CEO, DIS Group", details: "Established a comprehensive logistics and trading network bridging Dubai, Lagos, and Lubumbashi." },
         { year: "2022", role: "Lead Consultant, Cross-Border Trade", details: "Advised multinational mining corporations on localized procurement compliance and secure freight corridors." },
-        { year: "2019", role: "Senior Logistics Director", details: "Spearheaded a regional supply chain overhaul for a major FMCG distributor, increasing regional distribution efficiency." }
-      ]
+        { year: "2019", role: "Senior Logistics Director", details: "Spearheaded a regional supply chain overhaul for a major FMCG distributor, increasing regional distribution efficiency." },
+        { year: "2013", role: "Founder, Logistics Conference", details: "Established a premier regional conference to discuss structural solutions for emerging market supply chains." }
+      ],
+      readPaper: "Read Research Paper",
+      closePaper: "Close Paper"
     }
   },
   fr: {
@@ -965,16 +970,19 @@ const translations: Record<Locale, Translations> = {
       researchTitle: "Recherche Appliquée et Perspectives Stratégiques",
       researchDesc: "Cadres pratiques développés par le PDG Okey Francis CHIBUEZE pour résoudre les inefficacités systémiques du commerce régional.",
       insights: [
-        { title: "Harmonisation Douanière Transfrontalière", content: "Proposition de protocoles de dédouanement numérique pour réduire les délais de transit, améliorant la vélocité du fret." },
-        { title: "Intégration du Transport Multimodal", content: "Recherche sur l'efficacité de la combinaison des réseaux de fret ferroviaire et routier pour réduire les coûts logísticos." },
-        { title: "Résilience de la Chaîne d'Approvisionnement", content: "Développement de modèles d'approvisionnement adaptatifs atténuant les perturbations causées par la volatilité des devises." }
+        { title: "Harmonisation Douanière Transfrontalière", content: "Proposition de protocoles de dédouanement numérique pour réduire les délais de transit, améliorant la vélocité du fret.", fullText: "Ce document de recherche décrit un cadre en 5 étapes pour la numérisation des protocoles douaniers transfrontaliers entre la RDC et la Zambie. L'étude démontre que le remplacement des systèmes de grand livre manuels par le partage de manifestes piloté par API peut réduire les temps d'attente moyens aux frontières de 48 heures à moins de 12 heures. Le document détaille les exigences structurelles pour la mise en œuvre, y compris l'alignement des parties prenantes, l'infrastructure matérielle nécessaire aux postes frontières et l'impact économique projeté sur les volumes de commerce régional." },
+        { title: "Intégration du Transport Multimodal", content: "Recherche sur l'efficacité de la combinaison des réseaux de fret ferroviaire et routier pour réduire les coûts logistiques.", fullText: "Ce livre blanc analyse le ratio coût-bénéfice des réseaux de transport multimodal dans le Haut-Katanga. En déplaçant 40% des achats industriels lourds du transport routier exclusif vers un modèle hybride rail-route, les entreprises peuvent obtenir une réduction de 15% des coûts de débarquement. La recherche fournit une analyse complète des capacités ferroviaires actuelles, des investissements requis dans les nœuds de transfert et d'une stratégie d'atténuation des risques pour les déficits d'infrastructure." },
+        { title: "Résilience de la Chaîne d'Approvisionnement", content: "Développement de modèles d'approvisionnement adaptatifs atténuant les perturbations causées par la volatilité des devises.", fullText: "Une analyse académique détaillée sur la construction de chaînes d'approvisionnement résilientes dans les marchés émergents volatils. Le document introduit un modèle d'approvisionnement adaptatif qui utilise un entreposage décentralisé, des stratégies de couverture multi-devises et une diversification dynamique des fournisseurs. Des études de cas sur les récentes fluctuations du marché ouest-africain soulignent comment ce modèle prévient les ruptures de stock et maintient la stabilité des marges pendant les chocs économiques." }
       ],
       milestonesTitle: "Jalons Professionnels",
       milestones: [
         { year: "2024", role: "Fondateur & PDG, DIS Group", details: "Établissement d'un réseau logistique et commercial complet reliant Dubaï, Lagos et Lubumbashi." },
         { year: "2022", role: "Consultant Principal, Commerce Transfrontalier", details: "Conseil aux multinationales minières sur la conformité des achats localisés." },
-        { year: "2019", role: "Directeur Logistique Principal", details: "Direction d'une refonte de la chaîne d'approvisionnement régionale pour un distributeur majeur." }
-      ]
+        { year: "2019", role: "Directeur Logistique Principal", details: "Direction d'une refonte de la chaîne d'approvisionnement régionale pour un distributeur majeur." },
+        { year: "2013", role: "Fondateur, Conférence sur la Logistique", details: "Création d'une conférence régionale de premier plan pour discuter des solutions structurelles pour les chaînes d'approvisionnement des marchés émergents." }
+      ],
+      readPaper: "Lire le document de recherche",
+      closePaper: "Fermer le document"
     }
   },
   es: {
@@ -1370,16 +1378,19 @@ const translations: Record<Locale, Translations> = {
       researchTitle: "Investigación Aplicada y Perspectivas Estratégicas",
       researchDesc: "Marcos prácticos desarrollados por el CEO Okey Francis CHIBUEZE para abordar las ineficiencias sistémicas en el comercio regional.",
       insights: [
-        { title: "Armonización Aduanera Transfronteriza", content: "Propuesta de protocolos de despacho digital para reducir los retrasos en tránsito, mejorando la velocidad de la carga." },
-        { title: "Integración de Transporte Multimodal", content: "Investigación sobre la eficacia de combinar redes de carga ferroviaria y por carretera para reducir costos logísticos." },
-        { title: "Resiliencia de la Cadena de Suministro", content: "Desarrollo de modelos de adquisición adaptativos que mitigan las interrupciones causadas por la volatilidad cambiaria." }
+        { title: "Armonización Aduanera Transfronteriza", content: "Propuesta de protocolos de despacho digital para reducir los retrasos en tránsito, mejorando la velocidad de la carga.", fullText: "Este trabajo de investigación describe un marco de 5 pasos para la digitalización de los protocolos aduaneros transfronterizos entre la RDC y Zambia. El estudio demuestra que la sustitución de los sistemas de contabilidad manuales por el intercambio de manifiestos impulsado por API puede reducir los tiempos de espera promedio en la frontera de 48 horas a menos de 12 horas. El documento detalla los requisitos estructurales para la implementación, incluida la alineación de las partes interesadas, la infraestructura de hardware necesaria en los puestos fronterizos y el impacto económico proyectado en los volúmenes de comercio regional." },
+        { title: "Integración de Transporte Multimodal", content: "Investigación sobre la eficacia de combinar redes de carga ferroviaria y por carretera para reducir costos logísticos.", fullText: "Este libro blanco analiza la relación costo-beneficio de las redes de transporte multimodal en Haut-Katanga. Al trasladar el 40% de las adquisiciones industriales pesadas del transporte por carretera exclusivo a un modelo híbrido tren-carretera, las empresas pueden lograr una reducción del 15% en los costos de aterrizaje. La investigación proporciona un análisis integral de las capacidades ferroviarias actuales, las inversiones requeridas en los nodos de transferencia y una estrategia de mitigación de riesgos para los déficits de infraestructura." },
+        { title: "Resiliencia de la Cadena de Suministro", content: "Desarrollo de modelos de adquisición adaptativos que mitigan las interrupciones causadas por la volatilidad cambiaria.", fullText: "Un análisis académico detallado sobre la construcción de cadenas de suministro resilientes en mercados emergentes volátiles. El documento presenta un modelo de adquisición adaptativo que utiliza almacenamiento descentralizado, estrategias de cobertura multidivisa y diversificación dinámica de proveedores. Los estudios de caso de las recientes fluctuaciones del mercado de África occidental destacan cómo este modelo previene el desabastecimiento y mantiene la estabilidad de los márgenes durante las crisis económicas." }
       ],
       milestonesTitle: "Hitos Profesionales",
       milestones: [
         { year: "2024", role: "Fundador y CEO, DIS Group", details: "Establecimiento de una red integral de logística y comercio que une Dubái, Lagos y Lubumbashi." },
         { year: "2022", role: "Consultor Principal, Comercio Transfronterizo", details: "Asesoramiento a corporaciones mineras multinacionales sobre cumplimiento de adquisiciones localizadas." },
-        { year: "2019", role: "Director de Logística", details: "Lideró una revisión de la cadena de suministro regional para un importante distribuidor." }
-      ]
+        { year: "2019", role: "Director de Logística", details: "Lideró una revisión de la cadena de suministro regional para un importante distribuidor." },
+        { year: "2013", role: "Fundador, Conferencia de Logística", details: "Establecimiento de una conferencia regional de primer nivel para discutir soluciones estructurales para las cadenas de suministro de los mercados emergentes." }
+      ],
+      readPaper: "Leer documento de investigación",
+      closePaper: "Cerrar documento"
     }
   }
 };
