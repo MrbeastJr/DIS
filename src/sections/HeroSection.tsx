@@ -4,6 +4,7 @@ import { useEffect, useRef, useMemo } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, ArrowDown, Play } from "@phosphor-icons/react";
 import { useLanguage } from "@/context/LanguageContext";
+import Image from "next/image";
 
 export default function HeroSection() {
   const { t } = useLanguage();
@@ -48,16 +49,13 @@ export default function HeroSection() {
     >
       {/* ── Video Background ── */}
       <div className="absolute inset-0 z-0">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          poster="/assets/hero-poster.jpg"
-          className="w-full h-full object-cover"
-        >
-          <source src="/assets/hero-video.mp4" type="video/mp4" />
-        </video>
+        <Image
+          src="/assets/hero-poster.jpg"
+          alt="DIS Global Logistics"
+          fill
+          priority
+          className="object-cover"
+        />
         {/* Dark overlay for text readability */}
         <div className="absolute inset-0 bg-espresso/70" />
         {/* Bottom gradient blend into white */}

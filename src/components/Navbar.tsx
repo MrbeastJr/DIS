@@ -12,7 +12,7 @@ const localeLabels: Record<Locale, string> = { en: "EN", fr: "FR", es: "ES" };
 
 const mobileNavItems = [
   { icon: House, href: "/", key: "home", isPage: true },
-  { icon: ShoppingCart, href: "/trading", key: "trading", isPage: true },
+  { icon: ShoppingCart, href: "/services/trading", key: "trading", isPage: true },
   { icon: Package, href: "/services/logistics", key: "logistics", isPage: true },
   { icon: User, href: "/about", key: "about", isPage: true },
   { icon: ChatCircle, href: "/#contact", key: "contact", isPage: false },
