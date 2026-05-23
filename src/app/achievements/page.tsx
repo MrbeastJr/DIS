@@ -4,8 +4,9 @@ import { useLanguage } from "@/context/LanguageContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { motion, AnimatePresence } from "framer-motion";
-import { Lightbulb, Trophy, CheckCircle, ArrowRight, CaretRight, X } from "@phosphor-icons/react";
+import { Lightbulb, Trophy, CheckCircle, ArrowRight, X } from "@phosphor-icons/react";
 import Link from "next/link";
+import ReactMarkdown from "react-markdown";
 import { useState } from "react";
 
 export default function AchievementsPage() {
@@ -193,8 +194,8 @@ export default function AchievementsPage() {
                 <p className="text-xl font-medium text-espresso mb-8 pb-8 border-b border-espresso/10">
                   {selectedPaper.content}
                 </p>
-                <div className="whitespace-pre-wrap text-base">
-                  {selectedPaper.fullText}
+                <div className="text-base text-walnut/90 leading-relaxed space-y-4 [&>p>strong]:text-espresso [&>p>strong]:font-bold">
+                  <ReactMarkdown>{selectedPaper.fullText}</ReactMarkdown>
                 </div>
               </div>
 
