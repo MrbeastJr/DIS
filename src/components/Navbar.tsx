@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { GlobeSimple, House, ShoppingCart, Package, User, ChatCircle } from "@phosphor-icons/react";
+import { GlobeSimple, House, ShoppingCart, Package, User, ChatCircle, Trophy } from "@phosphor-icons/react";
 import { useLanguage } from "@/context/LanguageContext";
 import type { Locale } from "@/lib/translations";
 import Image from "next/image";
@@ -15,7 +15,7 @@ const mobileNavItems = [
   { icon: ShoppingCart, href: "/services/trading", key: "trading", isPage: true },
   { icon: Package, href: "/services/logistics", key: "logistics", isPage: true },
   { icon: User, href: "/about", key: "about", isPage: true },
-  { icon: ChatCircle, href: "/#contact", key: "contact", isPage: false },
+  { icon: Trophy, href: "/achievements", key: "achievements", isPage: true },
 ];
 
 export default function Navbar() {
@@ -47,6 +47,7 @@ export default function Navbar() {
     { label: t.nav.services, href: "/#services", isPage: false },
     { label: t.nav.industries, href: "/#industries", isPage: false },
     { label: t.nav.about, href: "/about", isPage: true },
+    { label: t.nav.achievements || "Achievements", href: "/achievements", isPage: true },
     { label: t.nav.contact, href: "/#contact", isPage: false },
   ];
 

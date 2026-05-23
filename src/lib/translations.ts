@@ -17,6 +17,7 @@ export interface Translations {
     contact: string;
     trading?: string;
     logistics?: string;
+    achievements?: string;
   };
   hero: {
     headline: string;
@@ -154,6 +155,15 @@ export interface Translations {
     ctaSub: string;
     ctaButton: string;
   };
+  achievementsPage: {
+    heroTitle: string;
+    heroSub: string;
+    researchTitle: string;
+    researchDesc: string;
+    insights: { title: string; content: string }[];
+    milestonesTitle: string;
+    milestones: { year: string; role: string; details: string }[];
+  };
 }
 
 const translations: Record<Locale, Translations> = {
@@ -166,6 +176,7 @@ const translations: Record<Locale, Translations> = {
       contact: "Contact",
       trading: "Trading",
       logistics: "Logistics",
+      achievements: "Achievements",
     },
     hero: {
       headline: "Modern Logistics &\nStrategic Consulting for\nAfrican Commerce",
@@ -543,6 +554,23 @@ const translations: Record<Locale, Translations> = {
       ctaSub: "Connect directly with CEO Okey Francis CHIBUEZE to discuss your business needs.",
       ctaButton: "Chat on WhatsApp",
     },
+    achievementsPage: {
+      heroTitle: "African Logistics Insights & Milestones",
+      heroSub: "Exploring strategic frameworks and structural solutions for cross-border supply chain optimization in Sub-Saharan Africa.",
+      researchTitle: "Applied Research & Strategic Insights",
+      researchDesc: "Practical frameworks developed by CEO Okey Francis CHIBUEZE to address systemic inefficiencies in regional trade.",
+      insights: [
+        { title: "Cross-Border Customs Harmonization", content: "Proposed comprehensive digital clearance protocols to reduce transit delays across the DRC-Zambia border, improving cargo velocity by an estimated 24%." },
+        { title: "Multimodal Transport Integration", content: "Researched the efficacy of combining rail and road freight networks to lower procurement logistics costs for industrial sectors in Haut-Katanga." },
+        { title: "Supply Chain Resilience in Emerging Markets", content: "Developed adaptive procurement models that mitigate disruptions caused by currency volatility and geopolitical shifts in West Africa." }
+      ],
+      milestonesTitle: "Professional Milestones",
+      milestones: [
+        { year: "2024", role: "Founder & CEO, DIS Group", details: "Established a comprehensive logistics and trading network bridging Dubai, Lagos, and Lubumbashi." },
+        { year: "2022", role: "Lead Consultant, Cross-Border Trade", details: "Advised multinational mining corporations on localized procurement compliance and secure freight corridors." },
+        { year: "2019", role: "Senior Logistics Director", details: "Spearheaded a regional supply chain overhaul for a major FMCG distributor, increasing regional distribution efficiency." }
+      ]
+    }
   },
   fr: {
     nav: {
@@ -553,6 +581,7 @@ const translations: Record<Locale, Translations> = {
       contact: "Contact",
       trading: "Négoce",
       logistics: "Logistique",
+      achievements: "Réalisations",
     },
     hero: {
       headline: "Logistique Moderne &\nConseil Stratégique pour\nle Commerce Africain",
@@ -930,6 +959,23 @@ const translations: Record<Locale, Translations> = {
       ctaSub: "Connectez-vous directement avec le PDG Okey Francis CHIBUEZE pour discuter de vos besoins.",
       ctaButton: "Discuter sur WhatsApp",
     },
+    achievementsPage: {
+      heroTitle: "Perspectives et Jalons de la Logistique Africaine",
+      heroSub: "Exploration de cadres stratégiques et de solutions structurelles pour l'optimisation de la chaîne d'approvisionnement transfrontalière en Afrique subsaharienne.",
+      researchTitle: "Recherche Appliquée et Perspectives Stratégiques",
+      researchDesc: "Cadres pratiques développés par le PDG Okey Francis CHIBUEZE pour résoudre les inefficacités systémiques du commerce régional.",
+      insights: [
+        { title: "Harmonisation Douanière Transfrontalière", content: "Proposition de protocoles de dédouanement numérique pour réduire les délais de transit, améliorant la vélocité du fret." },
+        { title: "Intégration du Transport Multimodal", content: "Recherche sur l'efficacité de la combinaison des réseaux de fret ferroviaire et routier pour réduire les coûts logísticos." },
+        { title: "Résilience de la Chaîne d'Approvisionnement", content: "Développement de modèles d'approvisionnement adaptatifs atténuant les perturbations causées par la volatilité des devises." }
+      ],
+      milestonesTitle: "Jalons Professionnels",
+      milestones: [
+        { year: "2024", role: "Fondateur & PDG, DIS Group", details: "Établissement d'un réseau logistique et commercial complet reliant Dubaï, Lagos et Lubumbashi." },
+        { year: "2022", role: "Consultant Principal, Commerce Transfrontalier", details: "Conseil aux multinationales minières sur la conformité des achats localisés." },
+        { year: "2019", role: "Directeur Logistique Principal", details: "Direction d'une refonte de la chaîne d'approvisionnement régionale pour un distributeur majeur." }
+      ]
+    }
   },
   es: {
     nav: {
@@ -940,6 +986,7 @@ const translations: Record<Locale, Translations> = {
       contact: "Contacto",
       trading: "Comercio",
       logistics: "Logística",
+      achievements: "Logros",
     },
     hero: {
       headline: "Logística Moderna y\nConsultoría Estratégica para\nel Comercio Africano",
@@ -1269,7 +1316,7 @@ const translations: Record<Locale, Translations> = {
         "Exfoliante de renovación cutánea que elimina células muertas y restaura un brillo natural suave. Enriquecido con exfoliantes naturales.",
         "Sérum de brillo diario altamente concentrado enriquecido con extractos botánicos avanzados para una piel radiante y luminosa.",
         "Loción corporal rica y nutritiva para hidratación duradera y tonificación uniforme. Fórmula ligera y no grasa.",
-        "Manteca corporal 100% pura importada formulada para acondicionamiento profundo y protección de la piel.",
+        "Manteca corporal 100% puras importada formulada para acondicionamiento profundo y protección de la piel.",
         "Aceite capilar reparador intensivo que combina coco y argán para restaurar el brillo y reducir la rotura.",
         "Bruma facial refrescante infusionada con rosa para un impulso instantáneo de hidratación. Perfecta para revitalización en movimiento.",
         "Aceite perfumado de inspiración árabe de larga duración con oud rico, vainilla cálida y notas sutiles de almizcle.",
@@ -1317,7 +1364,24 @@ const translations: Record<Locale, Translations> = {
       ctaSub: "Conéctese directamente con el CEO Okey Francis CHIBUEZE para discutir sus necesidades.",
       ctaButton: "Chatear en WhatsApp",
     },
-  },
+    achievementsPage: {
+      heroTitle: "Perspectivas e Hitos de la Logística Africana",
+      heroSub: "Explorando marcos estratégicos y soluciones estructurales para la optimización de la cadena de suministro transfronteriza en África Subsahariana.",
+      researchTitle: "Investigación Aplicada y Perspectivas Estratégicas",
+      researchDesc: "Marcos prácticos desarrollados por el CEO Okey Francis CHIBUEZE para abordar las ineficiencias sistémicas en el comercio regional.",
+      insights: [
+        { title: "Armonización Aduanera Transfronteriza", content: "Propuesta de protocolos de despacho digital para reducir los retrasos en tránsito, mejorando la velocidad de la carga." },
+        { title: "Integración de Transporte Multimodal", content: "Investigación sobre la eficacia de combinar redes de carga ferroviaria y por carretera para reducir costos logísticos." },
+        { title: "Resiliencia de la Cadena de Suministro", content: "Desarrollo de modelos de adquisición adaptativos que mitigan las interrupciones causadas por la volatilidad cambiaria." }
+      ],
+      milestonesTitle: "Hitos Profesionales",
+      milestones: [
+        { year: "2024", role: "Fundador y CEO, DIS Group", details: "Establecimiento de una red integral de logística y comercio que une Dubái, Lagos y Lubumbashi." },
+        { year: "2022", role: "Consultor Principal, Comercio Transfronterizo", details: "Asesoramiento a corporaciones mineras multinacionales sobre cumplimiento de adquisiciones localizadas." },
+        { year: "2019", role: "Director de Logística", details: "Lideró una revisión de la cadena de suministro regional para un importante distribuidor." }
+      ]
+    }
+  }
 };
 
 export default translations;
