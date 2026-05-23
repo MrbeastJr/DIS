@@ -149,7 +149,7 @@ export default function AchievementsPage() {
             href="/#contact"
             className="inline-flex items-center gap-2 bg-crimson text-white px-8 py-4 rounded-full font-bold hover:bg-[#a61c1c] transition-all hover:scale-105 shadow-lg shadow-crimson/20"
           >
-            {t.ctaButton} <ArrowRight weight="bold" />
+            {t.aboutPage.ctaButton || "Chat on WhatsApp"} <ArrowRight weight="bold" />
           </Link>
         </div>
       </section>
