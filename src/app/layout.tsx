@@ -82,7 +82,7 @@ import LanguagePopup from "@/components/LanguagePopup";
 import FloatingOrderButton from "@/components/FloatingOrderButton";
 
 import { Toaster } from "react-hot-toast";
-
+import { Analytics } from "@vercel/analytics/next";
 export default function RootLayout({
   children,
 }: {
@@ -99,6 +99,7 @@ export default function RootLayout({
             <LanguagePopup />
             <FloatingOrderButton />
             <Toaster position="bottom-right" />
+            <Analytics />
           </LanguageProvider>
         </ConfigProvider>
       </body>
