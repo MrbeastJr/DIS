@@ -466,7 +466,7 @@ const translations: Record<Locale, Translations> = {
       products: "products",
       noResults: "No products found",
       noResultsSub: "Try adjusting your search or filter",
-      categories: ["All", "Skincare", "Body Care", "Hair Care", "Fragrance", "Mobile Accessories"],
+      categories: ["All", "Cosmetics", "Electronics", "Appliances", "Fashion", "Vehicles", "Industrial", "Agriculture", "Construction", "General"],
       trustBadges: [
         { title: "Free Local Delivery", sub: "Lubumbashi & Lagos" },
         { title: "Authentic Products", sub: "100% genuine imports" },
@@ -853,7 +853,7 @@ const translations: Record<Locale, Translations> = {
       products: "produits",
       noResults: "Aucun produit trouvé",
       noResultsSub: "Essayez d'ajuster votre recherche ou filtre",
-      categories: ["Tous", "Soins Peau", "Soins Corps", "Soins Cheveux", "Parfum", "Accessoires Mobiles"],
+      categories: ["Tous", "Cosmétiques", "Électronique", "Électroménager", "Mode", "Véhicules", "Industriel", "Agriculture", "Construction", "Général"],
       trustBadges: [
         { title: "Livraison Locale Gratuite", sub: "Lubumbashi & Lagos" },
         { title: "Produits Authentiques", sub: "100% importations authentiques" },
@@ -1240,7 +1240,7 @@ const translations: Record<Locale, Translations> = {
       products: "productos",
       noResults: "No se encontraron productos",
       noResultsSub: "Intente ajustar su búsqueda o filtro",
-      categories: ["Todos", "Cuidado de la Piel", "Cuidado Corporal", "Cuidado Capilar", "Fragancias", "Accesorios Móviles"],
+      categories: ["Todos", "Cosméticos", "Electrónica", "Electrodomésticos", "Moda", "Vehículos", "Industrial", "Agricultura", "Construcción", "General"],
       trustBadges: [
         { title: "Entrega Local Gratuita", sub: "Lubumbashi & Lagos" },
         { title: "Productos Auténticos", sub: "100% importaciones genuinas" },

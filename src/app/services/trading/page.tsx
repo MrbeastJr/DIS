@@ -24,7 +24,7 @@ interface CartItem {
 }
 
 /* ── Product Catalog (Mock DB State) ── */
-const categoryKeys = ["All", "Skincare", "Body Care", "Hair Care", "Fragrance"] as const;
+const categoryKeys = ["all", "cosmetics", "electronics", "appliances", "accessories", "automobiles", "industrial", "agriculture", "construction", "general"] as const;
 
 const MOCK_DB_INITIAL_DATA = [
   {
