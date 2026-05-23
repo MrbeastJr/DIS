@@ -2,12 +2,31 @@
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Briefcase, ArrowRight, MapPin, Clock, PaperPlaneRight } from "@phosphor-icons/react";
+import { Briefcase, ArrowRight, MapPin, Clock, PaperPlaneRight, ShareNetwork } from "@phosphor-icons/react";
 import { useConfig } from "@/context/ConfigContext";
+import toast from "react-hot-toast";
 
 export default function CareersPage() {
   const { config } = useConfig();
   
+  const handleShare = async (jobTitle: string) => {
+    const url = window.location.href;
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: `DIS Group Careers: ${jobTitle}`,
+          text: `Check out this open position at DIS Group: ${jobTitle}`,
+          url: url,
+        });
+      } catch (err) {
+        console.log("Share canceled or failed", err);
+      }
+    } else {
+      navigator.clipboard.writeText(url);
+      toast.success("Link copied to clipboard!");
+    }
+  };
+
   return (
     <main className="min-h-screen bg-snow text-espresso selection:bg-crimson selection:text-white flex flex-col">
       <Navbar />
@@ -50,14 +69,23 @@ export default function CareersPage() {
                 </span>
               </div>
             </div>
-            <a
-              href={`mailto:${config?.emailAddress || "okeycongo@gmail.com"}?subject=Application:%20Social%20Media%20Manager&body=Hello%20DIS%20Team,%0A%0AI%20am%20writing%20to%20apply%20for%20the%20Social%20Media%20Manager%20position.%20Please%20find%20my%20portfolio%20and%20CV%20attached.%0A%0A[Attach%20CV%20Here]`}
-              className="inline-flex items-center justify-center px-8 py-3.5 bg-crimson text-white font-bold text-sm rounded-full hover:bg-crimson-dark transition-all duration-300 shadow-md shadow-crimson/20 shrink-0"
-              style={{ textDecoration: "none" }}
-            >
-              <span>Apply via Email</span>
-              <PaperPlaneRight size={18} weight="fill" className="ml-2" />
-            </a>
+            <div className="flex flex-col sm:flex-row gap-3 shrink-0">
+              <button
+                onClick={() => handleShare("Social Media & Community Manager")}
+                className="inline-flex items-center justify-center px-6 py-3.5 bg-gray-100 text-espresso font-bold text-sm rounded-full hover:bg-gray-200 transition-all duration-300"
+              >
+                <span>Share</span>
+                <ShareNetwork size={18} weight="bold" className="ml-2" />
+              </button>
+              <a
+                href={`mailto:${config?.emailAddress || "okeycongo@gmail.com"}?subject=Application:%20Social%20Media%20Manager&body=Hello%20DIS%20Team,%0A%0AI%20am%20writing%20to%20apply%20for%20the%20Social%20Media%20Manager%20position.%20Please%20find%20my%20portfolio%20and%20CV%20attached.%0A%0A[Attach%20CV%20Here]`}
+                className="inline-flex items-center justify-center px-8 py-3.5 bg-crimson text-white font-bold text-sm rounded-full hover:bg-crimson-dark transition-all duration-300 shadow-md shadow-crimson/20"
+                style={{ textDecoration: "none" }}
+              >
+                <span>Apply via Email</span>
+                <PaperPlaneRight size={18} weight="fill" className="ml-2" />
+              </a>
+            </div>
           </div>
 
           <div className="space-y-6 text-walnut/80 text-sm leading-relaxed">
