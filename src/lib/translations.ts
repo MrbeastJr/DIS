@@ -568,7 +568,7 @@ const translations: Record<Locale, Translations> = {
       ],
       milestonesTitle: "Professional Milestones",
       milestones: [
-        { year: "2024", role: "Founder & CEO, DIS Group", details: "Established a comprehensive logistics and trading network bridging Dubai, Lagos, and Lubumbashi." },
+        { year: "2024 - 2026", role: "Founder & CEO, DIS Group", details: "Established a comprehensive logistics and trading network bridging Dubai, Lagos, and Lubumbashi." },
         { year: "2022", role: "Lead Consultant, Cross-Border Trade", details: "Advised multinational mining corporations on localized procurement compliance and secure freight corridors." },
         { year: "2019", role: "Senior Logistics Director", details: "Spearheaded a regional supply chain overhaul for a major FMCG distributor, increasing regional distribution efficiency." },
         { year: "2013", role: "Founder, COFRANCE INTEGRATED CONCEPT LTD", details: "Founded the parent company (RC: 1492798) that serves as the foundation for multi-sector enterprise connecting African markets to global supply chains." }
@@ -976,7 +976,7 @@ const translations: Record<Locale, Translations> = {
       ],
       milestonesTitle: "Jalons Professionnels",
       milestones: [
-        { year: "2024", role: "Fondateur & PDG, DIS Group", details: "Établissement d'un réseau logistique et commercial complet reliant Dubaï, Lagos et Lubumbashi." },
+        { year: "2024 - 2026", role: "Fondateur & PDG, DIS Group", details: "Établissement d'un réseau logistique et commercial complet reliant Dubaï, Lagos et Lubumbashi." },
         { year: "2022", role: "Consultant Principal, Commerce Transfrontalier", details: "Conseil aux multinationales minières sur la conformité des achats localisés." },
         { year: "2019", role: "Directeur Logistique Principal", details: "Direction d'une refonte de la chaîne d'approvisionnement régionale pour un distributeur majeur." },
         { year: "2013", role: "Fondateur, COFRANCE INTEGRATED CONCEPT LTD", details: "A fondé la société mère (RC : 1492798) qui sert de base à une entreprise multisectorielle reliant les marchés africains aux chaînes d'approvisionnement mondiales." }
@@ -1384,7 +1384,7 @@ const translations: Record<Locale, Translations> = {
       ],
       milestonesTitle: "Hitos Profesionales",
       milestones: [
-        { year: "2024", role: "Fundador y CEO, DIS Group", details: "Establecimiento de una red integral de logística y comercio que une Dubái, Lagos y Lubumbashi." },
+        { year: "2024 - 2026", role: "Fundador y CEO, DIS Group", details: "Establecimiento de una red integral de logística y comercio que une Dubái, Lagos y Lubumbashi." },
         { year: "2022", role: "Consultor Principal, Comercio Transfronterizo", details: "Asesoramiento a corporaciones mineras multinacionales sobre cumplimiento de adquisiciones localizadas." },
         { year: "2019", role: "Director de Logística", details: "Lideró una revisión de la cadena de suministro regional para un importante distribuidor." },
         { year: "2013", role: "Fundador, COFRANCE INTEGRATED CONCEPT LTD", details: "Fundó la empresa matriz (RC: 1492798) que sirve como base para una empresa multisectorial que conecta los mercados africanos con las cadenas de suministro globales." }
