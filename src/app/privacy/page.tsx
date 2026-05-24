@@ -103,7 +103,7 @@ export default function PrivacyPolicyPage() {
           <div className="bg-pearl/50 p-6 rounded-2xl border border-espresso/5 mt-6">
             <p className="m-0"><strong>DIGITAL INTEGRATED SERVICES RDC</strong></p>
             <p className="m-0 mt-2"><strong>DR Congo:</strong> 32, Av. Sendwe / Des Usines, C/Lubumbashi, Haut-Katanga</p>
-            <p className="m-0"><strong>Nigeria:</strong> 2 Olugbenga St, Amuwo Odofin, Lagos</p>
+            <p className="m-0"><strong>Nigeria:</strong> Kano plaza B07, Trade Fair, Lagos Nigeria</p>
             <p className="m-0 mt-2"><strong>Email:</strong> okeycongo@gmail.com</p>
             <p className="m-0"><strong>WhatsApp:</strong> +243 990 301 518</p>
           </div>
