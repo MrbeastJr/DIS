@@ -6,17 +6,20 @@ import {
   ArrowLeft, Globe, ShieldCheck, Handshake, Buildings,
   ChartLineUp, Package, Lightbulb, ShoppingCart, TrendUp,
   WhatsappLogo, LinkedinLogo, EnvelopeSimple, MapPin, Star,
+  FacebookLogo, InstagramLogo, XLogo, TiktokLogo
 } from "@phosphor-icons/react";
 import Navbar from "@/components/Navbar";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import Link from "next/link";
 import { useLanguage } from "@/context/LanguageContext";
+import { useConfig } from "@/context/ConfigContext";
 
 const fadeUp = { initial: { opacity: 0, y: 30 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true } };
 
 export default function AboutPage() {
   const { t } = useLanguage();
   const a = t.aboutPage || {} as any;
+  const { config } = useConfig();
 
   return (
     <main className="bg-white min-h-screen text-espresso w-full max-w-full overflow-hidden">
@@ -142,7 +145,7 @@ export default function AboutPage() {
             </p>
 
             {/* Contact Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
               <a href="https://wa.me/243990301518" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-4 rounded-2xl bg-[#25D366]/5 border border-[#25D366]/15 hover:border-[#25D366]/30 transition-all" style={{ textDecoration: "none" }}>
                 <WhatsappLogo size={24} weight="fill" className="text-[#25D366] flex-shrink-0" />
                 <div><span className="text-body-sm font-bold text-espresso block">WhatsApp</span><span className="text-[11px] text-walnut/40">+243 990 301 518</span></div>
@@ -151,13 +154,32 @@ export default function AboutPage() {
                 <EnvelopeSimple size={24} weight="light" className="text-crimson flex-shrink-0" />
                 <div><span className="text-body-sm font-bold text-espresso block">Email</span><span className="text-[11px] text-walnut/40">okeycongo@gmail.com</span></div>
               </a>
-              <a href="https://www.linkedin.com/in/okey-francis-chibueze-3b803063" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-4 rounded-2xl bg-[#0A66C2]/5 border border-[#0A66C2]/10 hover:border-[#0A66C2]/20 transition-all" style={{ textDecoration: "none" }}>
-                <LinkedinLogo size={24} weight="fill" className="text-[#0A66C2] flex-shrink-0" />
-                <div><span className="text-body-sm font-bold text-espresso block">LinkedIn</span><span className="text-[11px] text-walnut/40">Professional Profile</span></div>
-              </a>
               <div className="flex items-center gap-3 p-4 rounded-2xl bg-espresso/[0.02] border border-espresso/[0.06]">
                 <MapPin size={24} weight="light" className="text-crimson flex-shrink-0" />
-                <div><span className="text-body-sm font-bold text-espresso block">{a.hqLabel || "Headquarters"}</span><span className="text-[11px] text-walnut/40">Lubumbashi, DRC · Lagos, Nigeria</span></div>
+                <div><span className="text-body-sm font-bold text-espresso block">{a.hqLabel || "Headquarters"}</span><span className="text-[11px] text-walnut/40">Lubumbashi, DRC &middot; Lagos, Nigeria</span></div>
+              </div>
+            </div>
+
+            {/* Premium Social Media Links */}
+            <div className="mt-8 rounded-3xl bg-[#525252] p-8 md:p-10 flex flex-col items-center justify-center shadow-xl border border-white/5 relative overflow-hidden group">
+              <div className="absolute inset-0 bg-gradient-to-tr from-black/20 to-transparent pointer-events-none" />
+              <h4 className="text-white font-medium text-xl mb-8 tracking-wide relative z-10">Subscribe</h4>
+              <div className="flex items-center justify-center gap-6 sm:gap-8 relative z-10 flex-wrap">
+                <a href={config?.facebookUrl || "#"} target="_blank" rel="noopener noreferrer" className="text-white hover:text-white/80 transition-transform transform hover:scale-110">
+                  <FacebookLogo size={32} weight="fill" />
+                </a>
+                <a href={config?.instagramUrl || "#"} target="_blank" rel="noopener noreferrer" className="text-white hover:text-white/80 transition-transform transform hover:scale-110">
+                  <InstagramLogo size={32} />
+                </a>
+                <a href={config?.linkedinUrl || "#"} target="_blank" rel="noopener noreferrer" className="text-white hover:text-white/80 transition-transform transform hover:scale-110">
+                  <LinkedinLogo size={32} weight="fill" />
+                </a>
+                <a href={config?.twitterUrl || "#"} target="_blank" rel="noopener noreferrer" className="text-white hover:text-white/80 transition-transform transform hover:scale-110">
+                  <XLogo size={32} />
+                </a>
+                <a href={config?.tiktokUrl || "#"} target="_blank" rel="noopener noreferrer" className="text-white hover:text-white/80 transition-transform transform hover:scale-110">
+                  <TiktokLogo size={32} weight="fill" />
+                </a>
               </div>
             </div>
           </motion.div>
