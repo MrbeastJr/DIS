@@ -31,7 +31,7 @@ const DEFAULT_CONFIG: ConfigData = {
   whatsappNumber: "+243 990 301 518",
   emailAddress: "okeycongo@gmail.com",
   rcNumber: "RC: 1492798 | ID.NAT.14-A-180",
-  officeDrCongo: "32, Av. Sendwe / Des Usines, C/Lubumbashi, Haut-Katanga",
+  officeDrCongo: "32 Av. jason sendwe/des Usines, Lubumbashi, Haut-Katanga, Democratic Republic of the Congo.",
   officeNigeria: "Kano plaza B07, Trade Fair, Lagos Nigeria",
   facebookUrl: "https://www.facebook.com/DigitalRationalServicesLtd/",
   linkedinUrl: "https://www.linkedin.com/in/okey-francis-chibueze-3b803063",

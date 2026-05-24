@@ -101,14 +101,18 @@ export default function Footer() {
                   <MapPin size={18} className="text-crimson mt-0.5 flex-shrink-0" />
                   <span>
                     <strong>DR Congo:</strong><br/>
-                    {config?.officeDrCongo || "32, Av. Sendwe / Des Usines, C/Lubumbashi, Haut-Katanga"}
+                    <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(config?.officeDrCongo || "32 Av. jason sendwe/des Usines, Lubumbashi, Haut-Katanga, Democratic Republic of the Congo.")}`} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors hover:underline">
+                      {config?.officeDrCongo || "32 Av. jason sendwe/des Usines, Lubumbashi, Haut-Katanga, Democratic Republic of the Congo."}
+                    </a>
                   </span>
                 </li>
                 <li className="flex items-start gap-3 text-body-sm text-white/70">
                   <MapPin size={18} className="text-crimson mt-0.5 flex-shrink-0" />
                   <span>
                     <strong>Nigeria:</strong><br/>
-                    {config?.officeNigeria || "Kano plaza B07, Trade Fair, Lagos Nigeria"}
+                    <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(config?.officeNigeria || "Kano plaza B07, Trade Fair, Lagos Nigeria")}`} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors hover:underline">
+                      {config?.officeNigeria || "Kano plaza B07, Trade Fair, Lagos Nigeria"}
+                    </a>
                   </span>
                 </li>
                 <li className="flex items-start gap-3 text-body-sm text-white/70">
