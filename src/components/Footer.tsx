@@ -93,7 +93,7 @@ export default function Footer() {
                   <MapPin size={18} className="text-crimson mt-0.5 flex-shrink-0" />
                   <span>
                     <strong>Nigeria:</strong><br/>
-                    {config?.officeNigeria || "2 Olugbenga St, Amuwo Odofin, Lagos"}
+                    {config?.officeNigeria || "Kano plaza B07, Trade Fair, Lagos Nigeria"}
                   </span>
                 </li>
                 <li className="flex items-start gap-3 text-body-sm text-white/70">
