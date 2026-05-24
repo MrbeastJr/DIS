@@ -145,41 +145,61 @@ export default function AboutPage() {
             </p>
 
             {/* Contact Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
-              <a href="https://wa.me/243990301518" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-4 rounded-2xl bg-[#25D366]/5 border border-[#25D366]/15 hover:border-[#25D366]/30 transition-all" style={{ textDecoration: "none" }}>
-                <WhatsappLogo size={24} weight="fill" className="text-[#25D366] flex-shrink-0" />
-                <div><span className="text-body-sm font-bold text-espresso block">WhatsApp</span><span className="text-[11px] text-walnut/40">+243 990 301 518</span></div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+              <a href="https://wa.me/243990301518" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 p-5 rounded-2xl bg-[#25D366]/5 border border-[#25D366]/15 hover:border-[#25D366]/30 transition-all" style={{ textDecoration: "none" }}>
+                <div className="w-12 h-12 rounded-full bg-[#25D366]/10 flex items-center justify-center flex-shrink-0">
+                  <WhatsappLogo size={24} weight="fill" className="text-[#25D366]" />
+                </div>
+                <div className="overflow-hidden">
+                  <span className="text-body-sm font-bold text-espresso block truncate">WhatsApp</span>
+                  <span className="text-xs text-walnut/60 block truncate">+243 990 301 518</span>
+                </div>
               </a>
-              <a href="mailto:okeycongo@gmail.com" className="flex items-center gap-3 p-4 rounded-2xl bg-crimson/[0.03] border border-crimson/10 hover:border-crimson/20 transition-all" style={{ textDecoration: "none" }}>
-                <EnvelopeSimple size={24} weight="light" className="text-crimson flex-shrink-0" />
-                <div><span className="text-body-sm font-bold text-espresso block">Email</span><span className="text-[11px] text-walnut/40">okeycongo@gmail.com</span></div>
+              
+              <a href="mailto:okeycongo@gmail.com" className="flex items-center gap-4 p-5 rounded-2xl bg-crimson/[0.03] border border-crimson/10 hover:border-crimson/20 transition-all" style={{ textDecoration: "none" }}>
+                <div className="w-12 h-12 rounded-full bg-crimson/5 flex items-center justify-center flex-shrink-0">
+                  <EnvelopeSimple size={24} weight="light" className="text-crimson" />
+                </div>
+                <div className="overflow-hidden">
+                  <span className="text-body-sm font-bold text-espresso block truncate">Email</span>
+                  <span className="text-xs text-walnut/60 block truncate">okeycongo@gmail.com</span>
+                </div>
               </a>
-              <div className="flex items-center gap-3 p-4 rounded-2xl bg-espresso/[0.02] border border-espresso/[0.06]">
-                <MapPin size={24} weight="light" className="text-crimson flex-shrink-0" />
-                <div><span className="text-body-sm font-bold text-espresso block">{a.hqLabel || "Headquarters"}</span><span className="text-[11px] text-walnut/40">Lubumbashi, DRC &middot; Lagos, Nigeria</span></div>
+              
+              <div className="flex items-center gap-4 p-5 rounded-2xl bg-espresso/[0.02] border border-espresso/[0.06]">
+                <div className="w-12 h-12 rounded-full bg-espresso/5 flex items-center justify-center flex-shrink-0">
+                  <MapPin size={24} weight="light" className="text-crimson" />
+                </div>
+                <div className="overflow-hidden">
+                  <span className="text-body-sm font-bold text-espresso block truncate">{a.hqLabel || "Headquarters"}</span>
+                  <span className="text-xs text-walnut/60 block truncate">Lubumbashi &middot; Lagos</span>
+                </div>
               </div>
-            </div>
 
-            {/* Premium Social Media Links */}
-            <div className="mt-8 rounded-3xl bg-[#525252] p-8 md:p-10 flex flex-col items-center justify-center shadow-xl border border-white/5 relative overflow-hidden group">
-              <div className="absolute inset-0 bg-gradient-to-tr from-black/20 to-transparent pointer-events-none" />
-              <h4 className="text-white font-medium text-xl mb-8 tracking-wide relative z-10">Subscribe</h4>
-              <div className="flex items-center justify-center gap-6 sm:gap-8 relative z-10 flex-wrap">
-                <a href={config?.facebookUrl || "#"} target="_blank" rel="noopener noreferrer" className="text-white hover:text-white/80 transition-transform transform hover:scale-110">
-                  <FacebookLogo size={32} weight="fill" />
-                </a>
-                <a href={config?.instagramUrl || "#"} target="_blank" rel="noopener noreferrer" className="text-white hover:text-white/80 transition-transform transform hover:scale-110">
-                  <InstagramLogo size={32} />
-                </a>
-                <a href={config?.linkedinUrl || "#"} target="_blank" rel="noopener noreferrer" className="text-white hover:text-white/80 transition-transform transform hover:scale-110">
-                  <LinkedinLogo size={32} weight="fill" />
-                </a>
-                <a href={config?.twitterUrl || "#"} target="_blank" rel="noopener noreferrer" className="text-white hover:text-white/80 transition-transform transform hover:scale-110">
-                  <XLogo size={32} />
-                </a>
-                <a href={config?.tiktokUrl || "#"} target="_blank" rel="noopener noreferrer" className="text-white hover:text-white/80 transition-transform transform hover:scale-110">
-                  <TiktokLogo size={32} weight="fill" />
-                </a>
+              <div className="flex items-center gap-4 p-5 rounded-2xl bg-espresso/[0.02] border border-espresso/[0.06]">
+                <div className="w-12 h-12 rounded-full bg-espresso/5 flex items-center justify-center flex-shrink-0">
+                  <Globe size={24} weight="light" className="text-crimson" />
+                </div>
+                <div className="flex-1 overflow-hidden">
+                  <span className="text-body-sm font-bold text-espresso block mb-1.5 truncate">{(a as any).socialLabel || "Connect With Us"}</span>
+                  <div className="flex items-center gap-2">
+                    <a href={config?.facebookUrl || "#"} target="_blank" rel="noopener noreferrer" className="text-espresso/50 hover:text-crimson transition-colors">
+                      <FacebookLogo size={20} weight="fill" />
+                    </a>
+                    <a href={config?.instagramUrl || "#"} target="_blank" rel="noopener noreferrer" className="text-espresso/50 hover:text-crimson transition-colors">
+                      <InstagramLogo size={20} weight="bold" />
+                    </a>
+                    <a href={config?.linkedinUrl || "#"} target="_blank" rel="noopener noreferrer" className="text-espresso/50 hover:text-crimson transition-colors">
+                      <LinkedinLogo size={20} weight="fill" />
+                    </a>
+                    <a href={config?.twitterUrl || "#"} target="_blank" rel="noopener noreferrer" className="text-espresso/50 hover:text-crimson transition-colors">
+                      <XLogo size={20} weight="bold" />
+                    </a>
+                    <a href={config?.tiktokUrl || "#"} target="_blank" rel="noopener noreferrer" className="text-espresso/50 hover:text-crimson transition-colors">
+                      <TiktokLogo size={20} weight="fill" />
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </motion.div>
