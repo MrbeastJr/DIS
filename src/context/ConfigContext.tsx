@@ -13,6 +13,10 @@ interface ConfigData {
   facebookUrl?: string;
   linkedinUrl?: string;
   instagramUrl?: string;
+  twitterUrl?: string;
+  tiktokUrl?: string;
+  pinterestUrl?: string;
+  youtubeUrl?: string;
 }
 
 interface ConfigContextProps {
@@ -31,7 +35,11 @@ const DEFAULT_CONFIG: ConfigData = {
   officeNigeria: "Kano plaza B07, Trade Fair, Lagos Nigeria",
   facebookUrl: "https://www.facebook.com/DigitalRationalServicesLtd/",
   linkedinUrl: "https://www.linkedin.com/in/okey-francis-chibueze-3b803063",
-  instagramUrl: "#"
+  instagramUrl: "https://www.instagram.com/Okeyfrancischibueze",
+  twitterUrl: "https://x.com/Okegod76",
+  tiktokUrl: "https://www.tiktok.com/@okey.francis.chib",
+  pinterestUrl: "https://www.pinterest.com/search/users/?q=Chibueze%20Francis%20Okey",
+  youtubeUrl: "https://www.youtube.com/results?search_query=Okey+Francis+Chibueze"
 };
 
 export const ConfigProvider = ({ children }: { children: React.ReactNode }) => {

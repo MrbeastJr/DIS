@@ -5,7 +5,7 @@ import { useConfig } from "@/context/ConfigContext";
 import Image from "next/image";
 import Link from "next/link";
 import {
-  LinkedinLogo, FacebookLogo,
+  LinkedinLogo, FacebookLogo, InstagramLogo, XLogo, TiktokLogo, PinterestLogo, YoutubeLogo,
   EnvelopeSimple, MapPin, WhatsappLogo,
 } from "@phosphor-icons/react";
 
@@ -44,12 +44,27 @@ export default function Footer() {
               <p className="text-white/70 text-body-sm max-w-sm mt-6">
                 {config?.companyName || "DIGITAL INTEGRATED SERVICES RDC"}
               </p>
-              <div className="flex items-center gap-4 mt-8">
+              <div className="flex flex-wrap items-center gap-3 mt-8">
                 <a href={config?.linkedinUrl || "#"} className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:text-white hover:bg-crimson transition-all" aria-label="LinkedIn">
                   <LinkedinLogo size={20} weight="fill" />
                 </a>
                 <a href={config?.facebookUrl || "#"} className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:text-white hover:bg-crimson transition-all" aria-label="Facebook">
                   <FacebookLogo size={20} weight="fill" />
+                </a>
+                <a href={config?.instagramUrl || "#"} className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:text-white hover:bg-crimson transition-all" aria-label="Instagram">
+                  <InstagramLogo size={20} weight="fill" />
+                </a>
+                <a href={config?.twitterUrl || "#"} className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:text-white hover:bg-crimson transition-all" aria-label="X (Twitter)">
+                  <XLogo size={20} weight="fill" />
+                </a>
+                <a href={config?.tiktokUrl || "#"} className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:text-white hover:bg-crimson transition-all" aria-label="TikTok">
+                  <TiktokLogo size={20} weight="fill" />
+                </a>
+                <a href={config?.youtubeUrl || "#"} className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:text-white hover:bg-crimson transition-all" aria-label="YouTube">
+                  <YoutubeLogo size={20} weight="fill" />
+                </a>
+                <a href={config?.pinterestUrl || "#"} className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/60 hover:text-white hover:bg-crimson transition-all" aria-label="Pinterest">
+                  <PinterestLogo size={20} weight="fill" />
                 </a>
               </div>
             </div>
