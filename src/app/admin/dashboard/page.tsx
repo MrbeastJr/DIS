@@ -172,6 +172,8 @@ export default function AdminDashboardPage() {
         });
         setImageFile(null);
         setImageError("");
+        const fileInput = document.getElementById('product-image-input') as HTMLInputElement;
+        if (fileInput) fileInput.value = "";
         fetchProducts(); // Refresh list
       } else {
         toast.error("Failed to save product.");
@@ -192,6 +194,8 @@ export default function AdminDashboardPage() {
     });
     setImageFile(null);
     setImageError("");
+    const fileInput = document.getElementById('product-image-input') as HTMLInputElement;
+    if (fileInput) fileInput.value = "";
   };
 
   return (
@@ -307,7 +311,7 @@ export default function AdminDashboardPage() {
 
                 <div>
                   <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Product Image (Max 300KB)</label>
-                  <input type="file" accept="image/*" onChange={handleImageChange} className={`w-full bg-gray-50 border ${imageError ? 'border-red-400' : 'border-gray-200'} rounded-xl px-4 py-2.5 text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-bold file:bg-crimson/10 file:text-crimson hover:file:bg-crimson/20 focus:outline-none transition-all cursor-pointer`} />
+                  <input id="product-image-input" type="file" accept="image/*" onChange={handleImageChange} className={`w-full bg-gray-50 border ${imageError ? 'border-red-400' : 'border-gray-200'} rounded-xl px-4 py-2.5 text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-bold file:bg-crimson/10 file:text-crimson hover:file:bg-crimson/20 focus:outline-none transition-all cursor-pointer`} />
                   {imageError ? (
                     <p className="text-[10px] text-red-500 mt-1 font-bold">{imageError}</p>
                   ) : (
