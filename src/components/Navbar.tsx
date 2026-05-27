@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { GlobeSimple, House, ShoppingCart, Package, User, ChatCircle, Trophy } from "@phosphor-icons/react";
+import { GlobeSimple, House, ShoppingCart, Package, User, ChatCircle, Trophy, X } from "@phosphor-icons/react";
 import { useLanguage } from "@/context/LanguageContext";
 import type { Locale } from "@/lib/translations";
 import Image from "next/image";
@@ -26,6 +26,7 @@ export default function Navbar() {
   const [hidden, setHidden] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [langOpen, setLangOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const isCompanyPage = pathname === "/company";
   const isHomePage = pathname === "/";
@@ -217,8 +218,8 @@ export default function Navbar() {
               boxShadow: "0 8px 32px rgba(26, 18, 16, 0.08)",
             }}
           >
-            {/* Logo + DIS — left aligned */}
-            <a href="/" onClick={(e) => { e.preventDefault(); goHome(); }} className="flex items-center gap-1.5 text-decoration-none">
+            {/* Logo + DIS — left aligned (triggers mobile drawer) */}
+            <button onClick={() => setMobileMenuOpen(true)} className="flex items-center gap-1.5 text-decoration-none cursor-pointer hover:opacity-80 transition-opacity">
               <Image src="/assets/dis-logo.png" alt="DIS" width={100} height={30} className="h-5 w-auto" priority />
               <span
                 className="text-[15px] font-black tracking-[0.06em] select-none"
@@ -226,7 +227,7 @@ export default function Navbar() {
               >
                 <span className="text-crimson">DIS</span><span className="text-espresso">.</span>
               </span>
-            </a>
+            </button>
 
             {/* Language toggle — right */}
             <button
@@ -286,6 +287,79 @@ export default function Navbar() {
           </div>
         </motion.nav>
       </div>
+      {/* ═══════════════════════════════════════
+          MOBILE SIDE NAVBAR (DRAWER)
+          ═══════════════════════════════════════ */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              onClick={() => setMobileMenuOpen(false)}
+              className="fixed inset-0 z-[60] bg-espresso/40 backdrop-blur-sm md:hidden"
+            />
+
+            {/* Sidebar */}
+            <motion.div
+              initial={{ x: "-100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="fixed top-0 left-0 bottom-0 z-[70] w-4/5 max-w-sm bg-white shadow-2xl flex flex-col md:hidden overflow-hidden"
+            >
+              {/* Sidebar Header */}
+              <div className="flex items-center justify-between p-6 border-b border-sand/50 bg-sand/30">
+                <div className="flex items-center gap-2">
+                  <Image src="/assets/dis-logo.png" alt="DIS" width={120} height={36} className="h-7 w-auto" priority />
+                  <span
+                    className="text-lg font-black tracking-widest"
+                    style={{ fontFamily: "var(--font-display)", fontStyle: "italic" }}
+                  >
+                    <span className="text-crimson">DIS</span><span className="text-espresso">.</span>
+                  </span>
+                </div>
+                <button
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="p-2 rounded-full bg-white shadow-sm text-espresso hover:text-crimson transition-colors"
+                >
+                  <X size={20} weight="bold" />
+                </button>
+              </div>
+
+              {/* Sidebar Links */}
+              <div className="flex-1 overflow-y-auto py-6 px-6 space-y-6">
+                <div className="flex flex-col space-y-4">
+                  <span className="text-xs font-bold text-walnut/50 uppercase tracking-widest mb-2">Navigation</span>
+                  {desktopNavItems.map((item, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => {
+                        setMobileMenuOpen(false);
+                        setTimeout(() => navigate(item.href, item.isPage), 300);
+                      }}
+                      className="text-left text-lg font-semibold text-espresso hover:text-crimson transition-colors"
+                    >
+                      {item.label}
+                    </button>
+                  ))}
+                </div>
+
+                <div className="pt-6 border-t border-sand/50 flex flex-col space-y-4">
+                  <span className="text-xs font-bold text-walnut/50 uppercase tracking-widest mb-2">Connect</span>
+                  <a href="https://wa.me/243990301518" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-espresso hover:text-crimson transition-colors font-medium">
+                    <ChatCircle size={24} weight="duotone" className="text-crimson" />
+                    Chat on WhatsApp
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </>
   );
 }
