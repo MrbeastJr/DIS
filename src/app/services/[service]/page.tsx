@@ -3,6 +3,7 @@
 import { useParams } from "next/navigation";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -573,6 +574,7 @@ export default function ServicePage() {
       </section>
 
       <WhatsAppButton />
+      <Footer />
     </main>
   );
 }

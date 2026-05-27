@@ -10,6 +10,7 @@ import {
   ShoppingCart, Plus, Minus, Trash,
 } from "@phosphor-icons/react";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import { useLanguage } from "@/context/LanguageContext";
 import { API_BASE_URL, getImageUrl } from "@/lib/api";
 
@@ -552,7 +553,7 @@ export default function TradingStorePage() {
         <motion.button
           initial={{ scale: 0 }} animate={{ scale: 1 }}
           onClick={() => setCartOpen(true)}
-          className="fixed bottom-24 md:bottom-8 right-6 z-50 w-14 h-14 rounded-full bg-espresso text-white flex items-center justify-center shadow-2xl hover:bg-crimson transition-colors cursor-pointer"
+          className="fixed bottom-[168px] md:bottom-[88px] right-6 z-50 w-14 h-14 rounded-full bg-espresso text-white flex items-center justify-center shadow-2xl hover:bg-crimson transition-colors cursor-pointer"
         >
           <ShoppingCart size={24} weight="fill" />
           <span className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-crimson text-white text-[11px] font-bold flex items-center justify-center">{cartCount}</span>
@@ -634,6 +635,8 @@ export default function TradingStorePage() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      <Footer />
     </main>
   );
 }

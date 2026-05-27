@@ -9,6 +9,7 @@ import {
   FacebookLogo, InstagramLogo, XLogo, TiktokLogo
 } from "@phosphor-icons/react";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import Link from "next/link";
 import { useLanguage } from "@/context/LanguageContext";
@@ -252,6 +253,7 @@ export default function AboutPage() {
       </section>
 
       <WhatsAppButton />
+      <Footer />
     </main>
   );
 }

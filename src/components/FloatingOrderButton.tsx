@@ -11,7 +11,7 @@ export default function FloatingOrderButton() {
   const { t } = useLanguage();
 
   // Hide the floating button on the trading store page since it already has a cart
-  if (pathname === "/services/trading") return null;
+  if (pathname === "/") return null;
 
   return (
     <AnimatePresence>
