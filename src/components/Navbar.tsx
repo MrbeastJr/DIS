@@ -11,9 +11,9 @@ import Image from "next/image";
 const localeLabels: Record<Locale, string> = { en: "EN", fr: "FR", es: "ES" };
 
 const mobileNavItems = [
-  { icon: House, href: "/", key: "home", isPage: true },
-  { icon: ShoppingCart, href: "/services/trading", key: "trading", isPage: true },
+  { icon: ShoppingCart, href: "/", key: "trading", isPage: true },
   { icon: Package, href: "/services/logistics", key: "logistics", isPage: true },
+  { icon: ChatCircle, href: "/services/consulting", key: "consulting", isPage: true },
   { icon: User, href: "/about", key: "about", isPage: true },
   { icon: Trophy, href: "/achievements", key: "achievements", isPage: true },
 ];
@@ -27,6 +27,7 @@ export default function Navbar() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [langOpen, setLangOpen] = useState(false);
 
+  const isCompanyPage = pathname === "/company";
   const isHomePage = pathname === "/";
 
   const handleScroll = useCallback(() => {
@@ -43,12 +44,12 @@ export default function Navbar() {
   }, [handleScroll]);
 
   const desktopNavItems = [
-    { label: t.nav.home, href: "/#hero", isPage: false },
-    { label: t.nav.services, href: "/#services", isPage: false },
-    { label: t.nav.industries, href: "/#industries", isPage: false },
+    { label: "Company", href: "/company", isPage: true },
+    { label: t.nav.services, href: "/company#services", isPage: false },
+    { label: t.nav.industries, href: "/company#industries", isPage: false },
     { label: t.nav.about, href: "/about", isPage: true },
     { label: t.nav.achievements || "Achievements", href: "/achievements", isPage: true },
-    { label: t.nav.contact, href: "/#contact", isPage: false },
+    { label: t.nav.contact, href: "/company#contact", isPage: false },
   ];
 
   const navigate = (href: string, isPage: boolean) => {
@@ -57,12 +58,12 @@ export default function Navbar() {
       return;
     }
     // Hash-based section link
-    const hash = href.replace("/", "");
-    if (isHomePage) {
+    const hash = href.replace("/company", "");
+    if (isCompanyPage) {
       const el = document.querySelector(hash);
       if (el) el.scrollIntoView({ behavior: "smooth" });
     } else {
-      // Navigate to home page with hash — browser will scroll to section
+      // Navigate to company page with hash — browser will scroll to section
       window.location.href = href;
     }
   };
