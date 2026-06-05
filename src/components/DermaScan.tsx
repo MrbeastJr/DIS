@@ -50,6 +50,18 @@ export default function DermaScan() {
     }
   }, []);
 
+  useEffect(() => {
+    const handleOpenEvent = () => {
+      setIsOpen(true);
+      setShowTooltip(false);
+      if (typeof window !== "undefined") {
+        localStorage.setItem("dis_derma_scan_tooltip", "true");
+      }
+    };
+    document.addEventListener("openDermaScan", handleOpenEvent);
+    return () => document.removeEventListener("openDermaScan", handleOpenEvent);
+  }, []);
+
   const handleOpen = () => {
     setIsOpen(true);
     setShowTooltip(false);

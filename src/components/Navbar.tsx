@@ -349,6 +349,16 @@ export default function Navbar() {
                 </div>
 
                 <div className="pt-6 border-t border-sand/50 flex flex-col space-y-4">
+                  <span className="text-xs font-bold text-walnut/50 uppercase tracking-widest mb-2">Features</span>
+                  <button onClick={() => { setMobileMenuOpen(false); setTimeout(() => document.dispatchEvent(new Event('openDermaScan')), 300); }} className="text-left text-lg font-semibold text-espresso hover:text-crimson transition-colors">
+                    AI Derma-Scan
+                  </button>
+                  <button onClick={() => { setMobileMenuOpen(false); setTimeout(() => navigate('/track', true), 300); }} className="text-left text-lg font-semibold text-espresso hover:text-crimson transition-colors">
+                    Track Order
+                  </button>
+                </div>
+
+                <div className="pt-6 border-t border-sand/50 flex flex-col space-y-4">
                   <span className="text-xs font-bold text-walnut/50 uppercase tracking-widest mb-2">Connect</span>
                   <a href="https://wa.me/243990301518" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-espresso hover:text-crimson transition-colors font-medium">
                     <ChatCircle size={24} weight="duotone" className="text-crimson" />

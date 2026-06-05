@@ -53,8 +53,13 @@ export default function AdminDashboardPage() {
   const [editingId, setEditingId] = useState<number | null>(null);
   const [formData, setFormData] = useState({
     name: "", desc: "", price: 0, priceFc: "",
-    category: "cosmetics", tag: "", rating: 5.0, reviews: 0, stock: 10
+    category: "", tag: "", rating: 5.0, reviews: 0, stock: 10, skin_type: "all"
   });
+
+  const isCosmeticsCategory = () => {
+    const cat = categories.find(c => c.id.toString() === formData.category.toString());
+    return cat ? cat.name.toLowerCase().includes("cosmetic") : false;
+  };
   const [imageFile, setImageFile] = useState<File | null>(null);
 
   useEffect(() => {
@@ -120,6 +125,9 @@ export default function AdminDashboardPage() {
       payload.append("category", formData.category);
       payload.append("tag", formData.tag);
       payload.append("stock", String(formData.stock));
+      if (isCosmeticsCategory()) {
+        payload.append("skin_type", formData.skin_type);
+      }
       if (imageFile) payload.append("image", imageFile);
 
       const url = editingId ? `${API_BASE_URL}/products/${editingId}/` : `${API_BASE_URL}/products/`;
@@ -131,7 +139,7 @@ export default function AdminDashboardPage() {
       if (res.ok) {
         toast.success(editingId ? "Updated!" : "Added!");
         setEditingId(null);
-        setFormData({ name: "", desc: "", price: 0, priceFc: "", category: "cosmetics", tag: "", rating: 5.0, reviews: 0, stock: 10 });
+        setFormData({ name: "", desc: "", price: 0, priceFc: "", category: "", tag: "", rating: 5.0, reviews: 0, stock: 10, skin_type: "all" });
         setImageFile(null);
         fetchData();
       } else {
@@ -363,10 +371,23 @@ export default function AdminDashboardPage() {
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <select value={formData.category} onChange={(e) => setFormData({...formData, category: e.target.value})} className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:border-crimson outline-none">
+                      <option value="">Select Category</option>
                       {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
                     </select>
                     <input type="number" required value={formData.stock} onChange={(e) => setFormData({...formData, stock: parseInt(e.target.value)})} placeholder="Stock" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:border-crimson outline-none" />
                   </div>
+                  {isCosmeticsCategory() && (
+                    <div className="grid grid-cols-1 gap-4">
+                      <select value={formData.skin_type} onChange={(e) => setFormData({...formData, skin_type: e.target.value})} className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:border-crimson outline-none">
+                        <option value="all">All Skin Types</option>
+                        <option value="normal">Normal</option>
+                        <option value="dry">Dry</option>
+                        <option value="oily">Oily</option>
+                        <option value="combination">Combination</option>
+                        <option value="sensitive">Sensitive</option>
+                      </select>
+                    </div>
+                  )}
                   <input type="file" accept="image/*" onChange={(e) => setImageFile(e.target.files?.[0] || null)} className="w-full text-sm" />
                   <button type="submit" disabled={isAdding} className="w-full bg-crimson text-white font-bold py-3.5 rounded-xl shadow-sm hover:bg-crimson-dark">Save Product</button>
                 </form>
@@ -386,7 +407,7 @@ export default function AdminDashboardPage() {
                         <td className="p-4 pl-6 text-sm font-bold text-gray-900">{p.name}</td>
                         <td className="p-4 text-sm">{p.stock} units</td>
                         <td className="p-4 flex gap-2">
-                          <button onClick={() => { setEditingId(p.id); setFormData({name: p.name, desc: p.desc, price: p.price, priceFc: p.priceFc, category: p.category, tag: p.tag, rating: p.rating, reviews: p.reviews, stock: p.stock}); }} className="p-2 text-gray-400 hover:text-blue-600"><PencilSimple size={18} /></button>
+                          <button onClick={() => { setEditingId(p.id); setFormData({name: p.name, desc: p.desc, price: p.price, priceFc: p.priceFc, category: p.category, tag: p.tag, rating: p.rating, reviews: p.reviews, stock: p.stock, skin_type: (p as any).skin_type || 'all'}); }} className="p-2 text-gray-400 hover:text-blue-600"><PencilSimple size={18} /></button>
                           <button onClick={() => handleProductDelete(p.id)} className="p-2 text-gray-400 hover:text-red-600"><Trash size={18} /></button>
                         </td>
                       </tr>
