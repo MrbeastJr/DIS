@@ -11,6 +11,8 @@ import {
 } from "@phosphor-icons/react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import CheckoutModal from "@/components/CheckoutModal";
+import DermaScan from "@/components/DermaScan";
 import { useLanguage } from "@/context/LanguageContext";
 import { API_BASE_URL, getImageUrl } from "@/lib/api";
 
@@ -127,9 +129,10 @@ const MOCK_DB_INITIAL_DATA = [
 ];
 
 /* ── Quick View Modal ── */
-function ProductModal({ product, onClose, ts }: {
-  product: { name: string; desc: string; price: number; priceFc: string; category: string; tag: string; rating: number; reviews: number; image: string };
+function ProductModal({ product, onClose, onCheckout, ts }: {
+  product: { id: number; name: string; desc: string; price: number; priceFc: string; category: string; tag: string; rating: number; reviews: number; image: string };
   onClose: () => void;
+  onCheckout: () => void;
   ts: any;
 }) {
   return (
@@ -199,16 +202,13 @@ function ProductModal({ product, onClose, ts }: {
               </div>
             </div>
 
-            <a
-              href={`https://wa.me/243990301518?text=${encodeURIComponent(`Hi Okey, I'd like to order:\n\n🛒 ${product.name}\n💰 $${product.price} (${product.priceFc})\n\nPlease confirm availability and delivery options.`)}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full py-4 bg-[#25D366] text-white rounded-2xl text-center text-sm font-bold hover:bg-[#20BD5A] transition-colors duration-300 flex items-center justify-center gap-2 shadow-lg shadow-[#25D366]/20"
-              style={{ textDecoration: "none" }}
+            <button
+              onClick={() => { onClose(); onCheckout(); }}
+              className="w-full py-4 bg-espresso text-white rounded-2xl text-center text-sm font-bold hover:bg-crimson transition-colors duration-300 flex items-center justify-center gap-2 shadow-lg"
             >
-              <WhatsappLogo size={22} weight="fill" />
-              <span>{ts.orderVia}</span>
-            </a>
+              <ShoppingCart size={22} weight="fill" />
+              <span>Checkout Now</span>
+            </button>
           </div>
         </div>
       </motion.div>
@@ -256,10 +256,11 @@ export default function TradingStorePage() {
 
   const [search, setSearch] = useState("");
   const [activeCategoryIndex, setActiveCategoryIndex] = useState(0);
-  const [quickView, setQuickView] = useState<{ name: string; desc: string; price: number; priceFc: string; category: string; tag: string; rating: number; reviews: number; image: string } | null>(null);
+  const [quickView, setQuickView] = useState<{ id: number; name: string; desc: string; price: number; priceFc: string; category: string; tag: string; rating: number; reviews: number; image: string } | null>(null);
   const [favorites, setFavorites] = useState<Set<number>>(new Set());
   const [cart, setCart] = useState<CartItem[]>([]);
   const [cartOpen, setCartOpen] = useState(false);
+  const [checkoutCart, setCheckoutCart] = useState<CartItem[] | null>(null);
 
   const toggleFav = (id: number) => {
     setFavorites((prev) => {
@@ -288,12 +289,7 @@ export default function TradingStorePage() {
   const cartTotal = cart.reduce((sum, c) => sum + c.price * c.qty, 0);
   const cartCount = cart.reduce((sum, c) => sum + c.qty, 0);
 
-  const buildWhatsAppMessage = () => {
-    const lines = cart.map((c) => `\u2022 ${c.name} x${c.qty} — $${c.price * c.qty}`);
-    return encodeURIComponent(
-      `Hi Okey,\n\nI'd like to place an order from DIS Beauty & Cosmetics:\n\n${lines.join("\n")}\n\n💰 Total: $${cartTotal}\n\nPlease confirm availability, delivery options, and payment details. Thank you!`
-    );
-  };
+  const checkoutTotal = checkoutCart ? checkoutCart.reduce((sum, c) => sum + c.price * c.qty, 0) : 0;
 
   // Use translations for the initial 8 mock products, fallback to the dynamic DB name
   const products = useMemo(() => productsData.map((p) => ({
@@ -562,7 +558,7 @@ export default function TradingStorePage() {
 
       {/* Quick View Modal */}
       <AnimatePresence>
-        {quickView && <ProductModal product={quickView} onClose={() => setQuickView(null)} ts={ts} />}
+        {quickView && <ProductModal product={quickView} onClose={() => setQuickView(null)} onCheckout={() => setCheckoutCart([{ ...quickView, qty: 1 }])} ts={ts} />}
       </AnimatePresence>
 
       {/* Cart Drawer */}
@@ -620,15 +616,13 @@ export default function TradingStorePage() {
                     <span className="text-body-sm text-walnut/60 font-medium">Total</span>
                     <span className="text-display-sm font-bold text-espresso">${cartTotal}</span>
                   </div>
-                  <a
-                    href={`https://wa.me/243990301518?text=${buildWhatsAppMessage()}`}
-                    target="_blank" rel="noopener noreferrer"
-                    className="w-full py-4 bg-[#25D366] text-white rounded-2xl text-center text-sm font-bold hover:bg-[#20BD5A] transition-colors flex items-center justify-center gap-2 shadow-lg"
-                    style={{ textDecoration: "none" }}
+                  <button
+                    onClick={() => { setCartOpen(false); setCheckoutCart(cart); }}
+                    className="w-full py-4 bg-espresso text-white rounded-2xl text-center text-sm font-bold hover:bg-crimson transition-colors flex items-center justify-center gap-2 shadow-lg"
                   >
-                    <WhatsappLogo size={22} weight="fill" />
-                    <span>{ts.orderVia}</span>
-                  </a>
+                    <ShoppingCart size={22} weight="fill" />
+                    <span>Proceed to Checkout</span>
+                  </button>
                 </div>
               )}
             </motion.div>
@@ -636,6 +630,17 @@ export default function TradingStorePage() {
         )}
       </AnimatePresence>
 
+      <AnimatePresence>
+        {checkoutCart && (
+          <CheckoutModal 
+            cart={checkoutCart} 
+            cartTotal={checkoutTotal} 
+            onClose={() => setCheckoutCart(null)} 
+          />
+        )}
+      </AnimatePresence>
+
+      <DermaScan />
       <Footer />
     </main>
   );

@@ -1,6 +1,13 @@
 export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL as string;
 export const MEDIA_BASE_URL = process.env.NEXT_PUBLIC_MEDIA_BASE_URL as string;
 
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
+// Use the provided API key for Derma-Scan AI via env variable
+const GEMINI_API_KEY = process.env.NEXT_PUBLIC_GEMINI_API_KEY || "";
+export const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
+
+
 /**
  * Returns headers with Authorization if a token exists in localStorage.
  */
