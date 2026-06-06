@@ -161,12 +161,11 @@ export default function DermaScan() {
       try {
         let result;
         try {
-          const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
+          const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
           result = await model.generateContent(contents);
         } catch (e: any) {
-          console.warn("Primary model failed, falling back to gemini-pro / gemini-pro-vision...", e);
-          const fallbackModelName = imageFile ? "gemini-pro-vision" : "gemini-pro";
-          const fallbackModel = genAI.getGenerativeModel({ model: fallbackModelName });
+          console.warn("Primary model failed, falling back to gemini-2.5-flash-lite...", e);
+          const fallbackModel = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite" });
           result = await fallbackModel.generateContent(contents);
         }
         const response = await result.response;

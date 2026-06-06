@@ -124,11 +124,11 @@ export default function AdminDashboardPage() {
         
         let result;
         try {
-          const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
+          const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
           result = await model.generateContent(prompt);
         } catch (e: any) {
-          console.warn("Primary model failed, falling back to gemini-pro...", e);
-          const fallbackModel = genAI.getGenerativeModel({ model: "gemini-pro" });
+          console.warn("Primary model failed, falling back to gemini-2.5-flash-lite...", e);
+          const fallbackModel = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite" });
           result = await fallbackModel.generateContent(prompt);
         }
         
