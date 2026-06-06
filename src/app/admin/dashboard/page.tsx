@@ -7,7 +7,7 @@ import {
   SignOut, Plus, Trash, Storefront, Package, Info, 
   PencilSimple, ShoppingCart, ChartLineUp, WarningCircle, CheckCircle
 } from "@phosphor-icons/react";
-import { API_BASE_URL, getAuthHeaders, getImageUrl } from "@/lib/api";
+import { API_BASE_URL, getAuthHeaders, getImageUrl, genAI } from "@/lib/api";
 import toast from "react-hot-toast";
 
 interface AdminProduct {
@@ -117,9 +117,29 @@ export default function AdminDashboardPage() {
     e.preventDefault();
     setIsAdding(true);
     try {
+      toast.loading("Translating & Saving...", { id: "save-toast" });
+      let name_fr = "", name_es = "", desc_fr = "", desc_es = "";
+      try {
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const prompt = `Translate the following product name and description into French and Spanish.\nReturn exactly this JSON format with no markdown formatting:\n{\n  "name_fr": "French name",\n  "name_es": "Spanish name",\n  "desc_fr": "French description",\n  "desc_es": "Spanish description"\n}\nName: ${formData.name}\nDescription: ${formData.desc}`;
+        const result = await model.generateContent(prompt);
+        const text = result.response.text().replace(/```json/g, "").replace(/```/g, "").trim();
+        const parsed = JSON.parse(text);
+        name_fr = parsed.name_fr || "";
+        name_es = parsed.name_es || "";
+        desc_fr = parsed.desc_fr || "";
+        desc_es = parsed.desc_es || "";
+      } catch (err) {
+        console.warn("Translation failed", err);
+      }
+
       const payload = new FormData();
       payload.append("name", formData.name);
+      if (name_fr) payload.append("name_fr", name_fr);
+      if (name_es) payload.append("name_es", name_es);
       payload.append("description", formData.desc);
+      if (desc_fr) payload.append("description_fr", desc_fr);
+      if (desc_es) payload.append("description_es", desc_es);
       payload.append("price_usd", String(formData.price));
       payload.append("price_fc", formData.priceFc);
       payload.append("category", formData.category);
@@ -137,16 +157,16 @@ export default function AdminDashboardPage() {
 
       const res = await fetch(url, { method, headers, body: payload });
       if (res.ok) {
-        toast.success(editingId ? "Updated!" : "Added!");
+        toast.success(editingId ? "Updated!" : "Added!", { id: "save-toast" });
         setEditingId(null);
         setFormData({ name: "", desc: "", price: 0, priceFc: "", category: "", tag: "", rating: 5.0, reviews: 0, stock: 10, skin_type: "all" });
         setImageFile(null);
         fetchData();
       } else {
-        toast.error("Failed to save product.");
+        toast.error("Failed to save product.", { id: "save-toast" });
       }
     } catch (err) {
-      toast.error("Network error.");
+      toast.error("Network error.", { id: "save-toast" });
     } finally {
       setIsAdding(false);
     }

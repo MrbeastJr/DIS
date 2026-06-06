@@ -218,7 +218,7 @@ function ProductModal({ product, onClose, onCheckout, ts }: {
 
 /* ── Main Store Page ── */
 export default function TradingStorePage() {
-  const { t } = useLanguage();
+  const { locale, t } = useLanguage();
   const ts = t?.tradingStore;
 
   const [productsData, setProductsData] = useState<any[]>(MOCK_DB_INITIAL_DATA);
@@ -234,8 +234,10 @@ export default function TradingStorePage() {
           const formattedData = productsArray.map((item: any) => ({
             ...item,
             desc: item.description,
+            desc_fr: item.description_fr,
+            desc_es: item.description_es,
             price: item.price_usd,
-            priceFc: item.price_fc,
+            priceFc: String(item.price_fc).toLowerCase().includes("fc") ? item.price_fc : `${item.price_fc} FC`,
             rating: 5.0, // Mock fallback
             reviews: 0,  // Mock fallback
             image: getImageUrl(item.image),
@@ -293,11 +295,29 @@ export default function TradingStorePage() {
   const checkoutTotal = checkoutCart ? checkoutCart.reduce((sum, c) => sum + c.price * c.qty, 0) : 0;
 
   // Use translations for the initial 8 mock products, fallback to the dynamic DB name
-  const products = useMemo(() => productsData.map((p) => ({
-    ...p,
-    name: (!p.isFetched && p.id <= 8) ? (ts?.productNames?.[p.id - 1] || p.name) : (p.name || `Product ${p.id}`),
-    desc: (!p.isFetched && p.id <= 8) ? (ts?.productDescs?.[p.id - 1] || p.desc) : (p.desc || "Premium quality product."),
-  })), [ts, productsData]);
+  const products = useMemo(() => productsData.map((p) => {
+    let finalName = p.name || `Product ${p.id}`;
+    let finalDesc = p.desc || "Premium quality product.";
+
+    if (!p.isFetched && p.id <= 8) {
+      finalName = ts?.productNames?.[p.id - 1] || finalName;
+      finalDesc = ts?.productDescs?.[p.id - 1] || finalDesc;
+    } else if (p.isFetched) {
+      if (locale === 'fr') {
+        finalName = p.name_fr || finalName;
+        finalDesc = p.desc_fr || finalDesc;
+      } else if (locale === 'es') {
+        finalName = p.name_es || finalName;
+        finalDesc = p.desc_es || finalDesc;
+      }
+    }
+
+    return {
+      ...p,
+      name: finalName,
+      desc: finalDesc,
+    };
+  }), [ts, productsData, locale]);
 
   const filtered = useMemo(() => {
     return products.filter((p) => {
