@@ -166,6 +166,51 @@ export interface Translations {
     readPaper: string;
     closePaper: string;
   };
+
+  dermaScan: {
+    title: string;
+    poweredBy: string;
+    discover: string;
+    discoverSub: string;
+    analyzeSkin: string;
+    analyzeSub: string;
+    takePhoto: string;
+    uploadImage: string;
+    describeSkin: string;
+    cancel: string;
+    capturePhoto: string;
+    describeLabelText: string;
+    describeLabelImg: string;
+    placeholder: string;
+    back: string;
+    analyzeBtn: string;
+    analyzing: string;
+    analyzingSub: string;
+    analysisFailed: string;
+    tryAgain: string;
+    identifiedType: string;
+    perfectMatches: string;
+    productsFound: string;
+    noProducts: string;
+    startNew: string;
+  };
+  trackOrder: {
+    tag: string;
+    title: string;
+    subtitle: string;
+    orderNumPlaceholder: string;
+    emailPlaceholder: string;
+    trackBtn: string;
+    detailsLabel: string;
+    totalLabel: string;
+    paid: string;
+    unpaid: string;
+    cancelledTitle: string;
+    cancelledSub: string;
+    itemsLabel: string;
+    qtyLabel: string;
+    stages: Record<string, { label: string; desc: string }>;
+  };
 }
 
 const translations: Record<Locale, Translations> = {
@@ -614,6 +659,57 @@ This research serves as a blueprint for operations in Nigeria, Ghana, and Ivory 
       ],
       readPaper: "Read Research Paper",
       closePaper: "Close Paper"
+    },
+
+    dermaScan: {
+      title: "AI Derma-Scan",
+      poweredBy: "Powered by Gemini",
+      discover: "Discover Your Perfect Match!",
+      discoverSub: "Scan your skin type to get cosmetics that perfectly fit you.",
+      analyzeSkin: "Analyze Your Skin",
+      analyzeSub: "Choose how you'd like our AI to analyze your skin to find the perfect cosmetic products for you.",
+      takePhoto: "Take a Photo",
+      uploadImage: "Upload Image",
+      describeSkin: "Describe Skin",
+      cancel: "Cancel",
+      capturePhoto: "Capture Photo",
+      describeLabelText: "Describe your skin concerns",
+      describeLabelImg: "Add extra details (Optional)",
+      placeholder: "e.g. My T-zone is oily but my cheeks feel dry and flaky after washing...",
+      back: "Back",
+      analyzeBtn: "Analyze Skin",
+      analyzing: "Analyzing Skin Profile",
+      analyzingSub: "Our AI is processing your inputs...",
+      analysisFailed: "Analysis Failed",
+      tryAgain: "Try Again",
+      identifiedType: "Identified Type",
+      perfectMatches: "Your Perfect Matches",
+      productsFound: "Products Found",
+      noProducts: "No specialized products found for this skin type currently in stock.",
+      startNew: "Start New Scan"
+    },
+    trackOrder: {
+      tag: "Logistics & Fulfillment",
+      title: "Track Your Order",
+      subtitle: "Enter your tracking number and email address to get real-time updates on your shipment status.",
+      orderNumPlaceholder: "Order Number (e.g. ORD-...)",
+      emailPlaceholder: "Billing Email Address",
+      trackBtn: "Track",
+      detailsLabel: "Order Details",
+      totalLabel: "Total Amount",
+      paid: "Paid",
+      unpaid: "Unpaid",
+      cancelledTitle: "Order Cancelled",
+      cancelledSub: "This order has been cancelled. Please contact support for assistance.",
+      itemsLabel: "Order Items",
+      qtyLabel: "Qty",
+      stages: {
+        PENDING: { label: "Pending", desc: "Waiting for payment confirmation." },
+        PAYMENT_REVIEW: { label: "Payment Review", desc: "Reviewing your payment proof." },
+        PROCESSING: { label: "Processing", desc: "Packing your items carefully." },
+        SHIPPED: { label: "Shipped", desc: "Handed over to logistics partner." },
+        DELIVERED: { label: "Delivered", desc: "Enjoy your items!" }
+      }
     }
   },
   fr: {
@@ -1061,6 +1157,57 @@ Cette recherche sert de plan d'action pour les opérations au Nigeria, au Ghana 
       ],
       readPaper: "Lire le document de recherche",
       closePaper: "Fermer le document"
+    },
+
+    dermaScan: {
+      title: "Derma-Scan IA",
+      poweredBy: "Propulsé par Gemini",
+      discover: "Découvrez Votre Produit Idéal !",
+      discoverSub: "Scannez votre type de peau pour obtenir des cosmétiques qui vous conviennent parfaitement.",
+      analyzeSkin: "Analysez Votre Peau",
+      analyzeSub: "Choisissez comment vous souhaitez que notre IA analyse votre peau pour trouver les produits parfaits.",
+      takePhoto: "Prendre une Photo",
+      uploadImage: "Télécharger une Image",
+      describeSkin: "Décrire la Peau",
+      cancel: "Annuler",
+      capturePhoto: "Capturer la Photo",
+      describeLabelText: "Décrivez vos problèmes de peau",
+      describeLabelImg: "Ajouter des détails (Optionnel)",
+      placeholder: "ex: Ma zone T est grasse mais mes joues sont sèches après le lavage...",
+      back: "Retour",
+      analyzeBtn: "Analyser la Peau",
+      analyzing: "Analyse du Profil Cutané",
+      analyzingSub: "Notre IA traite vos informations...",
+      analysisFailed: "L'analyse a échoué",
+      tryAgain: "Réessayer",
+      identifiedType: "Type Identifié",
+      perfectMatches: "Vos Correspondances Parfaites",
+      productsFound: "Produits Trouvés",
+      noProducts: "Aucun produit spécialisé trouvé pour ce type de peau actuellement en stock.",
+      startNew: "Commencer un Nouveau Scan"
+    },
+    trackOrder: {
+      tag: "Logistique & Distribution",
+      title: "Suivre Votre Commande",
+      subtitle: "Entrez votre numéro de commande et votre adresse e-mail pour obtenir des mises à jour en temps réel.",
+      orderNumPlaceholder: "Numéro de Commande (ex: ORD-...)",
+      emailPlaceholder: "Adresse E-mail de Facturation",
+      trackBtn: "Suivre",
+      detailsLabel: "Détails de la Commande",
+      totalLabel: "Montant Total",
+      paid: "Payé",
+      unpaid: "Non Payé",
+      cancelledTitle: "Commande Annulée",
+      cancelledSub: "Cette commande a été annulée. Veuillez contacter le support pour obtenir de l'aide.",
+      itemsLabel: "Articles de la Commande",
+      qtyLabel: "Qté",
+      stages: {
+        PENDING: { label: "En attente", desc: "En attente de confirmation de paiement." },
+        PAYMENT_REVIEW: { label: "Vérification du paiement", desc: "Vérification de votre preuve de paiement." },
+        PROCESSING: { label: "En cours", desc: "Emballage soigné de vos articles." },
+        SHIPPED: { label: "Expédié", desc: "Remis au partenaire logistique." },
+        DELIVERED: { label: "Livré", desc: "Profitez de vos articles !" }
+      }
     }
   },
   es: {
@@ -1508,6 +1655,57 @@ Esta investigación sirve como un modelo para las operaciones en Nigeria, Ghana 
       ],
       readPaper: "Leer documento de investigación",
       closePaper: "Cerrar documento"
+    },
+
+    dermaScan: {
+      title: "Derma-Scan con IA",
+      poweredBy: "Desarrollado por Gemini",
+      discover: "¡Descubre tu producto ideal!",
+      discoverSub: "Escanea tu tipo de piel para obtener cosméticos que se adapten perfectamente a ti.",
+      analyzeSkin: "Analiza tu Piel",
+      analyzeSub: "Elige cómo te gustaría que nuestra IA analice tu piel para encontrar los productos perfectos.",
+      takePhoto: "Tomar una Foto",
+      uploadImage: "Subir Imagen",
+      describeSkin: "Describir la Piel",
+      cancel: "Cancelar",
+      capturePhoto: "Capturar Foto",
+      describeLabelText: "Describe tus problemas de piel",
+      describeLabelImg: "Añadir detalles adicionales (Opcional)",
+      placeholder: "ej: Mi zona T es grasa pero mis mejillas se sienten secas...",
+      back: "Volver",
+      analyzeBtn: "Analizar la Piel",
+      analyzing: "Analizando el Perfil de la Piel",
+      analyzingSub: "Nuestra IA está procesando tu información...",
+      analysisFailed: "El análisis ha fallado",
+      tryAgain: "Intentar de Nuevo",
+      identifiedType: "Tipo Identificado",
+      perfectMatches: "Tus Coincidencias Perfectas",
+      productsFound: "Productos Encontrados",
+      noProducts: "No se encontraron productos especializados para este tipo de piel en stock.",
+      startNew: "Comenzar un Nuevo Escaneo"
+    },
+    trackOrder: {
+      tag: "Logística y Distribución",
+      title: "Rastrear tu Pedido",
+      subtitle: "Introduce tu número de pedido y correo electrónico para obtener actualizaciones en tiempo real.",
+      orderNumPlaceholder: "Número de Pedido (ej: ORD-...)",
+      emailPlaceholder: "Correo Electrónico de Facturación",
+      trackBtn: "Rastrear",
+      detailsLabel: "Detalles del Pedido",
+      totalLabel: "Cantidad Total",
+      paid: "Pagado",
+      unpaid: "No Pagado",
+      cancelledTitle: "Pedido Cancelado",
+      cancelledSub: "Este pedido ha sido cancelado. Por favor, contacta con soporte.",
+      itemsLabel: "Artículos del Pedido",
+      qtyLabel: "Cant.",
+      stages: {
+        PENDING: { label: "Pendiente", desc: "Esperando confirmación de pago." },
+        PAYMENT_REVIEW: { label: "Revisión de Pago", desc: "Revisando tu comprobante de pago." },
+        PROCESSING: { label: "Procesando", desc: "Empaquetando tus artículos cuidadosamente." },
+        SHIPPED: { label: "Enviado", desc: "Entregado al socio logístico." },
+        DELIVERED: { label: "Entregado", desc: "¡Disfruta de tus artículos!" }
+      }
     }
   }
 };
