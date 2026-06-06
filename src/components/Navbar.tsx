@@ -7,6 +7,7 @@ import { GlobeSimple, House, ShoppingCart, Package, User, ChatCircle, Trophy, X 
 import { useLanguage } from "@/context/LanguageContext";
 import type { Locale } from "@/lib/translations";
 import Image from "next/image";
+import Link from "next/link";
 
 const localeLabels: Record<Locale, string> = { en: "EN", fr: "FR", es: "ES" };
 
@@ -350,9 +351,9 @@ export default function Navbar() {
 
                 <div className="pt-6 border-t border-sand/50 flex flex-col space-y-4">
                   <span className="text-xs font-bold text-walnut/50 uppercase tracking-widest mb-2">Features</span>
-                  <button onClick={() => { setMobileMenuOpen(false); setTimeout(() => document.dispatchEvent(new Event('openDermaScan')), 300); }} className="text-left text-lg font-semibold text-espresso hover:text-crimson transition-colors">
+                  <Link href="/derma-scan" onClick={() => setMobileMenuOpen(false)} className="text-left text-lg font-semibold text-espresso hover:text-crimson transition-colors">
                     AI Derma-Scan
-                  </button>
+                  </Link>
                   <button onClick={() => { setMobileMenuOpen(false); setTimeout(() => navigate('/track', true), 300); }} className="text-left text-lg font-semibold text-espresso hover:text-crimson transition-colors">
                     Track Order
                   </button>

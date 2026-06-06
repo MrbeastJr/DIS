@@ -72,6 +72,7 @@ export interface Translations {
     items: { name: string; desc: string }[];
   };
   process: {
+
     title: string;
     steps: { title: string; description: string }[];
   };
@@ -82,8 +83,8 @@ export interface Translations {
     headline: string;
     button: string;
   };
-  floatingOrder: string;
   spamWarning: string;
+  floatingOrder: string;
   loader: {
     subtitle: string;
   };
@@ -494,8 +495,8 @@ const translations: Record<Locale, Translations> = {
       headline: "Built for businesses\nthat move globally.",
       button: "Start a Conversation",
     },
-    floatingOrder: "Order Now",
     spamWarning: "Order placed successfully! Please check your spam/junk folder for your confirmation email.",
+    floatingOrder: "Order Now",
     loader: {
       subtitle: "Building Global Operational Excellence",
     },
@@ -993,8 +994,8 @@ This research serves as a blueprint for operations in Nigeria, Ghana, and Ivory 
       headline: "Conçu pour les entreprises\nqui opèrent mondialement.",
       button: "Démarrer une Conversation",
     },
-    floatingOrder: "Commander",
     spamWarning: "Commande passée avec succès ! Veuillez vérifier votre dossier spam/courrier indésirable pour votre e-mail de confirmation.",
+    floatingOrder: "Commander",
     loader: {
       subtitle: "Construire l'Excellence Opérationnelle Mondiale",
     },
@@ -1213,292 +1214,6 @@ Cette recherche sert de plan d'action pour les opérations au Nigeria, au Ghana 
       }
     }
   },
-  es: {
-    nav: {
-      home: "Inicio",
-      services: "Servicios",
-      industries: "Industrias",
-      about: "Nosotros",
-      contact: "Contacto",
-      trading: "Comercio",
-      logistics: "Logística",
-      achievements: "Logros",
-    },
-    hero: {
-      headline: "Logística Moderna y\nConsultoría Estratégica para\nel Comercio Africano",
-      subtext:
-        "Conectamos mercados, optimizamos cadenas de suministro e impulsamos el crecimiento en África y más allá.",
-      cta1: "Contáctenos",
-      cta2: "Explorar Servicios",
-    },
-    trustStrip: {
-      items: [
-        "Logística",
-        "Adquisiciones",
-        "Consultoría",
-        "Comercio",
-        "Operaciones Transfronterizas",
-        "Gestión de Cadena",
-        "Asesoría Estratégica",
-        "Entrada al Mercado",
-      ],
-    },
-    services: {
-      title: "Lo Que Hacemos",
-      subtitle: "Capacidades fundamentales que impulsan operaciones globales",
-      logistics: {
-        title: "Logística",
-        description:
-          "Gestión integral de carga, almacenamiento y redes de distribución en África, Medio Oriente y Asia.",
-      },
-      consulting: {
-        title: "Consultoría Estratégica",
-        description:
-          "Estrategias de entrada al mercado, auditorías operativas y transformación empresarial.",
-      },
-      procurement: {
-        title: "Adquisiciones",
-        description:
-          "Abastecimiento global, gestión de proveedores y optimización de compras — calidad, eficiencia y cumplimiento a escala.",
-      },
-      trading: {
-        title: "Comercio",
-        description:
-          "Comercio transfronterizo de materias primas y alianzas comerciales que conectan productores africanos con mercados internacionales.",
-      },
-    },
-    serviceDetail: {
-      backToHome: "Volver al Inicio",
-      serviceArea: "Área de Servicio Corporativo",
-      storefront: "Mini Tienda en Línea",
-      overview: "Descripción General",
-      keyCapabilities: "Capacidades Clave",
-      readyCta: "¿Listo para acelerar sus operaciones?",
-      readyCtaSub: "Contacte directamente al CEO Okey Francis CHIBUEZE en WhatsApp para conexiones rápidas de intermediarios, rutas de carga o pedidos de cosméticos.",
-      chatWhatsApp: "Chatear en WhatsApp",
-      orderVia: "Pedir por WhatsApp",
-      verifiedCatalog: "Catálogo Verificado",
-      featuredProducts: "Cosméticos Premium Destacados",
-      featuredProductsSub: "Explore nuestras importaciones de cuidado de piel y belleza. Haga clic en cualquier artículo para iniciar un pedido mayorista o minorista a través de WhatsApp.",
-      faqTitle: "Consultas Frecuentes",
-      faqSub: "Respuestas claras sobre representación intermediaria, estructuración operativa y portales de software integrados.",
-      logistics: {
-        title: "Logística Global y Carga Express",
-        subtitle: "Orquestación integral de la cadena de suministro en RD Congo, Nigeria y corredores comerciales globales.",
-        description: "Desarrollamos y mantenemos redes de distribución, instalaciones de transporte, rutas de carga express y logística de fulfillment mayorista. Dirigido por el CEO Okey Francis CHIBUEZE, nuestro marco registrado conecta requisitos regionales con eficiencia global.",
-        capabilities: [
-          "Despacho Aduanero Transfronterizo y Cadenas de Cumplimiento",
-          "Carga Express y Redes de Transporte Multimodal",
-          "Almacenamiento Seguro en Hubs de Lubumbashi y Lagos",
-          "Envío Directo y Representación de Intermediario de Carga",
-        ],
-      },
-      consulting: {
-        title: "Servicios de Consultoría Estratégica",
-        subtitle: "Asesoría accionable para entrada a mercados emergentes, optimización de adquisiciones y estructuración corporativa.",
-        description: "Navegue por los paisajes comerciales y regulatorios del África Subsahariana con inteligencia local verificada sobre el terreno. Nuestra suite de consultoría ofrece estrategias de acceso al mercado personalizadas y hojas de ruta de cumplimiento estructuradas.",
-        capabilities: [
-          "Auditorías de Factibilidad de Mercado y Planes de Expansión",
-          "Alineación de Intermediarios para Compradores y Vendedores Globales",
-          "Soporte de Licencias, Incorporación y Alineación de Entidad RC",
-          "Plataforma Empresarial Escalable & Infraestructura Digital",
-        ],
-      },
-      procurement: {
-        title: "Adquisiciones y Sourcing Estratégico",
-        subtitle: "Soluciones de abastecimiento de alta integridad conectando demanda internacional con cadenas de suministro confiables.",
-        description: "Como intermediarios seguros, presentamos compradores y vendedores verificados mientras gestionamos aseguramiento de calidad, directrices de escrow y paridad de precios. Desde activos comerciales hasta artículos de estilo de vida premium.",
-        capabilities: [
-          "Auditorías Estructuradas de Proveedores y Paridad de Precios Globales",
-          "Protocolos de Introducción de Intermediarios Directos",
-          "Sourcing de Commodities Mayoristas y Productos Terminados",
-          "Aseguramiento de Calidad y Verificación Multi-Punto",
-        ],
-      },
-      trading: {
-        title: "Comercio de Belleza, Cosméticos, Accesorios Móviles y Materias Primas",
-        subtitle: "Importaciones premium de cosméticos, accesorios móviles y estilo de vida gestionadas con ejecución retail global.",
-        description: "DIGITAL INTEGRATED SERVICES RDC maintains a thriving commercial marketplace specializing in highly curated skin wellness, glow formulations, and personal care products distributed directly across our local hubs.",
-        capabilities: [
-          "Optimización de Redes Mayoristas y Minoristas",
-          "Distribución de Lociones Premium de Brillo y Exfoliación",
-          "Fulfillment Directo al Consumidor vía Canales WhatsApp",
-          "Canales de Pago Directo Seguros y Envío Local",
-        ],
-      },
-      faqs: [
-        {
-          q: "¿Cómo iniciar una asociación de consultoría o comercio?",
-          a: "Contáctenos directamente vía WhatsApp (+243 990 301 518). El CEO Okey Francis CHIBUEZE y nuestros asociados senior definen los requisitos operativos y vías transaccionales al instante.",
-        },
-        {
-          q: "¿Qué infraestructura digital y backend soportan?",
-          a: "Desplegamos arquitecturas empresariales optimizadas para escalabilidad, incorporando entornos backend de alto rendimiento para gestión de clientes e integraciones de mensajería.",
-        },
-        {
-          q: "¿Están sus entidades regionales completamente verificadas y licenciadas?",
-          a: "Absolutamente. DIGITAL INTEGRATED SERVICES RDC opera en alineación directa con nuestra sede comercial nigeriana registrada (Subsidiaria de COFRANCE INTEGRATED CONCEPT LTD RC:1492798), garantizando transparencia institucional.",
-        },
-      ],
-      makeEnquiry: "Hacer más consultas",
-      consultingFaqs: [
-        {
-          q: "¿Cómo iniciar un compromiso de consultoría con DIS?",
-          a: "Simplemente contáctese vía WhatsApp con el CEO Okey Francis CHIBUEZE (+243 990 301 518). Comenzamos con una llamada de descubrimiento gratuita para entender sus objetivos, mercado de interés y cronograma antes de presentar una hoja de ruta personalizada.",
-          whatsappMsg: "Hola CEO, estoy interesado en iniciar un compromiso de consultoría con DIS. ¿Podríamos programar una llamada de descubrimiento?",
-        },
-        {
-          q: "¿En qué mercados africanos tienen experiencia directa?",
-          a: "Tenemos presencia operativa directa en RDC, Nigeria, Ghana, Kenia y Sudáfrica. También facilitamos la entrada a EAU, China, Turquía, India y Arabia Saudita a través de nuestra red global de socios.",
-          whatsappMsg: "Hola CEO, me gustaría saber más sobre su experiencia directa en mercados africanos específicos.",
-        },
-        {
-          q: "¿Pueden ayudarnos a establecer una entidad comercial registrada en África?",
-          a: "Sí. Proporcionamos soporte completo de estructuración corporativa incluyendo formación de entidad, registro RC, licencias y cumplimiento regulatorio en la RDC y Nigeria.",
-          whatsappMsg: "Hola CEO, necesito asistencia para establecer una entidad comercial registrada en África.",
-        },
-        {
-          q: "¿Ofrecen asesoría continua o solo consultoría de proyectos puntuales?",
-          a: "Ambos. Proporcionamos estudios de viabilidad puntuales así como asesoría retenida a largo plazo para empresas con operaciones africanas en curso. Nuestra tasa de retención del 100% refleja la profundidad de nuestros compromisos.",
-          whatsappMsg: "Hola CEO, me gustaría discutir servicios de asesoría continua y consultoría retenida.",
-        },
-        {
-          q: "¿Cómo verifican y presentan a los socios intermediarios?",
-          a: "Cada intermediario, proveedor o comprador en nuestra red pasa por un proceso de verificación multi-punto incluyendo verificaciones legales, referencias comerciales y diligencia debida in situ.",
-          whatsappMsg: "Hola CEO, tengo preguntas sobre su proceso de verificación e introducción de socios.",
-        },
-        {
-          q: "¿En qué industrias han realizado proyectos de consultoría?",
-          a: "Hemos servido más de 12 industrias incluyendo minería, petróleo y gas, agricultura, FMCG, construcción, farmacéutica, telecomunicaciones e inmobiliaria. Cada proyecto es liderado por especialistas sectoriales.",
-          whatsappMsg: "Hola CEO, me gustaría conocer su experiencia de consultoría en mi industria específica.",
-        },
-      ],
-      logisticsFaqs: [
-        {
-          q: "¿Manejan envíos intercontinentales así como entregas locales a nivel estatal/provincial?",
-          a: "Sí, manejamos ambos. Operamos grandes fletes marítimos/aéreos intercontinentales, transporte transfronterizo entre naciones africanas y entregas localizadas de estado a estado o de ciudad a ciudad en la RDC y Nigeria.",
-          whatsappMsg: "Hola CEO, tengo una consulta sobre su logística de envío intercontinental y local a nivel estatal.",
-        },
-        {
-          q: "¿Cuánto tiempo toma típicamente el envío?",
-          a: "El flete marítimo intercontinental toma de 3 a 5 semanas. El flete aéreo llega entre 3 y 7 días. Para la logística local o dentro del país, las entregas suelen tardar de 24 a 72 horas.",
-          whatsappMsg: "Hola CEO, me gustaría hacer una consulta sobre los plazos de envío y las opciones de entrega exprés.",
-        },
-        {
-          q: "¿Manejan el despacho de aduanas para mercancías importadas?",
-          a: "Sí, proporcionamos despacho de aduanas de extremo a extremo. Nuestro profundo conocimiento de las regulaciones locales asegura que su carga pase el control fronterizo sin demoras.",
-          whatsappMsg: "Hola CEO, necesito asistencia o tengo una consulta relacionada con el despacho de aduanas para bienes importados.",
-        },
-        {
-          q: "¿Está asegurada mi carga durante el tránsito?",
-          a: "Absolutamente. Toda la carga gestionada por DIS está completamente asegurada contra pérdida o daño durante el tránsito, brindándole total tranquilidad desde la salida hasta la entrega final.",
-          whatsappMsg: "Hola CEO, tengo una consulta sobre sus pólizas de seguro de carga.",
-        },
-        {
-          q: "¿Pueden consolidar envíos de múltiples proveedores internacionales?",
-          a: "Sí, nuestras instalaciones en importantes ciudades comerciales nos permiten consolidar mercancías de varios proveedores en un solo contenedor, reduciendo significativamente los costos.",
-          whatsappMsg: "Hola CEO, me interesa la consolidación de envíos de múltiples proveedores y quisiera saber más.",
-        },
-        {
-          q: "¿Qué tipos de mercancías requieren manejo especial?",
-          a: "Aunque transportamos una amplia gama de bienes comerciales, materiales peligrosos y productos químicos específicos requieren documentación especial.",
-          whatsappMsg: "Hola CEO, quiero realizar una consulta sobre el envío de mercancías restringidas o especializadas.",
-        },
-      ],
-      procurementFaqs: [
-        {
-          q: "¿Cómo garantizan la calidad de los bienes adquiridos?",
-          a: "Realizamos rigurosas auditorías de proveedores de múltiples puntos, inspecciones in situ y controles de garantía de calidad antes del envío, asegurando que todos los productos cumplen con estándares internacionales.",
-          whatsappMsg: "Hola CEO, tengo una consulta sobre su proceso de garantía de calidad para bienes adquiridos.",
-        },
-        {
-          q: "¿Pueden abastecer productos especializados o de nicho?",
-          a: "Sí. Nuestra red global abarca 5 continentes, permitiéndonos adquirir una gran variedad de productos, desde maquinaria pesada y materias primas hasta bienes de estilo de vida premium.",
-          whatsappMsg: "Hola CEO, me gustaría saber si pueden abastecer un producto especializado específico para mi negocio.",
-        },
-        {
-          q: "¿Cuál es su tiempo de respuesta típico para adquisiciones?",
-          a: "Para productos estándar y proveedores verificados, garantizamos un plazo de 48 horas desde el pedido hasta el despacho. Las adquisiciones personalizadas pueden demorar más según las especificaciones.",
-          whatsappMsg: "Hola CEO, quiero consultar el tiempo de respuesta estimado para un pedido de adquisición.",
-        },
-        {
-          q: "¿Cómo gestionan las fluctuaciones de precios y negocian costos?",
-          a: "Nuestras estrategias de adquisición basadas en datos y relaciones directas con fabricantes nos permiten evitar intermediarios, brindando un ahorro de costos del 30% en promedio.",
-          whatsappMsg: "Hola CEO, estoy interesado en cómo DIS puede ayudar a optimizar nuestros costos de adquisición.",
-        },
-        {
-          q: "¿Manejan el proceso de pago y depósito (escrow)?",
-          a: "Absolutamente. Facilitamos transacciones seguras con directrices de pago estructuradas y supervisión de depósito, protegiendo tanto a compradores como a vendedores durante todo el ciclo de adquisición.",
-          whatsappMsg: "Hola CEO, tengo preguntas con respecto a su gestión de depósito y procesos de pago seguro.",
-        },
-        {
-          q: "¿Pueden integrar las adquisiciones con la logística?",
-          a: "Sí. Las adquisiciones y la logística están perfectamente integradas en DIS. Una vez que se adquieren y verifican los bienes, nuestras redes de transporte multimodal manejan el viaje completo.",
-          whatsappMsg: "Hola CEO, me gustaría discutir una solución integrada de adquisición y logística.",
-        },
-      ],
-    },
-    globalReach: {
-      title: "Alcance Global",
-      subtitle:
-        "Presencia estratégica en mercados clave de África, Medio Oriente y Asia.",
-    },
-    industries: {
-      sectionLabel: "Industrias Que Servimos",
-      sectionTitle: "Impulsando los Sectores Que Mueven África",
-      sectionSub: "Desde recursos naturales hasta bienes de consumo, ofrecemos soluciones de logística, adquisiciones y consultoría en las industrias más críticas de África.",
-      items: [
-        { name: "Minería y Minerales", desc: "Suministro de equipos, logística de campamentos y facilitación de exportación minera" },
-        { name: "Petróleo y Gas", desc: "Cadena de suministro upstream, logística de refinería y adquisición energética" },
-        { name: "FMCG y Retail", desc: "Distribución de bienes de consumo rápido y cadenas de suministro minoristas" },
-        { name: "Agricultura", desc: "Logística del campo al mercado, apoyo agroindustrial y exportación" },
-        { name: "Construcción", desc: "Abastecimiento de materiales, equipos pesados y logística de obra" },
-        { name: "Farmacéutica", desc: "Logística de cadena de frío, adquisición de suministros médicos y cumplimiento" },
-        { name: "Energía y Electricidad", desc: "Suministro de infraestructura eléctrica, equipos solares y logística de red" },
-        { name: "Transporte y Carga", desc: "Camiones transfronterizos, envío de carga y gestión de flotas" },
-        { name: "Bienes Raíces", desc: "Consultoría de desarrollo, adquisición de materiales y gestión de instalaciones" },
-        { name: "Manufactura", desc: "Abastecimiento de materias primas, consultoría de planta y logística de exportación" },
-      ],
-    },
-    process: {
-      title: "Nuestro Proceso",
-      steps: [
-        {
-          title: "Consulta",
-          description:
-            "Análisis profundo de su panorama operativo y objetivos de crecimiento.",
-        },
-        {
-          title: "Estrategia",
-          description:
-            "Estrategias a medida basadas en datos y mejores prácticas globales.",
-        },
-        {
-          title: "Ejecución",
-          description:
-            "Despliegue preciso con equipos dedicados y seguimiento en tiempo real.",
-        },
-        {
-          title: "Entrega",
-          description:
-            "Resultados medibles, informes transparentes y optimización continua.",
-        },
-      ],
-    },
-    testimonials: {
-      title: "Lo Que Dicen Nuestros Socios",
-    },
-    cta: {
-      headline: "Diseñado para empresas\nque operan globalmente.",
-      button: "Iniciar una Conversación",
-    },
-    floatingOrder: "Comprar Ahora",
-    spamWarning: "¡Pedido realizado con éxito! Por favor, revise su carpeta de spam/correo no deseado para encontrar su correo de confirmación.",
-    loader: {
-      subtitle: "Construyendo Excelencia Operacional Global",
-    },
-    footer: {
-      tagline: "Precisión. Integridad. Perspectiva Global.",
       copyright: `© ${new Date().getFullYear()} DIS Group. Todos los derechos reservados.`,
     },
     pieChart: {

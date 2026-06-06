@@ -4,6 +4,8 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { X, Spinner, CheckCircle } from "@phosphor-icons/react";
 import { API_BASE_URL } from "@/lib/api";
+import { useLanguage } from "@/context/LanguageContext";
+import { toast } from "react-hot-toast";
 
 interface CheckoutModalProps {
   cart: any[];
@@ -20,6 +22,7 @@ export default function CheckoutModal({ cart, cartTotal, onClose }: CheckoutModa
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const { t, locale } = useLanguage();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,7 +31,7 @@ export default function CheckoutModal({ cart, cartTotal, onClose }: CheckoutModa
 
     try {
       const items = cart.map(item => ({ product_id: item.id, quantity: item.qty || 1 }));
-      const payload = { ...formData, items };
+      const payload = { ...formData, items, locale };
 
       const res = await fetch(`${API_BASE_URL}/orders/`, {
         method: "POST",
@@ -47,7 +50,10 @@ export default function CheckoutModal({ cart, cartTotal, onClose }: CheckoutModa
         `Hi Okey,\n\nI've placed a new order!\n\n🧾 Order ID: ${data.order_id}\n👤 Name: ${formData.customer_name}\n📍 Address: ${formData.shipping_address}\n\nItems:\n${lines.join("\n")}\n\n💰 Total: $${data.total_amount}\n\nPlease confirm my order. Thank you!`
       );
       
-      window.open(`https://wa.me/243990301518?text=${whatsappMsg}`, '_blank');
+      toast.success(t.spamWarning, { duration: 8000, style: { background: '#1A1210', color: '#fff', borderRadius: '12px' } });
+      setTimeout(() => {
+        window.open(`https://wa.me/243990301518?text=${whatsappMsg}`, '_blank');
+      }, 3000);
       onClose();
     } catch (err: any) {
       setError(err.message || "An unexpected error occurred.");

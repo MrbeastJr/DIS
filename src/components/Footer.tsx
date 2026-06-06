@@ -79,7 +79,7 @@ export default function Footer() {
                 <li><Link href="/company#industries" className="text-body-sm text-white/90 hover:text-white font-medium transition-colors duration-300">{industries}</Link></li>
                 <li><Link href="/careers" className="text-body-sm text-white/90 hover:text-white font-medium transition-colors duration-300">Careers</Link></li>
                 <li><Link href="/track" className="text-body-sm text-white/90 hover:text-white font-medium transition-colors duration-300">Track Order</Link></li>
-                <li><button onClick={() => document.dispatchEvent(new Event('openDermaScan'))} className="text-body-sm text-white/90 hover:text-white font-medium transition-colors duration-300">AI Derma-Scan</button></li>
+                <li><Link href="/derma-scan" className="text-body-sm text-white/90 hover:text-white font-medium transition-colors duration-300">AI Derma-Scan</Link></li>
               </ul>
             </div>
 
