@@ -120,9 +120,18 @@ export default function AdminDashboardPage() {
       toast.loading("Translating & Saving...", { id: "save-toast" });
       let name_fr = "", name_es = "", desc_fr = "", desc_es = "";
       try {
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
         const prompt = `Translate the following product name and description into French and Spanish.\nReturn exactly this JSON format with no markdown formatting:\n{\n  "name_fr": "French name",\n  "name_es": "Spanish name",\n  "desc_fr": "French description",\n  "desc_es": "Spanish description"\n}\nName: ${formData.name}\nDescription: ${formData.desc}`;
-        const result = await model.generateContent(prompt);
+        
+        let result;
+        try {
+          const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
+          result = await model.generateContent(prompt);
+        } catch (e: any) {
+          console.warn("Primary model failed, falling back to gemini-pro...", e);
+          const fallbackModel = genAI.getGenerativeModel({ model: "gemini-pro" });
+          result = await fallbackModel.generateContent(prompt);
+        }
+        
         const text = result.response.text();
         const match = text.match(/\{[\s\S]*\}/);
         if (match) {

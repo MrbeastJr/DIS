@@ -138,7 +138,6 @@ export default function DermaScan() {
     
     try {
       // 1. Call Gemini
-      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
       const prompt = `
         You are an expert dermatologist. Analyze the following input to determine the user's skin type and provide a brief, helpful feedback paragraph (2-3 sentences max).
         The skin type MUST be exactly one of these words: normal, dry, oily, combination, sensitive.
@@ -160,7 +159,16 @@ export default function DermaScan() {
       let parsed: { skin_type: string, feedback: string };
       
       try {
-        const result = await model.generateContent(contents);
+        let result;
+        try {
+          const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-latest" });
+          result = await model.generateContent(contents);
+        } catch (e: any) {
+          console.warn("Primary model failed, falling back to gemini-pro / gemini-pro-vision...", e);
+          const fallbackModelName = imageFile ? "gemini-pro-vision" : "gemini-pro";
+          const fallbackModel = genAI.getGenerativeModel({ model: fallbackModelName });
+          result = await fallbackModel.generateContent(contents);
+        }
         const response = await result.response;
         const text = response.text().replace(/```json/g, "").replace(/```/g, "").trim();
         parsed = JSON.parse(text);
