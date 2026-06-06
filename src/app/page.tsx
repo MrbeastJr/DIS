@@ -238,7 +238,8 @@ export default function TradingStorePage() {
             priceFc: item.price_fc,
             rating: 5.0, // Mock fallback
             reviews: 0,  // Mock fallback
-            image: getImageUrl(item.image)
+            image: getImageUrl(item.image),
+            isFetched: true
           }));
           setProductsData(formattedData.length > 0 ? formattedData : MOCK_DB_INITIAL_DATA);
         } else {
@@ -294,8 +295,8 @@ export default function TradingStorePage() {
   // Use translations for the initial 8 mock products, fallback to the dynamic DB name
   const products = useMemo(() => productsData.map((p) => ({
     ...p,
-    name: (p.id <= 8 ? ts?.productNames?.[p.id - 1] : p.name) || p.name || `Product ${p.id}`,
-    desc: (p.id <= 8 ? ts?.productDescs?.[p.id - 1] : p.desc) || p.desc || "Premium quality product.",
+    name: (!p.isFetched && p.id <= 8) ? (ts?.productNames?.[p.id - 1] || p.name) : (p.name || `Product ${p.id}`),
+    desc: (!p.isFetched && p.id <= 8) ? (ts?.productDescs?.[p.id - 1] || p.desc) : (p.desc || "Premium quality product."),
   })), [ts, productsData]);
 
   const filtered = useMemo(() => {
