@@ -8,6 +8,7 @@ import {
   CheckCircle, ArrowRight, Package
 } from "@phosphor-icons/react";
 import { genAI, API_BASE_URL, getImageUrl } from "@/lib/api";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface Product {
   id: number;
@@ -20,6 +21,7 @@ interface Product {
 }
 
 export default function DermaScan() {
+  const { t, locale } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [mode, setMode] = useState<'options' | 'upload' | 'camera' | 'text'>('options');
   const [status, setStatus] = useState<'idle' | 'analyzing' | 'success' | 'error'>('idle');
@@ -147,6 +149,10 @@ export default function DermaScan() {
           "feedback": "..."
         }
         
+        CRITICAL: The "feedback" paragraph MUST be written exclusively in ${
+          locale === "fr" ? "French" : locale === "es" ? "Spanish" : "English"
+        }.
+        
         User Text Description: ${textInput || "None"}
       `;
 
@@ -179,9 +185,15 @@ export default function DermaScan() {
         if (textInput.toLowerCase().includes("dry") || textInput.toLowerCase().includes("flake")) mockType = "dry";
         if (textInput.toLowerCase().includes("oil") || textInput.toLowerCase().includes("shine")) mockType = "oily";
         
+        let fb = "Based on the analysis, your skin exhibits characteristics of " + mockType + " skin. We recommend a balanced routine focused on hydration and gentle cleansing.";
+        if (locale === "fr") {
+          fb = "D'après l'analyse, votre peau présente les caractéristiques d'une peau de type " + mockType + ". Nous recommandons une routine équilibrée axée sur l'hydratation et un nettoyage en douceur.";
+        } else if (locale === "es") {
+          fb = "Según el análisis, su piel presenta características de piel " + mockType + ". Recomendamos una rutina equilibrada centrada en la hidratación y una limpieza suave.";
+        }
         parsed = {
           skin_type: mockType,
-          feedback: "Based on the analysis, your skin exhibits characteristics of " + mockType + " skin. We recommend a balanced routine focused on hydration and gentle cleansing."
+          feedback: fb
         };
       }
 
@@ -199,7 +211,7 @@ export default function DermaScan() {
       setStatus('success');
     } catch (err) {
       console.error("Analysis error:", err);
-      setErrorMsg("We encountered an error analyzing your skin. Please try again.");
+      setErrorMsg(t.dermaScan.analysisFailed);
       setStatus('error');
     }
   };
@@ -241,8 +253,8 @@ export default function DermaScan() {
                   <Sparkle size={16} weight="fill" className="text-crimson" />
                 </div>
                 <div>
-                  <p className="text-xs font-bold text-gray-900 leading-tight mb-1">Discover Your Perfect Match!</p>
-                  <p className="text-[10px] text-gray-500 leading-relaxed">Scan your skin type to get cosmetics that perfectly fit you.</p>
+                  <p className="text-xs font-bold text-gray-900 leading-tight mb-1">{t.dermaScan.discover}</p>
+                  <p className="text-[10px] text-gray-500 leading-relaxed">{t.dermaScan.discoverSub}</p>
                 </div>
               </div>
               <div className="absolute -bottom-2 right-8 w-4 h-4 bg-white border-r border-b border-gray-100 transform rotate-45" />
@@ -256,7 +268,7 @@ export default function DermaScan() {
         >
           <div className="absolute inset-0 bg-gradient-to-r from-crimson/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           <Sparkle size={24} weight="fill" className="text-crimson animate-pulse-slow relative z-10" />
-          <span className="text-white font-bold text-sm tracking-wide relative z-10">AI Derma-Scan</span>
+          <span className="text-white font-bold text-sm tracking-wide relative z-10">{t.dermaScan.title}</span>
         </button>
       </div>
 
@@ -284,8 +296,8 @@ export default function DermaScan() {
                     <Sparkle size={20} weight="fill" className="text-crimson" />
                   </div>
                   <div>
-                    <h2 className="text-lg font-bold text-gray-900">AI Derma-Scan</h2>
-                    <p className="text-[11px] text-gray-500 uppercase tracking-widest font-bold">Powered by Gemini</p>
+                    <h2 className="text-lg font-bold text-gray-900">{t.dermaScan.title}</h2>
+                    <p className="text-[11px] text-gray-500 uppercase tracking-widest font-bold">{t.dermaScan.poweredBy}</p>
                   </div>
                 </div>
                 <button onClick={close} className="p-2 text-gray-400 hover:text-gray-900 hover:bg-gray-100 rounded-full transition-colors">
@@ -306,28 +318,28 @@ export default function DermaScan() {
                         className="space-y-6"
                       >
                         <div className="text-center mb-8">
-                          <h3 className="text-2xl font-bold text-gray-900 mb-2">Analyze Your Skin</h3>
-                          <p className="text-gray-500 text-sm">Choose how you&apos;d like our AI to analyze your skin to find the perfect cosmetic products for you.</p>
+                          <h3 className="text-2xl font-bold text-gray-900 mb-2">{t.dermaScan.analyzeSkin}</h3>
+                          <p className="text-gray-500 text-sm">{t.dermaScan.analyzeSub}</p>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                           <button onClick={() => { setMode('camera'); startCamera(); }} className="flex flex-col items-center gap-4 p-6 rounded-2xl border border-gray-200 hover:border-crimson hover:shadow-lg hover:bg-crimson/5 transition-all group">
                             <div className="w-16 h-16 rounded-full bg-gray-50 group-hover:bg-white flex items-center justify-center transition-colors">
                               <Camera size={32} className="text-gray-400 group-hover:text-crimson transition-colors" />
                             </div>
-                            <span className="font-bold text-gray-700 group-hover:text-crimson text-sm">Take a Photo</span>
+                            <span className="font-bold text-gray-700 group-hover:text-crimson text-sm">{t.dermaScan.takePhoto}</span>
                           </button>
                           <label className="flex flex-col items-center gap-4 p-6 rounded-2xl border border-gray-200 hover:border-crimson hover:shadow-lg hover:bg-crimson/5 transition-all group cursor-pointer">
                             <div className="w-16 h-16 rounded-full bg-gray-50 group-hover:bg-white flex items-center justify-center transition-colors">
                               <UploadSimple size={32} className="text-gray-400 group-hover:text-crimson transition-colors" />
                             </div>
-                            <span className="font-bold text-gray-700 group-hover:text-crimson text-sm">Upload Image</span>
+                            <span className="font-bold text-gray-700 group-hover:text-crimson text-sm">{t.dermaScan.uploadImage}</span>
                             <input type="file" accept="image/*" className="hidden" onChange={(e) => { handleImageUpload(e); setMode('upload'); }} />
                           </label>
                           <button onClick={() => setMode('text')} className="flex flex-col items-center gap-4 p-6 rounded-2xl border border-gray-200 hover:border-crimson hover:shadow-lg hover:bg-crimson/5 transition-all group">
                             <div className="w-16 h-16 rounded-full bg-gray-50 group-hover:bg-white flex items-center justify-center transition-colors">
                               <TextAa size={32} className="text-gray-400 group-hover:text-crimson transition-colors" />
                             </div>
-                            <span className="font-bold text-gray-700 group-hover:text-crimson text-sm">Describe Skin</span>
+                            <span className="font-bold text-gray-700 group-hover:text-crimson text-sm">{t.dermaScan.describeSkin}</span>
                           </button>
                         </div>
                       </motion.div>
@@ -340,8 +352,8 @@ export default function DermaScan() {
                           <div className="absolute inset-0 border-[4px] border-white/20 rounded-2xl pointer-events-none" />
                         </div>
                         <div className="flex gap-4">
-                          <button onClick={reset} className="px-6 py-3 rounded-xl font-bold text-gray-500 bg-gray-100 hover:bg-gray-200 transition-colors">Cancel</button>
-                          <button onClick={capturePhoto} className="px-6 py-3 rounded-xl font-bold text-white bg-crimson hover:bg-crimson-dark transition-colors shadow-lg shadow-crimson/30">Capture Photo</button>
+                          <button onClick={reset} className="px-6 py-3 rounded-xl font-bold text-gray-500 bg-gray-100 hover:bg-gray-200 transition-colors">{t.dermaScan.cancel}</button>
+                          <button onClick={capturePhoto} className="px-6 py-3 rounded-xl font-bold text-white bg-crimson hover:bg-crimson-dark transition-colors shadow-lg shadow-crimson/30">{t.dermaScan.capturePhoto}</button>
                         </div>
                       </motion.div>
                     )}
@@ -359,21 +371,21 @@ export default function DermaScan() {
                         
                         <div>
                           <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">
-                            {mode === 'text' ? "Describe your skin concerns" : "Add extra details (Optional)"}
+                            {mode === 'text' ? t.dermaScan.describeLabelText : t.dermaScan.describeLabelImg}
                           </label>
                           <textarea 
                             value={textInput}
                             onChange={(e) => setTextInput(e.target.value)}
-                            placeholder="e.g. My T-zone is oily but my cheeks feel dry and flaky after washing..."
+                            placeholder={t.dermaScan.placeholder}
                             className="w-full bg-gray-50 border border-gray-200 rounded-xl p-4 text-sm focus:outline-none focus:border-crimson focus:ring-1 focus:ring-crimson transition-all h-32 resize-none"
                           />
                         </div>
 
                         <div className="flex gap-4 pt-4 border-t border-gray-100">
-                          <button onClick={reset} className="flex-1 py-4 rounded-xl font-bold text-gray-500 bg-gray-100 hover:bg-gray-200 transition-colors">Back</button>
+                          <button onClick={reset} className="flex-1 py-4 rounded-xl font-bold text-gray-500 bg-gray-100 hover:bg-gray-200 transition-colors">{t.dermaScan.back}</button>
                           <button onClick={analyzeSkin} disabled={!textInput && !imageFile} className="flex-[2] py-4 rounded-xl font-bold text-white bg-[#1A1210] hover:bg-black transition-colors shadow-lg flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
                             <Sparkle size={20} weight="fill" className="text-crimson" />
-                            Analyze Skin
+                            {t.dermaScan.analyzeBtn}
                           </button>
                         </div>
                       </motion.div>
@@ -388,8 +400,8 @@ export default function DermaScan() {
                       <div className="absolute inset-0 border-4 border-crimson rounded-full border-t-transparent animate-spin" />
                       <Sparkle size={32} weight="fill" className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-crimson animate-pulse" />
                     </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">Analyzing Skin Profile</h3>
-                    <p className="text-gray-500 text-sm">Our AI is processing your inputs...</p>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">{t.dermaScan.analyzing}</h3>
+                    <p className="text-gray-500 text-sm">{t.dermaScan.analyzingSub}</p>
                   </motion.div>
                 )}
 
@@ -398,9 +410,9 @@ export default function DermaScan() {
                     <div className="w-16 h-16 rounded-full bg-red-50 flex items-center justify-center mb-6">
                       <WarningCircle size={32} weight="fill" className="text-red-500" />
                     </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">Analysis Failed</h3>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">{t.dermaScan.analysisFailed}</h3>
                     <p className="text-gray-500 text-sm mb-8">{errorMsg}</p>
-                    <button onClick={reset} className="px-8 py-3 rounded-xl font-bold text-white bg-gray-900 hover:bg-black transition-colors">Try Again</button>
+                    <button onClick={reset} className="px-8 py-3 rounded-xl font-bold text-white bg-gray-900 hover:bg-black transition-colors">{t.dermaScan.tryAgain}</button>
                   </motion.div>
                 )}
 
@@ -415,7 +427,7 @@ export default function DermaScan() {
                         </div>
                         <div>
                           <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-white border border-gray-100 rounded-full text-[10px] font-bold uppercase tracking-wider text-gray-600 mb-3 shadow-sm">
-                            Identified Type: <span className="text-crimson">{skinType}</span>
+                            {t.dermaScan.identifiedType}: <span className="text-crimson">{skinType}</span>
                           </div>
                           <p className="text-gray-700 leading-relaxed font-medium text-sm md:text-base">
                             {feedback}
@@ -427,8 +439,8 @@ export default function DermaScan() {
                     {/* Prescribed Products */}
                     <div>
                       <div className="flex items-center justify-between mb-6">
-                        <h3 className="text-lg font-bold text-gray-900">Your Perfect Matches</h3>
-                        <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">{products.length} Products Found</span>
+                        <h3 className="text-lg font-bold text-gray-900">{t.dermaScan.perfectMatches}</h3>
+                        <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">{products.length} {t.dermaScan.productsFound}</span>
                       </div>
                       
                       {products.length > 0 ? (
@@ -458,13 +470,13 @@ export default function DermaScan() {
                         </div>
                       ) : (
                         <div className="text-center py-8 bg-gray-50 rounded-2xl border border-gray-100 border-dashed">
-                          <p className="text-sm text-gray-500 font-medium">No specialized products found for this skin type currently in stock.</p>
+                          <p className="text-sm text-gray-500 font-medium">{t.dermaScan.noProducts}</p>
                         </div>
                       )}
                     </div>
                     
                     <button onClick={reset} className="w-full py-4 rounded-xl font-bold text-gray-500 bg-gray-50 hover:bg-gray-100 transition-colors text-sm">
-                      Start New Scan
+                      {t.dermaScan.startNew}
                     </button>
                   </motion.div>
                 )}

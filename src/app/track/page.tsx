@@ -9,6 +9,7 @@ import {
   MapPin, Clock, FileText, XCircle, CreditCard
 } from "@phosphor-icons/react";
 import { API_BASE_URL } from "@/lib/api";
+import { useLanguage } from "@/context/LanguageContext";
 import Image from "next/image";
 
 // Matching the backend Order.STATUS_CHOICES
@@ -21,6 +22,7 @@ const STATUS_STAGES = [
 ];
 
 export default function TrackOrderPage() {
+  const { t } = useLanguage();
   const [orderNumber, setOrderNumber] = useState("");
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
@@ -78,14 +80,12 @@ export default function TrackOrderPage() {
           
           <div className="text-center mb-12">
             <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-crimson/10 text-crimson text-[10px] font-bold uppercase tracking-wider mb-4">
-              <Package size={14} weight="fill" />
-              Logistics & Fulfillment
-            </span>
+              <Package size={14} weight="fill" />{t.trackOrder.tag}</span>
             <h1 className="text-display-sm md:text-display-md font-bold text-espresso mb-4">
-              Track Your Order
+              {t.trackOrder.title}
             </h1>
             <p className="text-body-sm text-walnut/60 max-w-lg mx-auto">
-              Enter your tracking number and email address to get real-time updates on your shipment status.
+              {t.trackOrder.subtitle}
             </p>
           </div>
 
@@ -97,7 +97,7 @@ export default function TrackOrderPage() {
                 required
                 value={orderNumber}
                 onChange={e => setOrderNumber(e.target.value)}
-                placeholder="Order Number (e.g. ORD-...)"
+                placeholder={t.trackOrder.orderNumPlaceholder}
                 className="w-full bg-white border border-espresso/10 rounded-2xl py-4 pl-12 pr-4 text-espresso placeholder-walnut/40 focus:outline-none focus:border-crimson focus:ring-1 focus:ring-crimson transition-all shadow-sm"
               />
             </div>
@@ -107,7 +107,7 @@ export default function TrackOrderPage() {
                 required
                 value={email}
                 onChange={e => setEmail(e.target.value)}
-                placeholder="Billing Email Address"
+                placeholder={t.trackOrder.emailPlaceholder}
                 className="w-full bg-white border border-espresso/10 rounded-2xl py-4 px-6 text-espresso placeholder-walnut/40 focus:outline-none focus:border-crimson focus:ring-1 focus:ring-crimson transition-all shadow-sm"
               />
             </div>
@@ -121,7 +121,7 @@ export default function TrackOrderPage() {
               ) : (
                 <>
                   <MagnifyingGlass size={20} weight="bold" />
-                  Track
+                  {t.trackOrder.trackBtn}
                 </>
               )}
             </button>
@@ -149,15 +149,15 @@ export default function TrackOrderPage() {
                 {/* Header */}
                 <div className="bg-espresso p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
                   <div>
-                    <p className="text-white/60 text-xs uppercase tracking-widest font-bold mb-1">Order Details</p>
+                    <p className="text-white/60 text-xs uppercase tracking-widest font-bold mb-1">{t.trackOrder.detailsLabel}</p>
                     <h2 className="text-2xl font-bold text-white mb-2">{order.order_number}</h2>
                     <p className="text-white/80 text-sm">{new Date(order.created_at).toLocaleDateString()}</p>
                   </div>
                   <div className="text-left md:text-right">
-                    <p className="text-white/60 text-xs uppercase tracking-widest font-bold mb-1">Total Amount</p>
+                    <p className="text-white/60 text-xs uppercase tracking-widest font-bold mb-1">{t.trackOrder.totalLabel}</p>
                     <p className="text-2xl font-bold text-white">NGN {parseFloat(order.total_amount).toLocaleString(undefined, { minimumFractionDigits: 2 })}</p>
                     <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider mt-2 ${order.is_paid ? 'bg-green-500/20 text-green-300' : 'bg-white/10 text-white/60'}`}>
-                      {order.is_paid ? 'Paid' : 'Unpaid'}
+                      {order.is_paid ? t.trackOrder.paid : t.trackOrder.unpaid}
                     </span>
                   </div>
                 </div>
@@ -167,8 +167,8 @@ export default function TrackOrderPage() {
                   {isCancelled ? (
                     <div className="text-center py-8">
                       <XCircle size={64} weight="fill" className="text-red-500 mx-auto mb-4" />
-                      <h3 className="text-xl font-bold text-gray-900 mb-2">Order Cancelled</h3>
-                      <p className="text-gray-500 text-sm">This order has been cancelled. Please contact support for assistance.</p>
+                      <h3 className="text-xl font-bold text-gray-900 mb-2">{t.trackOrder.cancelledTitle}</h3>
+                      <p className="text-gray-500 text-sm">{t.trackOrder.cancelledSub}</p>
                     </div>
                   ) : (
                     <div className="relative">
@@ -200,15 +200,11 @@ export default function TrackOrderPage() {
                               </div>
                               <div className="pt-2 md:pt-6">
                                 <h4 className={`text-base md:text-lg font-bold ${isCurrent ? 'text-crimson' : 'text-gray-900'}`}>
-                                  {stage.label}
+                                  {t.trackOrder.stages[stage.id]?.label || stage.label}
                                 </h4>
                                 {isCurrent && (
                                   <p className="text-sm text-gray-500 mt-1">
-                                    {stage.id === 'PENDING' && "Waiting for payment confirmation."}
-                                    {stage.id === 'PAYMENT_REVIEW' && "Reviewing your payment proof."}
-                                    {stage.id === 'PROCESSING' && "Packing your items carefully."}
-                                    {stage.id === 'SHIPPED' && "Handed over to logistics partner."}
-                                    {stage.id === 'DELIVERED' && "Enjoy your items!"}
+                                    {t.trackOrder.stages[stage.id]?.desc}
                                   </p>
                                 )}
                               </div>
@@ -222,7 +218,7 @@ export default function TrackOrderPage() {
                 
                 {/* Items */}
                 <div className="bg-gray-50 border-t border-gray-100 p-8">
-                  <h4 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-4">Order Items</h4>
+                  <h4 className="text-sm font-bold text-gray-900 uppercase tracking-wider mb-4">{t.trackOrder.itemsLabel}</h4>
                   <div className="space-y-4">
                     {order.items?.map((item: any) => (
                       <div key={item.id} className="flex items-center justify-between bg-white p-4 rounded-xl border border-gray-100">
@@ -232,7 +228,7 @@ export default function TrackOrderPage() {
                           </div>
                           <div>
                             <p className="text-sm font-bold text-gray-900">{item.product_name}</p>
-                            <p className="text-xs text-gray-500">Qty: {item.quantity}</p>
+                            <p className="text-xs text-gray-500">{t.trackOrder.qtyLabel}: {item.quantity}</p>
                           </div>
                         </div>
                         <p className="text-sm font-bold text-gray-900">
