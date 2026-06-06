@@ -123,14 +123,20 @@ export default function AdminDashboardPage() {
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
         const prompt = `Translate the following product name and description into French and Spanish.\nReturn exactly this JSON format with no markdown formatting:\n{\n  "name_fr": "French name",\n  "name_es": "Spanish name",\n  "desc_fr": "French description",\n  "desc_es": "Spanish description"\n}\nName: ${formData.name}\nDescription: ${formData.desc}`;
         const result = await model.generateContent(prompt);
-        const text = result.response.text().replace(/```json/g, "").replace(/```/g, "").trim();
-        const parsed = JSON.parse(text);
-        name_fr = parsed.name_fr || "";
-        name_es = parsed.name_es || "";
-        desc_fr = parsed.desc_fr || "";
-        desc_es = parsed.desc_es || "";
-      } catch (err) {
+        const text = result.response.text();
+        const match = text.match(/\{[\s\S]*\}/);
+        if (match) {
+          const parsed = JSON.parse(match[0]);
+          name_fr = parsed.name_fr || "";
+          name_es = parsed.name_es || "";
+          desc_fr = parsed.desc_fr || "";
+          desc_es = parsed.desc_es || "";
+        } else {
+          throw new Error("No JSON found in response");
+        }
+      } catch (err: any) {
         console.warn("Translation failed", err);
+        toast.error("AI Translation failed: " + err.message, { id: "save-toast" });
       }
 
       const payload = new FormData();
