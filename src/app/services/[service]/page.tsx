@@ -19,6 +19,7 @@ const iconMap: Record<string, any> = {
   logistics: Package,
   consulting: Lightbulb,
   procurement: ShoppingCart,
+  trading: ShoppingCart,
 };
 
 /* ── Per-service hero images ── */
@@ -26,6 +27,7 @@ const heroImages: Record<string, string> = {
   logistics: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1600&h=600&fit=crop",
   consulting: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1600&h=600&fit=crop",
   procurement: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1600&h=600&fit=crop",
+  trading: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1600&h=600&fit=crop",
 };
 
 /* ── Per-service secondary images ── */
@@ -33,6 +35,7 @@ const sideImages: Record<string, string> = {
   logistics: "https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=800&h=600&fit=crop",
   consulting: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&h=600&fit=crop",
   procurement: "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&h=600&fit=crop",
+  trading: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=800&h=600&fit=crop",
 };
 
 /* ── Per-service stats ── */
@@ -43,15 +46,20 @@ export default function ServicePage() {
   const { t, locale } = useLanguage();
   const key = (params?.service as string) || "logistics";
 
-  const validKeys = ["logistics", "consulting", "procurement"] as const;
+  const validKeys = ["logistics", "consulting", "procurement", "trading"] as const;
   const safeKey = validKeys.includes(key as any) ? (key as typeof validKeys[number]) : "logistics";
 
   const sd = t?.serviceDetail;
   const details = sd?.[safeKey] || {
-    title: "Service",
-    subtitle: "",
-    description: "",
-    capabilities: [],
+    title: safeKey === "trading" ? (locale === "fr" ? "Commerce de Beauté & Cosmétiques" : "Beauty & Cosmetics Cross-Border Trading") : "Service",
+    subtitle: safeKey === "trading" ? (locale === "fr" ? "Importation et distribution de soins de qualité" : "Importation & wholesale distribution of premium skincare across DRC and West Africa") : "",
+    description: safeKey === "trading" ? (locale === "fr" ? "DIS Group gère l'importation de produits de beauté haut de gamme depuis l'Asie, l'Europe et le Moyen-Orient vers les marchés africains." : "DIS Group manages the end-to-end importation and distribution of high-end skincare, body care, hair care, and cosmetics products across African markets.") : "",
+    capabilities: safeKey === "trading" ? [
+      locale === "fr" ? "Sérums éclaircissants et soins du visage" : "Luminous Glow Serums & Facial Care",
+      locale === "fr" ? "Crèmes hydratantes et lotions corporelles" : "Hydrating Day Creams & Shea Butter Lotions",
+      locale === "fr" ? "Masques capillaires à l'huile d'argan" : "Argan Oil Hair Treatments & Masks",
+      locale === "fr" ? "Approvisionnement en gros et logistique B2B" : "Wholesale B2B Sourcing & Custom Logistics"
+    ] : [],
   };
   const faqs = sd?.faqs || [];
   const Icon = iconMap[safeKey] || Package;
@@ -76,6 +84,12 @@ export default function ServicePage() {
       { value: "5", label: locale === "fr" ? "Continents Couverts" : locale === "es" ? "Continentes Cubiertos" : "Continents Covered" },
       { value: "48h", label: locale === "fr" ? "Délai d'Exécution" : locale === "es" ? "Tiempo de Respuesta" : "Turnaround Time" },
     ],
+    trading: [
+      { value: "50+", label: locale === "fr" ? "Marques de Beauté" : locale === "es" ? "Marcas de Belleza" : "Beauty Brands" },
+      { value: "100%", label: locale === "fr" ? "Authenticité" : locale === "es" ? "Autenticidad" : "Authentic Sourcing" },
+      { value: "DRC", label: locale === "fr" ? "Distribution Rapide" : locale === "es" ? "Distribución Rápida" : "Lubumbashi & Lagos" },
+      { value: "48h", label: locale === "fr" ? "Expédition Gros" : locale === "es" ? "Envío al por mayor" : "Wholesale Dispatch" },
+    ],
   };
 
   /* ── Localized Per-service feature highlights ── */
@@ -84,7 +98,7 @@ export default function ServicePage() {
       { icon: Truck, title: locale === "fr" ? "Itinéraires Express" : locale === "es" ? "Rutas Exprés" : "Express Cargo Routes", desc: locale === "fr" ? "Transport multimodal avec suivi en temps réel." : locale === "es" ? "Transporte multimodal con seguimiento en tiempo real." : "Multimodal transport across DR Congo, Nigeria, and global corridors with real-time tracking." },
       { icon: Globe, title: locale === "fr" ? "Dédouanement" : locale === "es" ? "Despacho de Aduanas" : "Cross-Border Clearance", desc: locale === "fr" ? "Conformité douanière pour des passages frontaliers fluides." : locale === "es" ? "Cumplimiento aduanero para cruces fronterizos sin problemas." : "End-to-end customs compliance and documentation for seamless border crossings." },
       { icon: Buildings, title: locale === "fr" ? "Réseau d'Entrepôts" : locale === "es" ? "Red de Almacenes" : "Warehouse Network", desc: locale === "fr" ? "Installations sécurisées avec gestion des stocks." : locale === "es" ? "Instalaciones seguras con gestión de inventario." : "Secure warehousing facilities across Lubumbashi and Lagos with inventory management." },
-      { icon: ShieldCheck, title: locale === "fr" ? "Expéditions Assurées" : locale === "es" ? "Envíos Asegurados" : "Insured Shipments", desc: locale === "fr" ? "Couverture complète d'assurance avec soutien dédié." : locale === "es" ? "Cobertura completa de seguro con soporte dedicado." : "Full cargo insurance coverage with dedicated claims support and risk mitigation." },
+      { icon: ShieldCheck, title: locale === "fr" ? "Expéditions Assurées" : locale === "es" ? "Envíos Asegurados" : "Envíos Asegurados", desc: locale === "fr" ? "Couverture complète d'assurance avec soutien dédié." : locale === "es" ? "Cobertura completa de seguro con soporte dedicado." : "Full cargo insurance coverage with dedicated claims support and risk mitigation." },
       { icon: ChartLineUp, title: locale === "fr" ? "Analyse Logistique" : locale === "es" ? "Análisis Logístico" : "Supply Chain Analytics", desc: locale === "fr" ? "Insights pour optimiser les itinéraires et réduire les coûts." : locale === "es" ? "Perspectivas para optimizar rutas y reducir costos." : "Data-driven insights to optimize routes, reduce costs, and improve delivery performance." },
       { icon: Lightning, title: locale === "fr" ? "Traitement Prioritaire" : locale === "es" ? "Procesamiento Prioritario" : "Same-Day Processing", desc: locale === "fr" ? "Traitement accéléré pour les envois urgents." : locale === "es" ? "Manejo acelerado para envíos urgentes." : "Expedited handling for urgent shipments with priority lane access at all hubs." },
     ],
@@ -103,6 +117,14 @@ export default function ServicePage() {
       { icon: ChartLineUp, title: locale === "fr" ? "Optimisation des Prix" : locale === "es" ? "Optimización de Precios" : "Price Optimization", desc: locale === "fr" ? "Stratégies générant une réduction moyenne de 30 %." : locale === "es" ? "Estrategias que ofrecen una reducción promedio del 30%." : "Data-driven procurement strategies delivering average 30% cost reduction." },
       { icon: Buildings, title: locale === "fr" ? "Gestion Sécurisée" : locale === "es" ? "Gestión de Depósito" : "Escrow Management", desc: locale === "fr" ? "Facilitation des transactions avec directives structurées." : locale === "es" ? "Facilitación de transacciones con directrices estructuradas." : "Secure transaction facilitation with structured payment guidelines and oversight." },
       { icon: Lightning, title: locale === "fr" ? "Fulfillment Rapide" : locale === "es" ? "Cumplimiento Rápido" : "Rapid Fulfillment", desc: locale === "fr" ? "Délai de 48 heures de la commande à l'expédition." : locale === "es" ? "Respuesta de 48 horas desde el pedido hasta el envío." : "48-hour turnaround from order to dispatch across commodity and finished goods." },
+    ],
+    trading: [
+      { icon: ShieldCheck, title: locale === "fr" ? "Produits 100% Authentiques" : locale === "es" ? "Productos 100% Auténticos" : "100% Authentic Products", desc: locale === "fr" ? "Approvisionnement direct auprès des fabricants." : locale === "es" ? "Abastecimiento directo de fabricantes." : "Direct sourcing from verified cosmetics and skincare manufacturers globally." },
+      { icon: Package, title: locale === "fr" ? "Distribution en Gros" : locale === "es" ? "Distribución al por mayor" : "Wholesale Distribution", desc: locale === "fr" ? "Livraison en gros pour salons et commerces." : locale === "es" ? "Entrega al por mayor para salones y tiendas." : "Bulk wholesale packaging and dispatch for beauty stores, salons, and distributors." },
+      { icon: Globe, title: locale === "fr" ? "Importation RDC & Afrique" : locale === "es" ? "Importación RDC y África" : "DRC & West Africa Imports", desc: locale === "fr" ? "Chaîne d'approvisionnement beauté optimisée." : locale === "es" ? "Cadena de suministro de belleza optimizada." : "Optimized customs clearance and supply chain for cosmetics across DR Congo and Nigeria." },
+      { icon: Lightning, title: locale === "fr" ? "Marques Tendance" : locale === "es" ? "Marcas en Tendencia" : "Trending Skincare Brands", desc: locale === "fr" ? "Les meilleurs sérums, crèmes et soins capillaires." : locale === "es" ? "Los mejores sueros, cremas y cuidado del cabello." : "Curated portfolio including Luminous Glow Serum, Shea Butter, and Argan Oil Care." },
+      { icon: Buildings, title: locale === "fr" ? "Stockage Tempéré" : locale === "es" ? "Almacenamiento Climatizado" : "Climate-Controlled Storage", desc: locale === "fr" ? "Preservation parfaite de la qualité des produits." : locale === "es" ? "Preservación perfecta de la calidad del producto." : "Dedicated temperature-controlled warehouses preserving delicate cosmetics formulation." },
+      { icon: ChartLineUp, title: locale === "fr" ? "Support Marketing" : locale === "es" ? "Soporte de Marketing" : "Retailer Growth Support", desc: locale === "fr" ? "Accompagnement commercial pour nos revendeurs." : locale === "es" ? "Soporte comercial para nuestros distribuidores." : "Dedicated business advisory and inventory planning for regional beauty retailers." },
     ],
   };
 

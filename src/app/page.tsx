@@ -27,8 +27,6 @@ interface CartItem {
 }
 
 /* ── Product Catalog (Mock DB State) ── */
-const categoryKeys = ["all", "cosmetics", "electronics", "appliances", "accessories", "automobiles", "industrial", "agriculture", "construction", "general"] as const;
-
 const MOCK_DB_INITIAL_DATA = [
   {
     id: 1,
@@ -319,14 +317,22 @@ export default function TradingStorePage() {
     };
   }), [ts, productsData, locale]);
 
+  const dynamicCategories = useMemo(() => {
+    const uniqueCats = Array.from(new Set(products.map((p) => p.category))).filter(Boolean);
+    const allLabel = ts?.categories?.[0] || (locale === "fr" ? "Tous" : locale === "es" ? "Todos" : "All");
+    return [allLabel, ...uniqueCats];
+  }, [products, ts, locale]);
+
   const filtered = useMemo(() => {
     return products.filter((p) => {
-      const matchCategory = activeCategoryIndex === 0 || p.category === categoryKeys[activeCategoryIndex];
+      const matchCategory =
+        activeCategoryIndex === 0 ||
+        p.category?.toLowerCase() === dynamicCategories[activeCategoryIndex]?.toLowerCase();
       const matchSearch = p.name.toLowerCase().includes(search.toLowerCase()) ||
         p.desc.toLowerCase().includes(search.toLowerCase());
       return matchCategory && matchSearch;
     });
-  }, [activeCategoryIndex, search, products]);
+  }, [activeCategoryIndex, search, products, dynamicCategories]);
 
   return (
     <main className="bg-white min-h-screen text-espresso w-full max-w-full overflow-hidden">
@@ -399,7 +405,7 @@ export default function TradingStorePage() {
           {/* Categories */}
           <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 scrollbar-hide">
             <Funnel size={16} className="text-walnut/30 flex-shrink-0 mr-1 hidden sm:block" />
-            {ts.categories.map((cat: string, idx: number) => (
+            {dynamicCategories.map((cat: string, idx: number) => (
               <button
                 key={idx}
                 onClick={() => setActiveCategoryIndex(idx)}

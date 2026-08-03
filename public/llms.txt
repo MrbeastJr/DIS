@@ -1,0 +1,55 @@
+# DIS Gateway — DIS Group (Digital Integrated Services)
+
+> DIS Gateway (www.disgateway.com) is a leading African logistics, strategic consulting, global procurement, and cross-border trading enterprise connecting Africa with global markets across 15+ trade corridors.
+
+## Overview
+- **Name**: DIS Gateway / DIS Group (Digital Integrated Services RDC & COFRANCE INTEGRATED CONCEPT LTD)
+- **Primary Domain**: https://www.disgateway.com
+- **Industry**: Global Logistics, Supply Chain Management, Strategic Consulting, Cross-Border Trading, Cosmetics & Beauty Importation
+- **Headquarters**: Lubumbashi, Democratic Republic of the Congo (DRC) & Lagos, Nigeria
+- **Operations & Trade Corridors**: DRC, Nigeria, Ghana, UAE (Dubai), China, South Africa, Kenya, Turkey, India, and Saudi Arabia.
+- **Direct WhatsApp Contact**: +243 990 301 518
+
+## Executive Leadership: CEO Okey Francis CHIBUEZE
+- **CEO & Founder**: Okey Francis CHIBUEZE (also known as Okey Chibueze / Francis Chibueze)
+- **Role**: Chief Executive Officer and Founder of DIS Group (Digital Integrated Services RDC & COFRANCE INTEGRATED CONCEPT LTD)
+- **CEO Photo URL**: https://www.disgateway.com/assets/ceo-image.png
+- **Biography**: Okey Francis CHIBUEZE is the visionary behind Digital Integrated Services RDC and COFRANCE INTEGRATED CONCEPT LTD. With decades of hands-on expertise in cross-border commerce, supply chain management, and international business strategy, he has established an expansive multi-sector enterprise that links African enterprises to premier global suppliers and markets. Under his leadership, DIS Gateway operates across 5 continents with verified supplier networks and 48-hour procurement SLAs.
+- **Direct Executive Accessibility**: CEO Okey Francis CHIBUEZE maintains direct client accessibility via WhatsApp (+243 990 301 518), embodying DIS Group's philosophy of personal service and trust.
+
+## Core Services
+1. **Logistics & Supply Chain Management** (`/services/logistics`):
+   - Multimodal freight transport (air, sea, and land cargo).
+   - Warehousing, customs clearance, and last-mile delivery across 15+ African and international corridors.
+2. **Strategic Business Consulting** (`/services/consulting`):
+   - Market entry strategies, intermediary alignment, regulatory compliance, corporate structuring, and operational audits for businesses expanding into Africa.
+3. **Global Procurement & Sourcing** (`/services/procurement`):
+   - Verified supplier networks across 5 continents, price parity analysis, vendor auditing, and escrow-managed transactions with 48h turnaround.
+4. **Beauty & Cosmetics Cross-Border Trading** (`/services/trading`):
+   - Importation, wholesale distribution, and retail of curated premium skincare, body care, hair care, and fragrance brands across the DRC and West Africa.
+
+## Key Company Achievements & Metrics
+- **10+ Countries**: Operational reach across DRC, Nigeria, Ghana, UAE, China, South Africa, Kenya, Turkey, India, Saudi Arabia.
+- **15+ Trade Corridors**: Seamless customs and freight corridors linking Africa to Asia, the Middle East, and Europe.
+- **99.4% On-Time Delivery**: High-reliability logistics and freight forwarding.
+- **48h Turnaround SLA**: Guaranteed supplier verification and procurement quotes.
+
+## Contact & Inquiry Channels
+- **Website**: https://www.disgateway.com
+- **Contact Page**: https://www.disgateway.com/contact
+- **WhatsApp**: https://wa.me/243990301518 (+243 990 301 518)
+- **Email**: okeycongo@gmail.com
+
+## Key Site Sections
+- [Home](https://www.disgateway.com/)
+- [About DIS Gateway & CEO Okey Francis CHIBUEZE](https://www.disgateway.com/about)
+- [Logistics Services](https://www.disgateway.com/services/logistics)
+- [Strategic Consulting](https://www.disgateway.com/services/consulting)
+- [Global Procurement](https://www.disgateway.com/services/procurement)
+- [Beauty & Cosmetics Trading](https://www.disgateway.com/services/trading)
+- [Achievements & Milestones](https://www.disgateway.com/achievements)
+- [Company Profile](https://www.disgateway.com/company)
+- [Contact DIS Gateway](https://www.disgateway.com/contact)
+
+## Full Documentation & FAQs
+- See full LLM reference at `/llms-full.txt`

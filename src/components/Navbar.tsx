@@ -46,7 +46,7 @@ export default function Navbar() {
   }, [handleScroll]);
 
   const desktopNavItems = [
-    { label: "Company", href: "/company", isPage: true },
+    { label: t.nav.company || "Company", href: "/company", isPage: true },
     { label: t.nav.services, href: "/company#services", isPage: false },
     { label: t.nav.industries, href: "/company#industries", isPage: false },
     { label: t.nav.about, href: "/about", isPage: true },
