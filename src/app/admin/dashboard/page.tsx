@@ -115,6 +115,10 @@ export default function AdminDashboardPage() {
   /* --- PRODUCT ACTIONS --- */
   const handleProductSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!formData.category) {
+      toast.error("Please select a category first. If none exist, create one in the Django backend.", { id: "save-toast" });
+      return;
+    }
     setIsAdding(true);
     try {
       toast.loading("Translating & Saving...", { id: "save-toast" });
@@ -401,15 +405,15 @@ export default function AdminDashboardPage() {
                   <input type="text" required value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} placeholder="Name" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:border-crimson outline-none" />
                   <input type="text" required value={formData.desc} onChange={(e) => setFormData({...formData, desc: e.target.value})} placeholder="Description" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:border-crimson outline-none" />
                   <div className="grid grid-cols-2 gap-4">
-                    <input type="number" required value={formData.price} onChange={(e) => setFormData({...formData, price: parseInt(e.target.value)})} placeholder="Price USD" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:border-crimson outline-none" />
+                    <input type="number" required value={formData.price === 0 && !formData.priceFc ? '' : formData.price} onChange={(e) => setFormData({...formData, price: e.target.value === "" ? 0 : parseFloat(e.target.value)})} placeholder="Price USD" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:border-crimson outline-none" />
                     <input type="text" required value={formData.priceFc} onChange={(e) => setFormData({...formData, priceFc: e.target.value})} placeholder="Price FC" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:border-crimson outline-none" />
                   </div>
                   <div className="grid grid-cols-2 gap-4">
-                    <select value={formData.category} onChange={(e) => setFormData({...formData, category: e.target.value})} className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:border-crimson outline-none">
+                    <select required value={formData.category} onChange={(e) => setFormData({...formData, category: e.target.value})} className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:border-crimson outline-none">
                       <option value="">Select Category</option>
                       {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
                     </select>
-                    <input type="number" required value={formData.stock} onChange={(e) => setFormData({...formData, stock: parseInt(e.target.value)})} placeholder="Stock" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:border-crimson outline-none" />
+                    <input type="number" required value={formData.stock === 0 && !formData.priceFc ? '' : formData.stock} onChange={(e) => setFormData({...formData, stock: e.target.value === "" ? 0 : parseInt(e.target.value)})} placeholder="Stock" className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:border-crimson outline-none" />
                   </div>
                   {isCosmeticsCategory() && (
                     <div className="grid grid-cols-1 gap-4">
